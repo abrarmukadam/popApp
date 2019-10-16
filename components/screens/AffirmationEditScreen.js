@@ -79,6 +79,8 @@ export default class AffirmationEditScreen extends Component {
               style={{fontSize: 35, textAlign: 'center'}}
               placeholder={'Type Here...'}
               value={this.state.text}
+              multiline
+              numberOfLines={4}
               onChangeText={this.onTextChange.bind(this)}
               autoFocus
               padding={10}

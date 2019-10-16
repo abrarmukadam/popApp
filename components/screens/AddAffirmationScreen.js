@@ -56,6 +56,8 @@ export default class AddAffirmationScreen extends React.Component {
             <TextInput
               style={{fontSize: 35, textAlign: 'center'}}
               placeholder={'Type Here...'}
+              multiline
+              numberOfLines={4}
               value={this.state.text}
               onChangeText={this.onTextChange.bind(this)}
               autoFocus
@@ -98,5 +100,6 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'space-between',
     alignItems: 'center',
+    //    flexWrap: 'wrap',
   },
 });
