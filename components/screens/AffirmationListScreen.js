@@ -7,8 +7,6 @@ import SearchAffirmation from './../SearchAffirmation';
 
 import ActionButton from 'react-native-action-button';
 
-import {TouchableOpacity} from 'react-native-gesture-handler';
-
 export default class AffirmationListScreen extends Component {
   static navigationOptions = {
     header: null,

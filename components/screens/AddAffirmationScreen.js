@@ -8,8 +8,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import BackgroundColor from './../BackgroundColor';
 
 export default class AddAffirmationScreen extends React.Component {
   state = {text: ''};
@@ -38,45 +38,65 @@ export default class AddAffirmationScreen extends React.Component {
 
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'stretch',
-          justifyContent: 'center',
-          padding: 20,
-          backgroundColor: 'lightyellow',
-        }}>
-        <TextInput
-          style={{fontSize: 25}}
-          placeholder={'Type Here...'}
-          value={this.state.text}
-          onChangeText={this.onTextChange.bind(this)}
-          autoFocus
-          padding={10}
-          color="black"
-          backgroundColor="lightgray"></TextInput>
-
-        <View
-          style={{
-            marginRight: 5,
-            marginTop: 5,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: 4,
-          }}>
-          <Button
-            padding="25"
-            onPress={() => {
-              this.props.navigation.navigate('Home');
-            }}
-            title="Back"
-          />
-          <TouchableOpacity onPress={this.onPressAdd}>
-            <Icon name="md-send" size={40} color="blue"></Icon>
-          </TouchableOpacity>
+      <SafeAreaView style={styles.safeAreaView}>
+        <View style={styles.container1}>
+          <View style={styles.addButton}>
+            <Button
+              padding="25"
+              onPress={() => {
+                this.props.navigation.navigate('Home');
+              }}
+              title="Back"
+            />
+          </View>
         </View>
-      </View>
+        <View style={styles.container2}>
+          <View style={styles.AffDetails}>
+            <TextInput
+              style={{fontSize: 35, textAlign: 'center'}}
+              placeholder={'Type Here...'}
+              value={this.state.text}
+              onChangeText={this.onTextChange.bind(this)}
+              autoFocus
+              padding={10}
+              color="back"></TextInput>
+            <BackgroundColor onPressColor={this.onPressColor} />
+          </View>
+          <View style={styles.addButton}>
+            <TouchableOpacity onPress={this.onPressAdd}>
+              <Icon name="md-send" size={40} color="blue"></Icon>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </SafeAreaView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    padding: 20,
+    backgroundColor: 'lightyellow',
+  },
+  container1: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  container2: {
+    flex: 2,
+    justifyContent: 'space-between',
+  },
+  addButton: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    padding: 20,
+  },
+  AffDetails: {
+    flex: 2,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
