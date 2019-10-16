@@ -61,41 +61,36 @@ export default class AffirmationEditScreen extends Component {
     return (
       <SafeAreaView
         style={[styles.safeAreaView, {backgroundColor: this.state.backColor}]}>
-        <View style={{padding: 5}}>
-          <View style={styles.buttonStyle}>
-            <Button
+        <View style={styles.container1}>
+          <View
+            style={(styles.addButton, {alignItems: 'flex-start', padding: 25})}>
+            <Icon
+              name="md-close"
+              size={40}
+              color="blue"
               onPress={() => {
                 this.props.navigation.navigate('Home');
-              }}
-              title="Back"
-            />
-            <Button onPress={this.onPressSave.bind(this)} title="Save" />
+              }}></Icon>
           </View>
-          <View style={{alignItems: 'center'}}>
+        </View>
+        <View style={styles.container2}>
+          <View style={styles.AffDetails}>
             <TextInput
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginLeft: 10,
-              }}
-              //value="ABC"
+              style={{fontSize: 35, textAlign: 'center'}}
+              placeholder={'Type Here...'}
               value={this.state.text}
               onChangeText={this.onTextChange.bind(this)}
               autoFocus
-            />
+              padding={10}
+              color="back"></TextInput>
+            <BackgroundColor onPressColor={this.onPressColor} />
+          </View>
+          <View style={styles.addButton}>
+            <TouchableOpacity onPress={this.onPressSave}>
+              <Icon name="md-send" size={40} color="blue"></Icon>
+            </TouchableOpacity>
           </View>
         </View>
-        <Text>
-          This is where you will Edit the Name, pop-up time, type, etc....
-        </Text>
-
-        <TouchableOpacity
-          style={{alignItems: 'flex-end', padding: 30}}
-          onPress={this.onPressAdd}>
-          <Icon name="md-send" size={40} color="blue"></Icon>
-        </TouchableOpacity>
-
-        <BackgroundColor onPressColor={this.onPressColor} />
       </SafeAreaView>
     );
   }
@@ -116,5 +111,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     padding: 10,
+  },
+  container1: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  container2: {
+    flex: 2,
+    justifyContent: 'space-between',
+  },
+  addButton: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    padding: 20,
+  },
+  AffDetails: {
+    flex: 2,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

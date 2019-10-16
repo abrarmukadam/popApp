@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import BackgroundColor from './../BackgroundColor';
 
 export default class AddAffirmationScreen extends React.Component {
-  state = {text: ''};
+  state = {text: '', backColor: '#ffebcd'};
   onTextChange = text => {
     this.setState({text});
   };
@@ -21,33 +21,34 @@ export default class AddAffirmationScreen extends React.Component {
     let addItem = {
       id: this.props.screenProps.popArray.length + 1,
       popMessage: this.state.text,
-      backColor: '#ffebcd',
+      backColor: this.state.backColor,
     };
 
     this.props.screenProps.updatePopArray([
       ...this.props.screenProps.popArray,
       addItem,
     ]);
-    this.props.navigation.navigate('Details', {
-      popItem: addItem,
-      popMessage: addItem.popMessage,
-      backColor: addItem.backColor,
-      id: addItem.id,
-    });
+
+    this.props.navigation.navigate('Home', this.state.text);
+  };
+  onPressColor = color => {
+    this.setState({backColor: color});
   };
 
   render() {
     return (
-      <SafeAreaView style={styles.safeAreaView}>
+      <SafeAreaView
+        style={[styles.safeAreaView, {backgroundColor: this.state.backColor}]}>
         <View style={styles.container1}>
-          <View style={styles.addButton}>
-            <Button
-              padding="25"
+          <View
+            style={(styles.addButton, {alignItems: 'flex-start', padding: 25})}>
+            <Icon
+              name="md-close"
+              size={40}
+              color="blue"
               onPress={() => {
                 this.props.navigation.navigate('Home');
-              }}
-              title="Back"
-            />
+              }}></Icon>
           </View>
         </View>
         <View style={styles.container2}>
@@ -79,7 +80,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'space-between',
     padding: 20,
-    backgroundColor: 'lightyellow',
   },
   container1: {
     flex: 1,
