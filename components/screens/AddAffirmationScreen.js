@@ -62,7 +62,7 @@ export default class AddAffirmationScreen extends React.Component {
               onChangeText={this.onTextChange.bind(this)}
               autoFocus
               padding={10}
-              color="back"></TextInput>
+              color="black"></TextInput>
             <BackgroundColor onPressColor={this.onPressColor} />
           </View>
           <View style={styles.addButton}>

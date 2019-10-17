@@ -57,13 +57,34 @@ export default class AffirmationEditScreen extends Component {
     });
   };
 
+  onPressBin = () => {
+    let popItem = this.props.navigation.getParam('popItem');
+    let todoArray = [
+      ...this.props.screenProps.popArray.filter(item => item.id !== popItem.id),
+    ];
+    this.props.screenProps.popArray.map(temp => {
+      if (temp.id > popItem.id) temp.id = temp.id - 1;
+    });
+    this.props.screenProps.updatePopArray(todoArray);
+
+    this.props.navigation.navigate('Home');
+  };
+
   render() {
     return (
       <SafeAreaView
         style={[styles.safeAreaView, {backgroundColor: this.state.backColor}]}>
         <View style={styles.container1}>
           <View
-            style={(styles.addButton, {alignItems: 'flex-start', padding: 25})}>
+            style={
+              (styles.addButton,
+              {
+                alignItems: 'flex-start',
+                padding: 25,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              })
+            }>
             <Icon
               name="md-close"
               size={40}
@@ -71,6 +92,11 @@ export default class AffirmationEditScreen extends Component {
               onPress={() => {
                 this.props.navigation.navigate('Home');
               }}></Icon>
+            <Icon
+              name="md-trash"
+              size={40}
+              color="blue"
+              onPress={() => this.onPressBin()}></Icon>
           </View>
         </View>
         <View style={styles.container2}>
