@@ -8,71 +8,203 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-let color = '';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+let tempIcon = 'circle'; //'bullseye'
+let icon1 = 'dot-circle-o';
+let icon2 = 'circle';
+
 export default class BackgroundColor extends Component {
+  state = {
+    color: this.props.selectedColor,
+  };
   render() {
+    let colorArray = this.props.colorArray;
+
+    console.log(this.props.selectedColor);
+    return (
+      <View style={[styles.ButtonContainer]}>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[0] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[0] ? 'lightgrey' : colorArray[0]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[0]});
+              this.props.onPressColor(colorArray[0]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[1] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[1] ? 'lightgrey' : colorArray[1]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[1]});
+              this.props.onPressColor(colorArray[1]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[2] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[2] ? 'lightgrey' : colorArray[2]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[2]});
+              this.props.onPressColor(colorArray[2]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[3] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[3] ? 'lightgrey' : colorArray[3]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[3]});
+              this.props.onPressColor(colorArray[3]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[4] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[4] ? 'lightgrey' : colorArray[4]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[4]});
+              this.props.onPressColor(colorArray[4]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[5] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[5] ? 'lightgrey' : colorArray[5]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[5]});
+              this.props.onPressColor(colorArray[5]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[6] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[6] ? 'lightgrey' : colorArray[6]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[6]});
+              this.props.onPressColor(colorArray[6]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[7] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[7] ? 'lightgrey' : colorArray[7]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[7]});
+              this.props.onPressColor(colorArray[7]);
+            }}
+          />
+        </View>
+        <View style={styles.ButtonPadding}>
+          <Icon
+            name={this.state.color == colorArray[8] ? icon1 : icon2}
+            size={40}
+            color={
+              this.state.color == colorArray[8] ? 'lightgrey' : colorArray[8]
+            }
+            onPress={backColor => {
+              this.setState({color: colorArray[8]});
+              this.props.onPressColor(colorArray[8]);
+            }}
+          />
+        </View>
+      </View>
+    );
+
     return (
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: '#ffebcd'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[0]}]}
           onPress={backColor => {
-            color = '#ffebcd';
+            color = colorArray[0];
+            this.props.onPressColor(color);
+          }}></TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.myButton, {backgroundColor: colorArray[1]}]}
+          onPress={backColor => {
+            color = colorArray[1];
             this.props.onPressColor(color);
           }}
         />
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'lightblue'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[2]}]}
           onPress={backColor => {
-            color = 'lightblue';
+            color = colorArray[2];
             this.props.onPressColor(color);
           }}
         />
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'blue'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[3]}]}
           onPress={backColor => {
-            color = 'blue';
+            color = colorArray[3];
             this.props.onPressColor(color);
           }}
         />
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'skyblue'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[4]}]}
           onPress={backColor => {
-            color = 'skyblue';
+            color = colorArray[4];
             this.props.onPressColor(color);
           }}
         />
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'lightgreen'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[5]}]}
           onPress={backColor => {
-            color = 'lightgreen';
+            color = colorArray[5];
             this.props.onPressColor(color);
           }}
         />
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'yellow'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[6]}]}
           onPress={backColor => {
-            color = 'yellow';
+            color = colorArray[6];
             this.props.onPressColor(color);
           }}
         />
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'pink'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[7]}]}
           onPress={backColor => {
-            color = 'pink';
+            color = colorArray[7];
             this.props.onPressColor(color);
           }}
         />
         <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'rgb(195, 125, 198)'}]}
+          style={[styles.myButton, {backgroundColor: colorArray[8]}]}
           onPress={backColor => {
-            color = 'rgb(195, 125, 198)';
-            this.props.onPressColor(color);
-          }}
-        />
-        <TouchableOpacity
-          style={[styles.myButton, {backgroundColor: 'purple'}]}
-          onPress={backColor => {
-            color = 'purple';
+            color = colorArray[8];
             this.props.onPressColor(color);
           }}
         />
@@ -82,13 +214,11 @@ export default class BackgroundColor extends Component {
 }
 
 const styles = StyleSheet.create({
-  myButton: {
+  ButtonContainer: {
+    flexDirection: 'row',
     margin: 3,
-    padding: 5,
-    height: 33,
-    width: 33, //The Width must be the same as the height
-    borderRadius: 60, //Then Make the Border Radius twice the size of width or Height
-    borderWidth: 0.3,
-    //    borderColor: 'black',
+  },
+  ButtonPadding: {
+    padding: 2,
   },
 });

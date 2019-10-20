@@ -15,9 +15,7 @@ export default class AffirmationDisplay extends Component {
       <TouchableOpacity
         style={[styles.Layout, {backgroundColor: this.props.popItem.backColor}]}
         onPress={this._onPressButton.bind(this)}>
-        <Text style={styles.AffText}>
-          {this.props.itemId}. {this.props.popItem.popMessage}
-        </Text>
+        <Text style={styles.AffText}>{this.props.popItem.popMessage}</Text>
       </TouchableOpacity>
       //    </View>
     );
@@ -29,6 +27,7 @@ const styles = StyleSheet.create({
     margin: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
     width: 160,
     height: 120,
     //    borderWidth: 0.3,
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
   },
   AffText: {
     fontSize: 15,
+    textAlign: 'center',
     fontWeight: '700',
     margin: 4,
   },

@@ -55,7 +55,7 @@ export default class AddAffirmationScreen extends React.Component {
           <View style={styles.AffDetails}>
             <TextInput
               style={{fontSize: 35, textAlign: 'center'}}
-              placeholder={'Type Here...'}
+              placeholder={'TypeHere...'}
               multiline
               numberOfLines={4}
               value={this.state.text}
@@ -63,7 +63,11 @@ export default class AddAffirmationScreen extends React.Component {
               autoFocus
               padding={10}
               color="black"></TextInput>
-            <BackgroundColor onPressColor={this.onPressColor} />
+            <BackgroundColor
+              selectedColor={this.props.screenProps.colorArray[0]}
+              onPressColor={this.onPressColor}
+              colorArray={this.props.screenProps.colorArray}
+            />
           </View>
           <View style={styles.addButton}>
             <TouchableOpacity onPress={this.onPressAdd}>

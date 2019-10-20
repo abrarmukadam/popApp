@@ -11,6 +11,7 @@ import {
 
 import BackgroundColor from './../BackgroundColor';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PopUpSample from './../PopUpSample';
 
 //this.props.navigation.state.params.movieId.title}
 export default class AffirmationEditScreen extends Component {
@@ -56,7 +57,6 @@ export default class AffirmationEditScreen extends Component {
       ].backColor,
     });
   };
-
   onPressBin = () => {
     let popItem = this.props.navigation.getParam('popItem');
     let todoArray = [
@@ -107,11 +107,19 @@ export default class AffirmationEditScreen extends Component {
               value={this.state.text}
               multiline
               numberOfLines={4}
-              onChangeText={this.onTextChange.bind(this)}
+              onChangeText={text => this.onTextChange(text)}
               autoFocus
               padding={10}
               color="back"></TextInput>
-            <BackgroundColor onPressColor={this.onPressColor} />
+            <BackgroundColor
+              onPressColor={color => this.onPressColor(color)}
+              colorArray={this.props.screenProps.colorArray}
+              selectedColor={
+                this.props.screenProps.popArray[
+                  this.props.navigation.getParam('id') - 1
+                ].backColor
+              }
+            />
           </View>
           <View style={styles.addButton}>
             <TouchableOpacity onPress={this.onPressSave}>
