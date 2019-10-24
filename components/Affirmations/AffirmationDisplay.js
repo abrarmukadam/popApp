@@ -3,10 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 export default class AffirmationDisplay extends Component {
   _onPressButton(popMessage) {
-    //this.props.navigation.navigate('Detail', {popMessage: popMessage});
     this.props.onItemClicked(this.props.popItem);
-
-    //    alert(this.props.popItem.popMessage);
   }
 
   render() {

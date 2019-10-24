@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import {
   SafeAreaView,
-  Text,
-  Button,
   View,
   TextInput,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import BackgroundColor from './../BackgroundColor';
+import {BackgroundColor} from './../../index';
 
-export default class AddAffirmationScreen extends React.Component {
+export default class AddAffirmationScreen extends Component {
   state = {text: '', backColor: '#ffebcd'};
   onTextChange = text => {
     this.setState({text});
@@ -54,7 +52,7 @@ export default class AddAffirmationScreen extends React.Component {
         <View style={styles.container2}>
           <View style={styles.AffDetails}>
             <TextInput
-              style={{fontSize: 35, textAlign: 'center'}}
+              style={styles.textInputStyle}
               placeholder={'TypeHere...'}
               multiline
               numberOfLines={4}
@@ -81,6 +79,10 @@ export default class AddAffirmationScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  textInputStyle: {
+    fontSize: 35,
+    textAlign: 'center',
+  },
   safeAreaView: {
     flex: 1,
     alignItems: 'stretch',

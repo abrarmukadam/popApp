@@ -9,7 +9,6 @@ export default class AddAffirmation extends Component {
   OnAddTextChange = text => {
     this.setState({text});
   };
-
   OnAddAffirmation = () => {
     this.props.OnAddAffirmation(this.state.text);
   };

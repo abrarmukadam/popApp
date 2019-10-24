@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet, View, ScrollView} from 'react-native';
-
-import AffirmationDisplay from './../AffirmationDisplay';
-import AddAffirmation from './../AddAffirmation';
-import SearchAffirmation from './../SearchAffirmation';
-
+import {SafeAreaView, StyleSheet, View, ScrollView, Image} from 'react-native';
 import ActionButton from 'react-native-action-button';
+
+import {AffirmationDisplay, SearchAffirmation} from './../../index';
 
 export default class AffirmationListScreen extends Component {
   static navigationOptions = {
@@ -60,6 +57,9 @@ export default class AffirmationListScreen extends Component {
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
+        <Image
+          source={require('../../../background1.jpg')}
+          style={styles.image}></Image>
         <SearchAffirmation
           OnSearchChange={this.OnSearchChange}></SearchAffirmation>
         <ScrollView>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightyellow',
     //  margin: 10,
     //  marginTop: 10,
-    marginBottom: 20,
+    //    marginBottom: 20,
   },
   Message: {
     fontSize: 15,
@@ -112,5 +112,12 @@ const styles = StyleSheet.create({
     marginRight: 60,
     shadowRadius: 10,
     shadowColor: 'blue',
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '100%',
+    flexDirection: 'column',
   },
 });

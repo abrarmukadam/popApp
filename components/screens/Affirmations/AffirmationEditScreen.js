@@ -9,9 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import BackgroundColor from './../BackgroundColor';
+import {BackgroundColor} from './../../index';
 import Icon from 'react-native-vector-icons/Ionicons';
-import PopUpSample from './../PopUpSample';
 
 //this.props.navigation.state.params.movieId.title}
 export default class AffirmationEditScreen extends Component {
