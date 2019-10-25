@@ -6,7 +6,6 @@ export default class VisionBoardDisplay extends Component {
     //this.props.navigation.navigate('Detail', {popMessage: popMessage});
     this.props.onVisionBoardClicked(this.props.visionItem);
   }
-
   render() {
     return (
       <TouchableOpacity
