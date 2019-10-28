@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Image} from 'react-native';
 
 import {
   AffirmationListScreen,
@@ -11,13 +10,15 @@ import {
   VisionBoardHomeScreen,
   VisionBoardSubScreen,
   AddVisionScreen,
+  VisionFullScreen,
 } from './../components/index';
+
+import {LoginScreen} from './../components/index';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const MainStack = createStackNavigator(
   {
@@ -28,6 +29,17 @@ const MainStack = createStackNavigator(
     initialRouteName: 'Home',
   },
 );
+
+MainStack.navigationOptions = ({navigation}) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
 
 const RootStack = createStackNavigator(
   {
@@ -43,11 +55,32 @@ const RootStack = createStackNavigator(
     headerMode: 'none',
   },
 );
+
+RootStack.navigationOptions = ({navigation}) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
 const VisionBoardStack = createStackNavigator(
   {
-    VisionBoardHome: VisionBoardHomeScreen,
-    VisionBoardSubScreen: VisionBoardSubScreen,
+    VisionBoardHome: {
+      screen: VisionBoardHomeScreen,
+      navigationOptions: {
+        tabBarVisible: false,
+      },
+    },
+
+    VisionBoardSubScreen: {
+      screen: VisionBoardSubScreen,
+    },
     AddVisionBoardScreen: AddVisionScreen,
+    VisionFullScreen: VisionFullScreen,
   },
   {
     initialRouteName: 'VisionBoardHome',
@@ -55,23 +88,57 @@ const VisionBoardStack = createStackNavigator(
   },
 );
 
+VisionBoardStack.navigationOptions = ({navigation}) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
 const TabNavigator = createBottomTabNavigator(
   {
     Affirmations: {
       screen: RootStack,
       navigationOptions: {
         //      tabBarLabel: 'Home Page',
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="home" size={40} color="blue" />
+        tabBarIcon: ({focused, tintColor}) => (
+          <Icon
+            name={focused ? 'home' : 'home-outline'}
+            size={focused ? 40 : 40}
+            color="white"
+          />
         ),
       },
     },
     VisionBoard: {
       screen: VisionBoardStack,
       navigationOptions: {
-        //      tabBarLabel: 'Home Page',
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="archive" size={40} color="blue" />
+        tabBarLabel: 'Dream Board',
+        color: 'white',
+        tabBarIcon: ({focused, tintColor}) => (
+          <Icon
+            name={focused ? 'card-bulleted' : 'card-bulleted-outline'}
+            size={focused ? 40 : 40}
+            color="white"
+          />
+        ),
+      },
+    },
+    LoginScreen: {
+      screen: LoginScreen,
+      navigationOptions: {
+        tabBarLabel: 'Account',
+        color: 'white',
+        tabBarIcon: ({focused, tintColor}) => (
+          <Icon
+            name={focused ? 'account' : 'account-outline'}
+            size={focused ? 40 : 40}
+            color="white"
+          />
         ),
       },
     },
@@ -79,19 +146,15 @@ const TabNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       showLabel: true,
+      activeTintColor: 'blue',
+      inactiveTintColor: 'white',
       labelStyle: {
         fontSize: 14,
       },
       style: {
-        //        height: 30,
         borderTopWidth: 0,
-        backgroundColor: 'lightgrey',
-        tintColor: 'blue',
-        //        borderTopRightRadius: 20,
-        //       borderTopLeftRadius: 20,
-
-        //      height: 55,
-        paddingTop: 1,
+        backgroundColor: 'darkcyan',
+        //        paddingTop: 1,
       },
     },
   },

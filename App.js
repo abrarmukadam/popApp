@@ -38,6 +38,7 @@ export default class App extends Component {
         visionMessage: '50,000$',
         backColor: '#ffebcd',
         uri: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
+        height: 100,
       },
       {
         id: 2,
@@ -46,6 +47,7 @@ export default class App extends Component {
         backColor: 'lightgreen',
         uri:
           'https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        height: 150,
       },
       {
         id: 3,
@@ -54,6 +56,7 @@ export default class App extends Component {
         backColor: 'lightblue',
         uri:
           'https://images.unsplash.com/photo-1485550409059-9afb054cada4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        height: 100,
       },
       {
         id: 4,
@@ -69,6 +72,7 @@ export default class App extends Component {
         backColor: 'yellow',
         uri:
           'https://climatecommunication.yale.edu/wp-content/uploads/2017/04/001-stone-circle-jpeg-768x350.jpg',
+        height: 150,
       },
       {
         id: 6,
@@ -77,6 +81,7 @@ export default class App extends Component {
         backColor: '#ffebcd',
         uri:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnL9YQM-viMIRdeaKNkcEj4HPFO3TjTg8O07OdyGnD36rrdU-3',
+        height: 100,
       },
       {
         id: 7,
@@ -85,6 +90,7 @@ export default class App extends Component {
         backColor: 'lightblue',
         uri:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRulyyemSoPHNoWWBx3VHB4dhPRha3gxHVYVErA8kgfRZrDJ2hJHw',
+        height: 100,
       },
       {
         id: 8,
@@ -93,6 +99,7 @@ export default class App extends Component {
         backColor: 'lightgreen',
         uri:
           'https://www.scified.com/articles/what-are-random-number-generators-used-for-61.jpg',
+        height: 100,
       },
     ],
 

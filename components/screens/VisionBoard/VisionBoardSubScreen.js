@@ -10,16 +10,18 @@ import {
   Button,
   Image,
 } from 'react-native';
-import {VisionDisplay} from './../../index';
+import {VisionDisplay, BackgroundImage} from './../../index';
 import ImagePicker from 'react-native-image-picker';
 import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class VisionBoardSubScreen extends Component {
   state = {photo: null, text: '', addNew: 0};
 
   onPressAddNew = () => {
-    this.setState({addNew: 1});
-    this.props.navigation.navigate('VisionBoardSubScreen');
+    this.handleChoosePhoto();
+    // this.setState({ addNew: 1 }); //added inside handleChoosePhoto
+    //   this.props.navigation.navigate('VisionBoardSubScreen');
   };
 
   onTextChange = text => {
@@ -33,6 +35,7 @@ class VisionBoardSubScreen extends Component {
     ImagePicker.showImagePicker(options, response => {
       if (response.uri) {
         this.setState({photo: response});
+        this.setState({addNew: 1});
       }
     });
   };
@@ -53,8 +56,15 @@ class VisionBoardSubScreen extends Component {
       newVision,
     ]);
     {
-      this.setState({addNew: 0});
+      this.setState({addNew: 0, text: ''});
     }
+  };
+
+  handleVisionClicked = visionItem => {
+    console.log(visionItem);
+    this.props.navigation.navigate('VisionFullScreen', {
+      visionItem: visionItem,
+    });
   };
 
   render() {
@@ -66,13 +76,12 @@ class VisionBoardSubScreen extends Component {
         return List.visionBoard == visionBoard.visionBoard;
       },
     );
+    console.log(filteredVisionArray.length);
 
     if (filteredVisionArray.length > 0 && this.state.addNew == 0)
       return (
         <SafeAreaView style={styles.safeAreaView}>
-          <Image
-            source={require('../../../background1.jpg')}
-            style={styles.image}></Image>
+          <BackgroundImage></BackgroundImage>
           <View
             style={{
               flexDirection: 'row',
@@ -94,17 +103,22 @@ class VisionBoardSubScreen extends Component {
               <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
             </View>
           </View>
+
           <ScrollView>
             <View style={styles.VisionList}>
               {filteredVisionArray.map(vision => {
                 return (
                   <VisionDisplay
                     key={vision.id}
-                    visionItem={vision}></VisionDisplay>
+                    visionItem={vision}
+                    onVisionClicked={visionItem =>
+                      this.handleVisionClicked(visionItem)
+                    }></VisionDisplay>
                 );
               })}
             </View>
           </ScrollView>
+
           <ActionButton
             buttonColor="blue"
             onPress={this.onPressAddNew}></ActionButton>
@@ -113,46 +127,43 @@ class VisionBoardSubScreen extends Component {
     return (
       //to add New Image
       <SafeAreaView style={styles.safeAreaView}>
-        <Image
-          source={require('../../../background1.jpg')}
-          style={styles.image}></Image>
+        <BackgroundImage />
         <View style={styles.Container}>
           <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
         </View>
-        <View style={styles.Container2}>
-          <Text style={styles.text}>Add a Dream to your Dream Board</Text>
-          {photo && (
-            <Image
-              source={{uri: photo.uri}}
-              style={{width: 300, height: 300}}></Image>
-          )}
-          <TextInput
-            style={styles.textInputStyle}
-            placeholder={'Type the Name Here...'}
-            value={this.state.text}
-            onChangeText={this.onTextChange.bind(this)}
-            autoFocus
-            padding={10}
-          />
-          {!photo && (
-            <TouchableOpacity style={styles.button} onPress={this.onPressAdd}>
-              <Text style={styles.buttonText}>Add Photo</Text>
-            </TouchableOpacity>
-          )}
-          {photo && (
-            <View>
-              <TouchableOpacity style={styles.button} onPress={this.onPressAdd}>
-                <Text style={styles.buttonText}>Change Photo</Text>
+        {!filteredVisionArray.length && //this is Only exicuted during the 1st time when No Dream board was available.
+          !photo &&
+          this.setState({photo: visionBoard})}
+
+        {photo && ( //if Existing Items in the Vision Board & if New Image Selected
+          <View style={styles.Container2}>
+            <Image source={{uri: photo.uri}} style={styles.image}></Image>
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.addButtonStyle}
+                onPress={this.onPressAdd}>
+                <Icon name="plus-box" size={40} color="white"></Icon>
               </TouchableOpacity>
+              <View style={{flex: 1, justifyContent: 'flex-end'}}>
+                <TextInput
+                  style={styles.textInputStyle}
+                  placeholder={'Type the Caption Here...'}
+                  value={this.state.text}
+                  onChangeText={this.onTextChange.bind(this)}
+                  autoCapitalize="none"
+                  padding={10}
+                />
+              </View>
 
               <TouchableOpacity
-                style={styles.createButton}
+                style={styles.sendButtonStyle}
                 onPress={this.onPressAddToDreamBoard}>
-                <Text style={styles.buttonText}>Add to Dream Board</Text>
+                <Icon name="content-save" size={40} color="white"></Icon>
               </TouchableOpacity>
             </View>
-          )}
-        </View>
+          </View>
+        )}
       </SafeAreaView>
     );
   }
@@ -168,17 +179,14 @@ const styles = StyleSheet.create({
   },
   Container: {
     paddingBottom: 4,
-    // flex: 1,
     borderColor: 'white',
     borderBottomWidth: 0.5,
-
-    //  flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   Container2: {
-    flex: 2,
-    justifyContent: 'center',
+    flex: 1,
+    justifyContent: 'flex-end',
     alignContent: 'center',
     alignItems: 'center',
   },
@@ -196,6 +204,20 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
   },
+  addButtonStyle: {justifyContent: 'flex-end', paddingLeft: 5},
+  sendButtonStyle: {justifyContent: 'flex-end', paddingRight: 5},
+  buttonContainer: {
+    //    flex: 1,
+    borderWidth: 2,
+    paddingBottom: 4,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    borderColor: 'white',
+    borderBottomWidth: 0.5,
+    backgroundColor: 'transparent',
+    borderRadius: 20,
+  },
+
   button: {
     marginTop: 10,
     padding: 10,
@@ -218,13 +240,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
   },
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '100%',
-    flexDirection: 'column',
-  },
   text: {
     margin: 10,
     color: 'black',
@@ -232,10 +247,20 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   textInputStyle: {
-    fontSize: 25,
+    fontSize: 20,
+    backgroundColor: 'grey',
     color: 'white',
     fontWeight: 'bold',
     fontStyle: 'italic',
+    borderRadius: 20,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    flexDirection: 'column',
   },
 });
 

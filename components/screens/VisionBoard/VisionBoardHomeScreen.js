@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
-import {VisionBoardDisplay} from './../../index';
+import {VisionBoardDisplay, BackgroundImage} from './../../index';
 import {
   Text,
   SafeAreaView,
+  TouchableOpacity,
   StyleSheet,
   Image,
   View,
   ScrollView,
   Button,
 } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class VisionBoardHomeScreen extends Component {
   navigateToVisionSubScreen = vision => {
@@ -32,9 +33,16 @@ class VisionBoardHomeScreen extends Component {
       //IF VISION BOARD ALREADY EXISTS
       return (
         <SafeAreaView style={styles.safeAreaView}>
-          <Image
-            source={require('../../../background1.jpg')}
-            style={styles.image}></Image>
+          <BackgroundImage />
+          <View
+            style={{
+              borderColor: 'white',
+              borderBottomWidth: 0.5,
+              width: '100%',
+              alignItems: 'center',
+            }}>
+            <Text style={styles.Heading}>Dream Boards</Text>
+          </View>
           <ScrollView>
             <View style={styles.VisionList}>
               {filteredList.map(vision => {
@@ -53,20 +61,22 @@ class VisionBoardHomeScreen extends Component {
           </ScrollView>
           <ActionButton
             buttonColor="blue"
-            onPress={this.onPressAdd}></ActionButton>
-
-          {
-            //  <Text>Vision Board!</Text>
-            //  <Button title="Add Item" onPress={this.onPressAdd}></Button>
-          }
+            onPress={this.onPressAdd}
+            /*            size={40}
+            icon={
+              <Icon
+                name={'home'}
+                size={70}
+                color="green"
+                onPress={this.onPressAdd}></Icon>
+            }*/
+          ></ActionButton>
         </SafeAreaView>
       );
     return (
       //IF NO VISION BOARD CREATED
       <SafeAreaView style={styles.safeAreaView}>
-        <Image
-          source={require('../../../background1.jpg')}
-          style={styles.image}></Image>
+        <BackgroundImage />
         <Text style={styles.Heading}>Dream Board</Text>
         <View style={styles.textContainer}>
           <Text style={styles.text}>
@@ -113,16 +123,9 @@ const styles = StyleSheet.create({
   },
   Heading: {
     fontSize: 30,
+    color: 'white',
     fontWeight: 'bold',
     fontStyle: 'italic',
-  },
-
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '100%',
-    flexDirection: 'column',
   },
   VisionList: {
     margin: 1,

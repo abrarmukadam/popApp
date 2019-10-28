@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 
 export default class VisionDisplay extends Component {
-  _onPressButton(popMessage) {
-    //this.props.navigation.navigate('Detail', {popMessage: popMessage});
-    this.props.onItemClicked(this.props.popItem);
+  onPressVision() {
+    this.props.onVisionClicked(this.props.visionItem);
+    //    this.props.navigation.navigate('VisionFullScreen');
 
     //    alert(this.props.popItem.popMessage);
   }
@@ -13,7 +13,7 @@ export default class VisionDisplay extends Component {
     return (
       <TouchableOpacity
         style={[styles.Layout, {backgroundColor: 'darkcyan'}]}
-        onPress={this._onPressButton.bind(this)}>
+        onPress={this.onPressVision.bind(this)}>
         <View
           style={{
             flex: 4,
@@ -25,7 +25,11 @@ export default class VisionDisplay extends Component {
             source={{
               uri: this.props.visionItem.uri,
             }}
-            style={{width: 180, height: 193}}
+            style={{
+              width: 180,
+              height: 193,
+              borderRadius: 5, //Then Make the Border Radius twice the size of width or Height
+            }}
           />
         </View>
         <View

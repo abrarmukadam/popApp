@@ -16,7 +16,7 @@ export default class VisionBoardDisplay extends Component {
             flex: 4,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignContent: 'center',
             alignItems: 'center',
           }}>
@@ -27,7 +27,7 @@ export default class VisionBoardDisplay extends Component {
             style={{
               flex: 1,
               width: 320,
-              height: 200,
+              height: 160,
               resizeMode: 'cover',
               position: 'absolute',
 
@@ -39,8 +39,8 @@ export default class VisionBoardDisplay extends Component {
             style={{
               flex: 1,
               justifyContent: 'flex-end',
-              alignSelf: 'flex-start',
-              //              alignItems: 'flex-start',
+              //          alignSelf: 'flex-start',
+              //alignItems: 'flex-start',
               flexWrap: 'wrap',
             }}>
             <Text style={styles.VisionText}>
@@ -56,12 +56,12 @@ export default class VisionBoardDisplay extends Component {
 const styles = StyleSheet.create({
   Layout: {
     margin: 2,
-    padding: 5,
+    //    padding: 5,
     justifyContent: 'center',
     //    alignItems: 'flex-end',
     alignContent: 'center',
     width: 320,
-    height: 280,
+    height: 200,
     //    borderWidth: 0.3,
     borderRadius: 10, //Then Make the Border Radius twice the size of width or Height
 
