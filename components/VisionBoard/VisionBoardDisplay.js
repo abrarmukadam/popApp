@@ -20,6 +20,7 @@ export default class VisionBoardDisplay extends Component {
             alignContent: 'center',
             alignItems: 'center',
           }}>
+          <View style={{flex: 4}}></View>
           <Image
             source={{
               uri: this.props.visionItem.uri,
@@ -28,7 +29,7 @@ export default class VisionBoardDisplay extends Component {
               flex: 1,
               width: 320,
               height: 160,
-              resizeMode: 'cover',
+              //             resizeMode: 'cover',
               position: 'absolute',
 
               borderRadius: 10, //Then Make the Border Radius twice the size of width or Height
@@ -39,9 +40,7 @@ export default class VisionBoardDisplay extends Component {
             style={{
               flex: 1,
               justifyContent: 'flex-end',
-              //          alignSelf: 'flex-start',
-              //alignItems: 'flex-start',
-              flexWrap: 'wrap',
+              //              flexWrap: 'wrap',
             }}>
             <Text style={styles.VisionText}>
               {this.props.id}. {this.props.visionItem.visionBoard}

@@ -1,33 +1,67 @@
 import React, {Component} from 'react';
 import {View, Text, SafeAreaView, Image, StyleSheet} from 'react-native';
-import Swiper from 'react-native-swiper';
 import {FullScreenSwiper} from './../../index';
 
 class VisionFullScreen extends Component {
   state = {};
 
-  handleOnClickBack = () => {
-    this.props.navigation.navigate('VisionBoardSubScreen');
-  };
-  render() {
+  handleOnClickDelete = index => {
     const visionItem = this.props.navigation.getParam('visionItem');
+
     const filteredVisionList = this.props.screenProps.visionArray.filter(
       List => {
         return List.visionBoard.indexOf(visionItem.visionBoard) !== -1;
       },
     );
     console.log(filteredVisionList);
+
+    //console.log('DELETE PRESSED-', index);
+    const deleteIndex = filteredVisionList[index].id;
+    // console.log('deleteIndex-', deleteIndex);
+
+    let tempArray = [
+      ...this.props.screenProps.visionArray.filter(
+        item => item.id !== deleteIndex,
+      ),
+    ];
+    this.props.screenProps.visionArray.map(temp => {
+      if (temp.id > deleteIndex) temp.id = temp.id - 1;
+    });
+    this.props.screenProps.updateVisionArray(tempArray);
+
+    console.log('what to Display now:', filteredVisionList[index - 1]);
+
+    this.props.navigation.navigate('VisionFullScreen', {
+      visionItem: filteredVisionList[index - 1],
+    });
+  };
+
+  handleOnClickBack = () => {
+    this.props.navigation.navigate('VisionBoardSubScreen');
+  };
+  render() {
+    const visionItem = this.props.navigation.getParam('visionItem');
+    console.log('VvvvisionItem:', visionItem);
+    const filteredVisionList = this.props.screenProps.visionArray.filter(
+      List => {
+        return List.visionBoard.indexOf(visionItem.visionBoard) !== -1;
+      },
+    );
     const visionIndex = filteredVisionList
       .map(List => {
         return List.visionMessage;
       })
       .indexOf(visionItem.visionMessage);
 
+    console.log('VisionArray:', filteredVisionList);
     return (
       <FullScreenSwiper
+        onClickDelete={this.handleOnClickDelete}
+        header={visionItem.visionBoard}
         itemIndex={visionIndex}
         list={filteredVisionList}
         onClickBack={this.handleOnClickBack}
+        //        visionItem={visionItem}
       />
     );
   }

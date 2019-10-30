@@ -11,7 +11,7 @@ import {
   Button,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class VisionBoardHomeScreen extends Component {
   navigateToVisionSubScreen = vision => {

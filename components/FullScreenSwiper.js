@@ -11,8 +11,11 @@ import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {BackgroundImage} from './index';
 class FullScreenSwiper extends Component {
-  state = {autoplay: 'false'};
+  state = {autoplay: 'false', index: this.props.itemIndex};
 
+  onPressDelete = () => {
+    this.props.onClickDelete(this.state.index);
+  };
   onPressBack = () => {
     this.props.onClickBack();
   };
@@ -21,8 +24,30 @@ class FullScreenSwiper extends Component {
       <SafeAreaView style={{flex: 1, backgroundColor: 'darkcyan'}}>
         <BackgroundImage></BackgroundImage>
 
-        <View style={{alignSelf: 'flex-start'}}>
-          <Button title="Back" onPress={() => this.onPressBack()}></Button>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            borderBottomWidth: 0.5,
+            borderBottomColor: 'white',
+          }}>
+          <View style={{marginLeft: 5}}>
+            <Icon
+              name="keyboard-backspace"
+              size={40}
+              color="white"
+              onPress={() => this.onPressBack()}></Icon>
+          </View>
+          <View style={{alignItems: 'center', flex: 4}}>
+            <Text style={styles.Heading}>{this.props.header}</Text>
+          </View>
+          <View style={{marginRight: 5}}>
+            <Icon
+              name="delete"
+              size={40}
+              color="white"
+              onPress={() => this.onPressDelete()}></Icon>
+          </View>
         </View>
 
         {/*
@@ -35,6 +60,10 @@ class FullScreenSwiper extends Component {
  */}
         <Swiper
           style={styles.wrapper}
+          //          onIndexChanged={index => this.handleOnIndexChanged(index)}
+          onIndexChanged={index => {
+            this.setState({index});
+          }}
           showsButtons={false}
           //          autoplay={this.state.autoplay}
           index={this.props.itemIndex}>
@@ -80,6 +109,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
     borderRadius: 20,
+  },
+  Heading: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
+    fontStyle: 'italic',
   },
 });
 

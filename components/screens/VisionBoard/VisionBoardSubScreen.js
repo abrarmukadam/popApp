@@ -91,15 +91,17 @@ class VisionBoardSubScreen extends Component {
               paddingLeft: 5,
               marginBottom: 2,
             }}>
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Button
-                title="Back"
+            <View style={{flex: 1, alignItems: 'flex-start', marginLeft: 5}}>
+              <Icon
+                name="keyboard-backspace"
+                size={40}
+                color="white"
                 onPress={() =>
                   this.props.navigation.navigate('VisionBoardHome')
-                }></Button>
+                }></Icon>
             </View>
 
-            <View style={{flex: 2, alignItems: 'flex-start'}}>
+            <View style={{flex: 5, alignItems: 'center'}}>
               <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
             </View>
           </View>
@@ -129,7 +131,19 @@ class VisionBoardSubScreen extends Component {
       <SafeAreaView style={styles.safeAreaView}>
         <BackgroundImage />
         <View style={styles.Container}>
-          <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
+          <View style={{marginLeft: 5}}>
+            <Icon
+              name="close"
+              size={40}
+              color="white"
+              onPress={() => {
+                this.setState({photo: 'null', addNew: 0, text: ''});
+                this.props.navigation.navigate('VisionBoardSubScreen');
+              }}></Icon>
+          </View>
+          <View style={{flex: 5, alignItems: 'center'}}>
+            <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
+          </View>
         </View>
         {!filteredVisionArray.length && //this is Only exicuted during the 1st time when No Dream board was available.
           !photo &&
@@ -150,6 +164,7 @@ class VisionBoardSubScreen extends Component {
                   style={styles.textInputStyle}
                   placeholder={'Type the Caption Here...'}
                   value={this.state.text}
+                  autoFocus
                   onChangeText={this.onTextChange.bind(this)}
                   autoCapitalize="none"
                   padding={10}
@@ -180,6 +195,7 @@ const styles = StyleSheet.create({
   Container: {
     paddingBottom: 4,
     borderColor: 'white',
+    flexDirection: 'row',
     borderBottomWidth: 0.5,
     justifyContent: 'flex-start',
     alignItems: 'center',
