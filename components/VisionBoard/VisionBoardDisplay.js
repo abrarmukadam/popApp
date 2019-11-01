@@ -3,7 +3,6 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 
 export default class VisionBoardDisplay extends Component {
   onPressVisionBoard(visionItem) {
-    //this.props.navigation.navigate('Detail', {popMessage: popMessage});
     this.props.onVisionBoardClicked(this.props.visionItem);
   }
   render() {
@@ -43,7 +42,7 @@ export default class VisionBoardDisplay extends Component {
               //              flexWrap: 'wrap',
             }}>
             <Text style={styles.VisionText}>
-              {this.props.id}. {this.props.visionItem.visionBoard}
+              {this.props.visionItem.visionBoard}
             </Text>
           </View>
         </View>

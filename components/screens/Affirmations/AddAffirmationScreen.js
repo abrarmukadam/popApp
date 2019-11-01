@@ -43,7 +43,7 @@ export default class AddAffirmationScreen extends Component {
             <Icon
               name="md-close"
               size={40}
-              color="blue"
+              color="white"
               onPress={() => {
                 this.props.navigation.navigate('Home');
               }}></Icon>

@@ -13,13 +13,15 @@ import {BackgroundImage} from './index';
 class FullScreenSwiper extends Component {
   state = {autoplay: 'false', index: this.props.itemIndex};
 
-  onPressDelete = () => {
-    this.props.onClickDelete(this.state.index);
+  onPressDelete = tempIndex => {
+    this.props.onClickDelete(tempIndex);
+    //    this.setState({index: tempIndex});
   };
   onPressBack = () => {
     this.props.onClickBack();
   };
   render() {
+    let tempIndex = this.props.itemIndex;
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'darkcyan'}}>
         <BackgroundImage></BackgroundImage>
@@ -46,7 +48,7 @@ class FullScreenSwiper extends Component {
               name="delete"
               size={40}
               color="white"
-              onPress={() => this.onPressDelete()}></Icon>
+              onPress={() => this.onPressDelete(tempIndex)}></Icon>
           </View>
         </View>
 
@@ -62,14 +64,15 @@ class FullScreenSwiper extends Component {
           style={styles.wrapper}
           //          onIndexChanged={index => this.handleOnIndexChanged(index)}
           onIndexChanged={index => {
-            this.setState({index});
+            tempIndex = index;
+            //            this.setState({index});
           }}
           showsButtons={false}
           //          autoplay={this.state.autoplay}
           index={this.props.itemIndex}>
           {this.props.list.map(items => {
             return (
-              <View style={{flex: 1}}>
+              <View key={items.id} style={{flex: 1}}>
                 {<Image source={{uri: items.uri}} style={styles.image}></Image>}
                 <View style={styles.textViewStyle}>
                   <Text style={styles.textStyle}>{items.visionMessage}</Text>

@@ -44,10 +44,10 @@ export default class AddVisionScreen extends Component {
     newVisionBoard = {
       id: len + 1,
       visionBoard: this.state.text,
+      height: 40,
       uri: this.state.photo.uri,
     };
     newVisionBoardArray = [...newVisionBoardArray, newVisionBoard];
-    console.log(newVisionBoardArray);
 
     this.props.screenProps.updateVisionBoardArray(newVisionBoardArray),
       this.props.navigation.navigate('VisionBoardSubScreen', {

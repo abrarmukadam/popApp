@@ -12,20 +12,20 @@ export default class App extends Component {
       'yellow',
       'pink',
       'rgb(195, 125, 198)',
-      'hotpink',
+      'mediumturquoise',
     ],
 
     value: '',
     visionBoardArray: [
       {
         id: 1,
-        visionBoard: 'Personal',
+        visionBoard: 'ME Dreams!',
         uri:
-          'https://blog.portalpravaler.com.br/wp-content/uploads/2016/05/marketing-pessoal.jpg',
+          'https://www.ocregister.com/wp-content/uploads/2017/08/0810_fea_fnt-l-ducktales-01.jpg?w=535',
       },
       {
         id: 2,
-        visionBoard: 'Professional',
+        visionBoard: 'Career',
         uri:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQfKPLFlnsjsMqNastpZ_2ZNnFNq0MjKP4sx7-jdjYPKhL6Bik',
       },
@@ -34,72 +34,67 @@ export default class App extends Component {
     visionArray: [
       {
         id: 1,
-        visionBoard: 'Personal',
+        visionBoard: 'ME Dreams!',
         visionMessage: '50,000$',
         backColor: '#ffebcd',
-        uri: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
-        height: 100,
+        uri:
+          'https://www.ocregister.com/wp-content/uploads/2017/08/0810_fea_fnt-l-ducktales-01.jpg?w=535',
       },
       {
         id: 2,
-        visionBoard: 'Personal',
+        visionBoard: 'ME Dreams!',
         visionMessage: 'Go on a World Tour with family',
         backColor: 'lightgreen',
         uri:
-          'https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-        height: 150,
+          'https://www.olympicholidays.com/media/24494/gold_collection_cyclades_islands.jpg?anchor=center&mode=crop&quality=65&width=330&height=230&rnd=131491883470000000',
       },
       {
         id: 3,
-        visionBoard: 'Personal',
+        visionBoard: 'ME Dreams!',
         visionMessage: 'Go off the grid for a month',
         backColor: 'lightblue',
         uri:
-          'https://images.unsplash.com/photo-1485550409059-9afb054cada4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-        height: 100,
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8FSaJw61-l3kcNSaE8rnzd4U8kvuvFf0sN9Y5jugn22Nq5kyU&s',
       },
       {
         id: 4,
-        visionBoard: 'Personal',
+        visionBoard: 'ME Dreams!',
         visionMessage: 'bungie jumping toh karna hi hai',
         backColor: '#ffebcd',
-        uri: 'https://hackernoon.com/hn-images/1*jFyawcsqoYctkTuZg6wQ1A.jpeg',
+        uri:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKfOT8Mwi4Fjdgves74vrI058DSNODE-JpvzL6NQQIrXzOOGAHtA&s',
       },
       {
         id: 5,
-        visionBoard: 'Personal',
+        visionBoard: 'ME Dreams!',
         visionMessage: 'Have a charity NGO under my care',
         backColor: 'yellow',
         uri:
-          'https://climatecommunication.yale.edu/wp-content/uploads/2017/04/001-stone-circle-jpeg-768x350.jpg',
-        height: 150,
+          'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
       },
       {
         id: 6,
-        visionBoard: 'Professional',
+        visionBoard: 'ME Dreams!',
         visionMessage: 'bungie jumping toh karna hi hai',
         backColor: '#ffebcd',
         uri:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnL9YQM-viMIRdeaKNkcEj4HPFO3TjTg8O07OdyGnD36rrdU-3',
-        height: 100,
       },
       {
         id: 7,
-        visionBoard: 'Professional',
+        visionBoard: 'Career',
         visionMessage: 'Go off the grid for a month',
         backColor: 'lightblue',
         uri:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRulyyemSoPHNoWWBx3VHB4dhPRha3gxHVYVErA8kgfRZrDJ2hJHw',
-        height: 100,
       },
       {
         id: 8,
-        visionBoard: 'Professional',
+        visionBoard: 'Career',
         visionMessage: 'Go on a Worl Tour with family',
         backColor: 'lightgreen',
         uri:
           'https://www.scified.com/articles/what-are-random-number-generators-used-for-61.jpg',
-        height: 100,
       },
     ],
 
@@ -128,7 +123,7 @@ export default class App extends Component {
       {
         id: 5,
         popMessage: 'Meditate your actions... ',
-        backColor: 'hotpink',
+        backColor: 'mediumturquoise',
       },
       {
         id: 6,

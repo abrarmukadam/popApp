@@ -13,11 +13,8 @@ class VisionFullScreen extends Component {
         return List.visionBoard.indexOf(visionItem.visionBoard) !== -1;
       },
     );
-    console.log(filteredVisionList);
 
-    //console.log('DELETE PRESSED-', index);
     const deleteIndex = filteredVisionList[index].id;
-    // console.log('deleteIndex-', deleteIndex);
 
     let tempArray = [
       ...this.props.screenProps.visionArray.filter(
@@ -29,10 +26,8 @@ class VisionFullScreen extends Component {
     });
     this.props.screenProps.updateVisionArray(tempArray);
 
-    console.log('what to Display now:', filteredVisionList[index - 1]);
-
     this.props.navigation.navigate('VisionFullScreen', {
-      visionItem: filteredVisionList[index - 1],
+      visionItem: filteredVisionList[index + 1],
     });
   };
 
@@ -41,7 +36,6 @@ class VisionFullScreen extends Component {
   };
   render() {
     const visionItem = this.props.navigation.getParam('visionItem');
-    console.log('VvvvisionItem:', visionItem);
     const filteredVisionList = this.props.screenProps.visionArray.filter(
       List => {
         return List.visionBoard.indexOf(visionItem.visionBoard) !== -1;
@@ -53,7 +47,6 @@ class VisionFullScreen extends Component {
       })
       .indexOf(visionItem.visionMessage);
 
-    console.log('VisionArray:', filteredVisionList);
     return (
       <FullScreenSwiper
         onClickDelete={this.handleOnClickDelete}

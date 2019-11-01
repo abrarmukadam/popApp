@@ -21,7 +21,6 @@ export default class BackgroundColor extends Component {
   render() {
     let colorArray = this.props.colorArray;
 
-    console.log(this.props.selectedColor);
     return (
       <View style={[styles.ButtonContainer]}>
         <View style={styles.ButtonPadding}>

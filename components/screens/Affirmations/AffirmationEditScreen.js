@@ -87,14 +87,14 @@ export default class AffirmationEditScreen extends Component {
             <Icon
               name="md-close"
               size={40}
-              color="blue"
+              color="white"
               onPress={() => {
                 this.props.navigation.navigate('Home');
               }}></Icon>
             <Icon
               name="md-trash"
               size={40}
-              color="blue"
+              color="white"
               onPress={() => this.onPressBin()}></Icon>
           </View>
         </View>
@@ -122,7 +122,7 @@ export default class AffirmationEditScreen extends Component {
           </View>
           <View style={styles.addButton}>
             <TouchableOpacity onPress={this.onPressSave}>
-              <Icon name="md-send" size={40} color="blue"></Icon>
+              <Icon name="md-send" size={40} color="white"></Icon>
             </TouchableOpacity>
           </View>
         </View>

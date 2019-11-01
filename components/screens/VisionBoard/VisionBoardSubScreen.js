@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Button,
   Image,
 } from 'react-native';
 import {VisionDisplay, BackgroundImage} from './../../index';
@@ -20,8 +19,6 @@ class VisionBoardSubScreen extends Component {
 
   onPressAddNew = () => {
     this.handleChoosePhoto();
-    // this.setState({ addNew: 1 }); //added inside handleChoosePhoto
-    //   this.props.navigation.navigate('VisionBoardSubScreen');
   };
 
   onTextChange = text => {
@@ -61,13 +58,14 @@ class VisionBoardSubScreen extends Component {
   };
 
   handleVisionClicked = visionItem => {
-    console.log(visionItem);
     this.props.navigation.navigate('VisionFullScreen', {
       visionItem: visionItem,
     });
   };
 
   render() {
+    let visionWidthCounter = 0;
+
     const photo = this.state.photo;
 
     const visionBoard = this.props.navigation.getParam('vision');
@@ -76,7 +74,6 @@ class VisionBoardSubScreen extends Component {
         return List.visionBoard == visionBoard.visionBoard;
       },
     );
-    console.log(filteredVisionArray.length);
 
     if (filteredVisionArray.length > 0 && this.state.addNew == 0)
       return (
@@ -104,13 +101,27 @@ class VisionBoardSubScreen extends Component {
             <View style={{flex: 5, alignItems: 'center'}}>
               <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
             </View>
+
+            <View style={{marginRight: 5}}>
+              <Icon
+                name="delete"
+                size={40}
+                color="white"
+                //onPress={() => this.onPressDelete(tempIndex)}
+              ></Icon>
+            </View>
           </View>
 
           <ScrollView>
             <View style={styles.VisionList}>
               {filteredVisionArray.map(vision => {
+                if (visionWidthCounter % 4 == 0) visionWidthCounter = 0;
+                visionWidthCounter++;
+                console.log(visionWidthCounter);
                 return (
                   <VisionDisplay
+                    visionWidthCounter={visionWidthCounter}
+                    //                    width={width}
                     key={vision.id}
                     visionItem={vision}
                     onVisionClicked={visionItem =>
