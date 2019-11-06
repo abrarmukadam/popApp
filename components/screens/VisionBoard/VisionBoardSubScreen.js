@@ -48,6 +48,8 @@ class VisionBoardSubScreen extends Component {
       visionMessage: this.state.text,
       uri: this.state.photo.uri,
     };
+    //    this.props.screenProps.updateData(newVision);
+
     this.props.screenProps.updateVisionArray([
       ...this.props.screenProps.visionArray,
       newVision,

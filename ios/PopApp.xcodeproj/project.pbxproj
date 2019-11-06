@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* PopAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PopAppTests.m */; };
 		0D5413B017EC4628BF52D9C0 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B52B4015AE89425FA0C5389F /* AntDesign.ttf */; };

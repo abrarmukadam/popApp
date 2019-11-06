@@ -49,6 +49,8 @@ export default class AddVisionScreen extends Component {
     };
     newVisionBoardArray = [...newVisionBoardArray, newVisionBoard];
 
+    //    this.props.screenProps.updateData(newVisionBoard);
+
     this.props.screenProps.updateVisionBoardArray(newVisionBoardArray),
       this.props.navigation.navigate('VisionBoardSubScreen', {
         vision: newVisionBoard,

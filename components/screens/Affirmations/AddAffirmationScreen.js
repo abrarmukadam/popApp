@@ -26,7 +26,7 @@ export default class AddAffirmationScreen extends Component {
       ...this.props.screenProps.popArray,
       addItem,
     ]);
-
+    //    this.props.screenProps.updateData(addItem);
     this.props.navigation.navigate('Home', this.state.text);
   };
   onPressColor = color => {

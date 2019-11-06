@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
-    width: 160,
+    //  width: 160,
+    width: '45%',
     height: 120,
     //    borderWidth: 0.3,
     borderRadius: 15, //Then Make the Border Radius twice the size of width or Height

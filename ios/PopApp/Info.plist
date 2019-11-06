@@ -25,7 +25,6 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
-	
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
@@ -73,10 +72,9 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
-
 	<key>NSPhotoLibraryUsageDescription</key>
-<string>Select an existing photo for us</string>
-<key>NSCameraUsageDescription</key>
-<string>Take a photo for us</string>
+	<string>Select an existing photo for us</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take a photo for us</string>
 </dict>
 </plist>

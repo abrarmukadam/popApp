@@ -8,7 +8,7 @@ export default class VisionBoardDisplay extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={[styles.Layout, {backgroundColor: 'darkcyan'}]}
+        style={[styles.Layout, {backgroundColor: 'lightgrey'}]}
         onPress={this.onPressVisionBoard.bind(this)}>
         <View
           style={{
@@ -27,7 +27,8 @@ export default class VisionBoardDisplay extends Component {
             style={{
               flex: 1,
               width: 320,
-              height: 160,
+              height: '100%',
+              //              height: 160,
               //             resizeMode: 'cover',
               position: 'absolute',
 
@@ -37,8 +38,14 @@ export default class VisionBoardDisplay extends Component {
 
           <View
             style={{
-              flex: 1,
+              //              flex: 1,
+              width: '100%',
               justifyContent: 'flex-end',
+              backgroundColor: 'black',
+              opacity: 0.5,
+
+              borderBottomRightRadius: 10, //Then Make the Border Radius twice the size of width or Height
+              borderBottomLeftRadius: 10, //Then Make the Border Radius twice the size of width or Height
               //              flexWrap: 'wrap',
             }}>
             <Text style={styles.VisionText}>
@@ -54,6 +61,7 @@ export default class VisionBoardDisplay extends Component {
 const styles = StyleSheet.create({
   Layout: {
     margin: 2,
+    marginBottom: 5,
     //    padding: 5,
     justifyContent: 'center',
     //    alignItems: 'flex-end',
@@ -66,6 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   VisionText: {
+    //    backgroundColor: 'lightgrey',
     fontSize: 20,
     textAlign: 'center',
     fontWeight: '700',
