@@ -51,6 +51,8 @@ export default class AffirmationListScreen extends Component {
     this.props.navigation.navigate('Add');
   };
   render() {
+    console.log('ScreenProps=>', this.props.screenProps);
+
     let filteredList = this.props.screenProps.popArray.filter(List => {
       return (
         List.popMessage

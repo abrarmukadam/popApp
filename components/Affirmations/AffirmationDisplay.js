@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   AffText: {
+    color: 'white',
     fontSize: 15,
     textAlign: 'center',
     fontWeight: '700',

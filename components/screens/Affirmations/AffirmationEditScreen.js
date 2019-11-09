@@ -109,7 +109,7 @@ export default class AffirmationEditScreen extends Component {
               onChangeText={text => this.onTextChange(text)}
               autoFocus
               padding={10}
-              color="back"></TextInput>
+              color="white"></TextInput>
             <BackgroundColor
               onPressColor={color => this.onPressColor(color)}
               colorArray={this.props.screenProps.colorArray}
