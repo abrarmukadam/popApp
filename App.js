@@ -11,7 +11,7 @@ export default class App extends Component {
     isLoading: 'true',
     //  colorArray: '',
     colorArray: [
-      'lightcoral',
+      's',
       'steelblue',
       'teal',
       'skyblue',
@@ -136,6 +136,7 @@ export default class App extends Component {
           let popArray = JSON.parse(stores[0][1]);
           let visionBoardArray = JSON.parse(stores[1][1]);
           let visionArray = JSON.parse(stores[2][1]);
+          console.log('stores', stores);
           console.log('stores', stores);
           //        if (popArray) {
           this.setState({
