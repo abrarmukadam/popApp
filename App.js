@@ -11,7 +11,7 @@ export default class App extends Component {
     isLoading: 'true',
     //  colorArray: '',
     colorArray: [
-      's',
+      'salmon',
       'steelblue',
       'teal',
       'skyblue',
@@ -43,7 +43,6 @@ export default class App extends Component {
 
   updatePopArray = popArray => {
     // method to update App's state, passed to children
-
     this.setState({popArray: popArray});
     this.updateDataServer(popArray);
     this._storeItem('popArray', popArray);
@@ -54,6 +53,8 @@ export default class App extends Component {
     this.updateDataServer(visionArray);
     this.setState({visionArray: visionArray});
     this._storeItem('visionArray', visionArray);
+
+    console.log('This is Ok');
   };
 
   updateVisionBoardArray = visionBoardArray => {
@@ -129,6 +130,7 @@ export default class App extends Component {
   };
 
   _retrieveData = async () => {
+    //     let asyncFunction = function(resolve, reject) {
     try {
       await AsyncStorage.multiGet(
         ['popArray', 'visionBoardArray', 'visionArray'],
@@ -136,9 +138,7 @@ export default class App extends Component {
           let popArray = JSON.parse(stores[0][1]);
           let visionBoardArray = JSON.parse(stores[1][1]);
           let visionArray = JSON.parse(stores[2][1]);
-          console.log('stores', stores);
-          console.log('stores', stores);
-          //        if (popArray) {
+
           this.setState({
             popArray,
             visionBoardArray,
@@ -149,14 +149,20 @@ export default class App extends Component {
           if (popArray) {
             this.setState({isLoading: false});
             console.log('popAraay Loaded', popArray);
+            this.updateDataServer(popArray);
+            this.updateDataServer(visionBoardArray);
+            this.updateDataServer(visionArray);
+
+            //       return true;
           } else {
             console.log('popAraay NOT LOADED', popArray);
+            //         return false;
           }
-          //     }
         },
       );
     } catch (error) {
       Alert.alert('Error', 'There was an error.');
+      // }
     }
   };
 
@@ -175,29 +181,40 @@ export default class App extends Component {
         );
       },
     );
-    */
+*/
+    let result = this._retrieveData();
 
-    this._retrieveData();
-    //    if (this.isLoading == true || dataAvailableCheck) return;
+    let functionToCallWhenSuccess = () => {
+      console.log('functionToCallWhenSuccess: SUCCESS ( RESOLVE )');
+      console.log('this.state.isLoading:', this.state.isLoading);
 
-    if (this.state.isLoading || !this.state.popArray) {
-      return fetch('http://localhost:3000/login')
-        .then(response => response.json())
-        .then(responseJson => {
-          this._storeData(
-            responseJson.data.popArray,
-            responseJson.data.visionBoardArray,
-            responseJson.data.visionArray,
-          ),
-            this._retrieveData(),
-            function() {};
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
+      if (this.state.isLoading) {
+        return fetch('http://localhost:3000/login')
+          .then(response => response.json())
+          .then(responseJson => {
+            this._storeData(
+              responseJson.data.popArray,
+              responseJson.data.visionBoardArray,
+              responseJson.data.visionArray,
+            ),
+              this.setState({
+                popArray: responseJson.data.popArray,
+                visionBoardArray: responseJson.data.visionBoardArray,
+                visionArray: responseJson.data.visionArray,
+              }),
+              function() {};
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    };
+
+    let functionToCallWhenFailed = () => {
+      console.log('functionToCallWhenFailed: FAILED (REJECT)');
+    };
+    result.then(functionToCallWhenSuccess, functionToCallWhenFailed);
   }
-
   render() {
     if (this.state.isLoading || !this.state.popArray) {
       console.log('ACTIVITY INDICATOR RUNNING');
@@ -217,16 +234,18 @@ export default class App extends Component {
       // <View>
       //   <Text>Testing</Text>
       // </View>
-
-      <TabNavigator
-        screenProps={{
-          ...this.state,
-          updatePopArray: this.updatePopArray,
-          updateVisionArray: this.updateVisionArray,
-          updateVisionBoardArray: this.updateVisionBoardArray,
-          updateDataServer: this.updateDataServer,
-        }}
-      />
+      console.log('POP', this.state.popArray),
+      (
+        <TabNavigator
+          screenProps={{
+            ...this.state,
+            updatePopArray: this.updatePopArray,
+            updateVisionArray: this.updateVisionArray,
+            updateVisionBoardArray: this.updateVisionBoardArray,
+            updateDataServer: this.updateDataServer,
+          }}
+        />
+      )
     );
   }
 }

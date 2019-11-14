@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {BackgroundColor} from './../../index';
 
 export default class AddAffirmationScreen extends Component {
-  state = {text: '', backColor: '#ffebcd'};
+  state = {text: '', backColor: this.props.screenProps.colorArray[0]};
   onTextChange = text => {
     this.setState({text});
   };
@@ -60,7 +60,7 @@ export default class AddAffirmationScreen extends Component {
               onChangeText={this.onTextChange.bind(this)}
               autoFocus
               padding={10}
-              color="black"></TextInput>
+              color="white"></TextInput>
             <BackgroundColor
               selectedColor={this.props.screenProps.colorArray[0]}
               onPressColor={this.onPressColor}

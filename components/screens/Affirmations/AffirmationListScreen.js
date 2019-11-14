@@ -60,6 +60,7 @@ export default class AffirmationListScreen extends Component {
           .indexOf(this.state.searchFilter.toLowerCase()) !== -1
       );
     });
+    console.log('filteredList:', filteredList);
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
@@ -69,13 +70,13 @@ export default class AffirmationListScreen extends Component {
         <ScrollView>
           <View style={styles.AffList}>
             {filteredList.map(item => {
+              console.log('item:', item);
               return (
                 <AffirmationDisplay
                   key={item.id}
-                  id={item.id}
-                  itemId={item.id}
                   popItem={item}
-                  onItemClicked={this.navigateToDetails}></AffirmationDisplay>
+                  onItemClicked={this.navigateToDetails}
+                />
               );
             })}
           </View>

@@ -21,6 +21,7 @@ export default class AffirmationEditScreen extends Component {
   state = {
     text: this.props.navigation.getParam('popMessage'),
     backColor: this.props.navigation.state.params.popItem.backColor,
+    popArray: [],
   };
   constructor(props) {
     super(props);
@@ -56,15 +57,22 @@ export default class AffirmationEditScreen extends Component {
       ].backColor,
     });
   };
+
   onPressBin = () => {
     let popItem = this.props.navigation.getParam('popItem');
-    let todoArray = [
-      ...this.props.screenProps.popArray.filter(item => item.id !== popItem.id),
-    ];
-    this.props.screenProps.popArray.map(temp => {
+    console.log('oioioi,popItem', popItem);
+    let tempArray = [...this.props.screenProps.popArray];
+    let todoArray = tempArray.filter(item => item.id !== popItem.id);
+    console.log('pop1', todoArray);
+    todoArray.map(temp => {
       if (temp.id > popItem.id) temp.id = temp.id - 1;
     });
+    this.setState({popArray: todoArray});
+    console.log('pop2', this.state.popArray);
+    console.log('pop3', this.props.screenProps.popArray);
+
     this.props.screenProps.updatePopArray(todoArray);
+    console.log('pop4', this.props.screenProps.popArray);
 
     this.props.navigation.navigate('Home');
   };
@@ -114,9 +122,10 @@ export default class AffirmationEditScreen extends Component {
               onPressColor={color => this.onPressColor(color)}
               colorArray={this.props.screenProps.colorArray}
               selectedColor={
-                this.props.screenProps.popArray[
-                  this.props.navigation.getParam('id') - 1
-                ].backColor
+                this.props.navigation.getParam('backColor')
+                //                this.props.screenProps.popArray[
+                //                 this.props.navigation.getParam('id') - 1
+                //              ].backColor
               }
             />
           </View>
