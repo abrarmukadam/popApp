@@ -60,19 +60,14 @@ export default class AffirmationEditScreen extends Component {
 
   onPressBin = () => {
     let popItem = this.props.navigation.getParam('popItem');
-    console.log('oioioi,popItem', popItem);
     let tempArray = [...this.props.screenProps.popArray];
     let todoArray = tempArray.filter(item => item.id !== popItem.id);
-    console.log('pop1', todoArray);
     todoArray.map(temp => {
       if (temp.id > popItem.id) temp.id = temp.id - 1;
     });
     this.setState({popArray: todoArray});
-    console.log('pop2', this.state.popArray);
-    console.log('pop3', this.props.screenProps.popArray);
 
     this.props.screenProps.updatePopArray(todoArray);
-    console.log('pop4', this.props.screenProps.popArray);
 
     this.props.navigation.navigate('Home');
   };

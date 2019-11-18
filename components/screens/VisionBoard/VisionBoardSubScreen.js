@@ -119,7 +119,7 @@ class VisionBoardSubScreen extends Component {
               {filteredVisionArray.map(vision => {
                 if (visionWidthCounter % 4 == 0) visionWidthCounter = 0;
                 visionWidthCounter++;
-                console.log(visionWidthCounter);
+
                 return (
                   <VisionDisplay
                     visionWidthCounter={visionWidthCounter}

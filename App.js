@@ -16,7 +16,7 @@ export default class App extends Component {
       'teal',
       'skyblue',
       'lightgreen',
-      'slategray',
+      'lightslategrey',
       'mediumpurple',
       'rgb(195, 125, 198)',
       'mediumturquoise',
@@ -38,7 +38,6 @@ export default class App extends Component {
         return res;
       })
       .catch(err => err);
-    console.log('UPDATED :', body);
   };
 
   updatePopArray = popArray => {
@@ -50,11 +49,9 @@ export default class App extends Component {
 
   updateVisionArray = visionArray => {
     // method to update App's state, passed to children
-    this.updateDataServer(visionArray);
+    //    this.updateDataServer(visionArray);
     this.setState({visionArray: visionArray});
-    this._storeItem('visionArray', visionArray);
-
-    console.log('This is Ok');
+    //    this._storeItem('visionArray', visionArray);
   };
 
   updateVisionBoardArray = visionBoardArray => {
@@ -73,53 +70,6 @@ export default class App extends Component {
   };
 
   _storeData = async (popArray, visionBoardArray, visionArray) => {
-    /*    let popArray = [
-      {
-        id: 1,
-        popMessage: 'Awesome Awesome Awesome ! ! !',
-        backColor: '#ffebcd',
-      },
-      {
-        id: 2,
-        popMessage:
-          'Conscious of your choice and Responsible for your actions.. ',
-        backColor: 'lightblue',
-      },
-    ];
-    let visionBoardArray = [
-      {
-        id: 1,
-        visionBoard: 'ME Dreams!',
-        uri:
-          'https://www.ocregister.com/wp-content/uploads/2017/08/0810_fea_fnt-l-ducktales-01.jpg?w=535',
-      },
-      {
-        id: 2,
-        visionBoard: 'Career',
-        uri:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQfKPLFlnsjsMqNastpZ_2ZNnFNq0MjKP4sx7-jdjYPKhL6Bik',
-      },
-    ];
-
-    let visionArray = [
-      {
-        id: 1,
-        visionBoard: 'ME Dreams!',
-        visionMessage: '50,000$',
-        backColor: '#ffebcd',
-        uri:
-          'https://www.ocregister.com/wp-content/uploads/2017/08/0810_fea_fnt-l-ducktales-01.jpg?w=535',
-      },
-      {
-        id: 2,
-        visionBoard: 'ME Dreams!',
-        visionMessage: 'Go on a World Tour with family',
-        backColor: 'lightgreen',
-        uri:
-          'https://www.olympicholidays.com/media/24494/gold_collection_cyclades_islands.jpg?anchor=center&mode=crop&quality=65&width=330&height=230&rnd=131491883470000000',
-      },
-    ];*/
-
     let multi_set_pairs = [
       ['popArray', JSON.stringify(popArray)],
       ['visionBoardArray', JSON.stringify(visionBoardArray)],
@@ -145,10 +95,9 @@ export default class App extends Component {
             visionArray,
           });
 
-          console.log('does popArray Exist?', popArray);
           if (popArray) {
             this.setState({isLoading: false});
-            console.log('popAraay Loaded', popArray);
+
             this.updateDataServer(popArray);
             this.updateDataServer(visionBoardArray);
             this.updateDataServer(visionArray);
@@ -186,7 +135,6 @@ export default class App extends Component {
 
     let functionToCallWhenSuccess = () => {
       console.log('functionToCallWhenSuccess: SUCCESS ( RESOLVE )');
-      console.log('this.state.isLoading:', this.state.isLoading);
 
       if (this.state.isLoading) {
         return fetch('http://localhost:3000/login')
@@ -217,8 +165,6 @@ export default class App extends Component {
   }
   render() {
     if (this.state.isLoading || !this.state.popArray) {
-      console.log('ACTIVITY INDICATOR RUNNING');
-      console.log(this.state.popArray);
       return (
         <View
           style={{
@@ -234,18 +180,15 @@ export default class App extends Component {
       // <View>
       //   <Text>Testing</Text>
       // </View>
-      console.log('POP', this.state.popArray),
-      (
-        <TabNavigator
-          screenProps={{
-            ...this.state,
-            updatePopArray: this.updatePopArray,
-            updateVisionArray: this.updateVisionArray,
-            updateVisionBoardArray: this.updateVisionBoardArray,
-            updateDataServer: this.updateDataServer,
-          }}
-        />
-      )
+      <TabNavigator
+        screenProps={{
+          ...this.state,
+          updatePopArray: this.updatePopArray,
+          updateVisionArray: this.updateVisionArray,
+          updateVisionBoardArray: this.updateVisionBoardArray,
+          updateDataServer: this.updateDataServer,
+        }}
+      />
     );
   }
 }

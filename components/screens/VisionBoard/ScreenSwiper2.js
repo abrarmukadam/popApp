@@ -1,32 +1,26 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Button,
-} from 'react-native';
-import Swiper from 'react-native-swiper';
+import {StyleSheet, View, Text, SafeAreaView, Image} from 'react-native';
+import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {BackgroundImage} from './index';
-class FullScreenSwiper extends Component {
-  state = {autoplay: 'false', index: this.props.itemIndex, temp: 0};
+import {BackgroundImage} from './../../index';
+
+class ScreenSwiper2 extends Component {
+  state = {index: this.props.itemIndex};
 
   onPressDelete = tempIndex => {
-    this.setState({temp: 1});
+    //    this.setState({temp: 1});
     this.props.onClickDelete(tempIndex);
     //    this.setState({index: tempIndex});
   };
   onPressBack = () => {
     this.props.onClickBack();
   };
+
   render() {
     let tempIndex = this.props.itemIndex;
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'darkcyan'}}>
         <BackgroundImage></BackgroundImage>
-
         <View
           style={{
             flexDirection: 'row',
@@ -52,25 +46,23 @@ class FullScreenSwiper extends Component {
               onPress={() => this.onPressDelete(tempIndex)}></Icon>
           </View>
         </View>
-
-        {/*
-        <Icon
-          name="play-box-outline"
-          size={40}
-          color="black"
-          onPress={() => this.setState({autoplay: !this.state.autoplay})}
-        />
- */}
-        <Swiper
-          style={styles.wrapper}
-          //          onIndexChanged={index => this.handleOnIndexChanged(index)}
-          onIndexChanged={index => {
-            tempIndex = index;
-            //            this.setState({index});
+        <ViewPager
+          ref={viewPager => {
+            this.viewPager = viewPager;
           }}
-          showsButtons={false}
-          //          autoplay={this.state.autoplay}
-          index={this.props.itemIndex}>
+          style={styles.viewPager}
+          initialPage={this.state.index}
+          transitionStyle="scroll"
+          onPageSelected={e => {
+            tempIndex = e.nativeEvent.position;
+            if (tempIndex == this.props.list.length - 1) {
+              this.setState({index: 0});
+              //              console.log('TRU TUR TUURR');
+              //    viewPager.setPage(0);
+            }
+            console.log(tempIndex);
+            //            this.setState({index});
+          }}>
           {this.props.list.map(items => {
             return (
               <View key={items.id} style={{flex: 1}}>
@@ -81,13 +73,26 @@ class FullScreenSwiper extends Component {
               </View>
             );
           })}
-        </Swiper>
+        </ViewPager>
+        {/*
+        <Icon
+          name="play-box-outline"
+          size={40}
+          color="black"
+          onPress={() => this.setState({autoplay: !this.state.autoplay})}
+        />
+ */}
       </SafeAreaView>
     );
   }
 }
 
+export default ScreenSwiper2;
+
 const styles = StyleSheet.create({
+  viewPager: {
+    flex: 1,
+  },
   image: {
     flex: 1,
     resizeMode: 'cover',
@@ -121,5 +126,3 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
 });
-
-export default FullScreenSwiper;

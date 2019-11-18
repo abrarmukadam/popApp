@@ -19,6 +19,8 @@ import VisionBoardDisplay from './VisionBoard/VisionBoardDisplay';
 
 import LoginScreen from './screens/Authentication/LoginScreen';
 import FullScreenSwiper from './FullScreenSwiper';
+import ScreenSwiper2 from './screens/VisionBoard/ScreenSwiper2';
+import FullScreenComponent from './FullScreenComponent';
 
 export {
   AffirmationListScreen,
@@ -37,4 +39,6 @@ export {
   VisionBoardDisplay,
   LoginScreen,
   FullScreenSwiper,
+  ScreenSwiper2,
+  FullScreenComponent,
 };

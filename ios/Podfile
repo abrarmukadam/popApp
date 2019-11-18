@@ -44,6 +44,8 @@ target 'PopApp' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+  pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
+
   target 'PopAppTests' do
     inherit! :search_paths
     # Pods for testing
