@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, SafeAreaView, Image} from 'react-native';
+import {StyleSheet, View, Text, SafeAreaView, Image, Alert} from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {BackgroundImage} from './../../index';
@@ -7,9 +7,34 @@ import {BackgroundImage} from './../../index';
 class ScreenSwiper2 extends Component {
   state = {index: this.props.itemIndex};
 
-  onPressDelete = tempIndex => {
+  onPressDeleteWarning = vision => {
+    const deletHeader = 'Delete Dream?';
+    const deletMessage = 'Do you wish to Delete the selected Dream?';
+    Alert.alert(
+      deletHeader,
+      deletMessage,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return;
+          },
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            this.onPressDelete(vision);
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
+  onPressDelete = vision => {
     //    this.setState({temp: 1});
-    this.props.onClickDelete(tempIndex);
+    this.props.onClickDelete(vision);
     //    this.setState({index: tempIndex});
   };
   onPressBack = () => {
@@ -43,7 +68,7 @@ class ScreenSwiper2 extends Component {
               name="delete"
               size={40}
               color="white"
-              onPress={() => this.onPressDelete(tempIndex)}></Icon>
+              onPress={() => this.onPressDeleteWarning(tempIndex)}></Icon>
           </View>
         </View>
         <ViewPager

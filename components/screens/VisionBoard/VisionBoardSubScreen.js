@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert,
 } from 'react-native';
 import {VisionDisplay, BackgroundImage} from './../../index';
 import ImagePicker from 'react-native-image-picker';
@@ -65,6 +66,34 @@ class VisionBoardSubScreen extends Component {
     });
   };
 
+  onPressDeleteWarning = visionBoard => {
+    const deletHeader = 'Delete "' + visionBoard.visionBoard + '" ?';
+    const deletMessage =
+      'This will Delete all Vision Entries on your "' +
+      visionBoard.visionBoard +
+      '" Dream Board.\n\n Do you wish to Continue ?';
+    Alert.alert(
+      deletHeader,
+      deletMessage,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return;
+          },
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            this.onPressDelete(visionBoard);
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
   onPressDelete = visionBoard => {
     let filteredVisionBoardArray = this.props.screenProps.visionBoardArray.filter(
       List => {
@@ -87,6 +116,8 @@ class VisionBoardSubScreen extends Component {
       temp.id = index;
       index++;
     });
+    //console.log('filteredVisionBoardArray', filteredVisionBoardArray);
+    //console.log('filteredVisionArray', filteredVisionArray);
     this.props.screenProps.updateVisionBoardArray(filteredVisionBoardArray);
     this.props.screenProps.updateVisionArray(filteredVisionArray);
 
@@ -137,7 +168,7 @@ class VisionBoardSubScreen extends Component {
                 name="delete"
                 size={40}
                 color="white"
-                onPress={() => this.onPressDelete(visionBoard)}></Icon>
+                onPress={() => this.onPressDeleteWarning(visionBoard)}></Icon>
             </View>
           </View>
 

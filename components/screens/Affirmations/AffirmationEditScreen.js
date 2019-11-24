@@ -4,6 +4,7 @@ import {
   Text,
   Button,
   View,
+  Alert,
   TextInput,
   StyleSheet,
   TouchableOpacity,
@@ -58,6 +59,33 @@ export default class AffirmationEditScreen extends Component {
     });
   };
 
+  onPressBinWarning = () => {
+    let popItem = this.props.navigation.getParam('popItem');
+
+    const deletHeader = 'Delete Affirmation ?';
+    const deletMessage = 'Do you wish to Delete the selected Affirmation?';
+    Alert.alert(
+      deletHeader,
+      deletMessage,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return;
+          },
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            this.onPressBin();
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
   onPressBin = () => {
     let popItem = this.props.navigation.getParam('popItem');
     let tempArray = [...this.props.screenProps.popArray];
@@ -98,7 +126,7 @@ export default class AffirmationEditScreen extends Component {
               name="md-trash"
               size={40}
               color="white"
-              onPress={() => this.onPressBin()}></Icon>
+              onPress={() => this.onPressBinWarning()}></Icon>
           </View>
         </View>
         <View style={styles.container2}>
