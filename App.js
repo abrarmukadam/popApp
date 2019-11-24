@@ -49,9 +49,9 @@ export default class App extends Component {
 
   updateVisionArray = visionArray => {
     // method to update App's state, passed to children
-    //    this.updateDataServer(visionArray);
+    this.updateDataServer(visionArray);
     this.setState({visionArray: visionArray});
-    //    this._storeItem('visionArray', visionArray);
+    this._storeItem('visionArray', visionArray);
   };
 
   updateVisionBoardArray = visionBoardArray => {
@@ -104,7 +104,7 @@ export default class App extends Component {
 
             //       return true;
           } else {
-            console.log('popAraay NOT LOADED', popArray);
+            console.log('DATA NOT LOADED');
             //         return false;
           }
         },
@@ -116,7 +116,7 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    console.log('COMPONEND DID MOUNT CALLED ');
+    //    console.log('COMPONEND DID MOUNT CALLED ');
     /*
     AsyncStorage.multiRemove(
       ['popArray', 'visionBoardArray', 'visionArray'],

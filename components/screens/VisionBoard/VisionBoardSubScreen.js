@@ -65,6 +65,34 @@ class VisionBoardSubScreen extends Component {
     });
   };
 
+  onPressDelete = visionBoard => {
+    let filteredVisionBoardArray = this.props.screenProps.visionBoardArray.filter(
+      List => {
+        return List.visionBoard != visionBoard.visionBoard;
+      },
+    );
+    let index = 1;
+    filteredVisionBoardArray.map(temp => {
+      temp.id = index;
+      index++;
+    });
+
+    let filteredVisionArray = this.props.screenProps.visionArray.filter(
+      List => {
+        return List.visionBoard != visionBoard.visionBoard;
+      },
+    );
+    index = 1;
+    filteredVisionArray.map(temp => {
+      temp.id = index;
+      index++;
+    });
+    this.props.screenProps.updateVisionBoardArray(filteredVisionBoardArray);
+    this.props.screenProps.updateVisionArray(filteredVisionArray);
+
+    this.props.navigation.navigate('VisionBoardHome');
+  };
+
   render() {
     let visionWidthCounter = 0;
 
@@ -109,8 +137,7 @@ class VisionBoardSubScreen extends Component {
                 name="delete"
                 size={40}
                 color="white"
-                //onPress={() => this.onPressDelete(tempIndex)}
-              ></Icon>
+                onPress={() => this.onPressDelete(visionBoard)}></Icon>
             </View>
           </View>
 
