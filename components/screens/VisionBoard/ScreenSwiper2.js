@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, SafeAreaView, Image, Alert} from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {BackgroundImage} from './../../index';
 
@@ -43,6 +44,14 @@ class ScreenSwiper2 extends Component {
 
   render() {
     let tempIndex = this.props.itemIndex;
+
+    let toBeDisplayedList = [
+      //      this.props.list[this.props.list.length - 1],
+      ...this.props.list,
+      //     this.props.list[0],
+    ];
+
+    console.log(toBeDisplayedList);
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: 'darkcyan'}}>
         <BackgroundImage></BackgroundImage>
@@ -80,15 +89,20 @@ class ScreenSwiper2 extends Component {
           transitionStyle="scroll"
           onPageSelected={e => {
             tempIndex = e.nativeEvent.position;
-            if (tempIndex == this.props.list.length - 1) {
+            if (tempIndex == this.props.list.length + 1) {
               this.setState({index: 0});
-              //              console.log('TRU TUR TUURR');
-              //    viewPager.setPage(0);
+              console.log('TRU TUR TUURR');
+              this.viewPager.setPage(1);
+            }
+            if (tempIndex == 0) {
+              this.setState({index: 0});
+              console.log('TRU TUR TUURR');
+              this.viewPager.setPage(this.props.list.length);
             }
             console.log(tempIndex);
             //            this.setState({index});
           }}>
-          {this.props.list.map(items => {
+          {toBeDisplayedList.map(items => {
             return (
               <View key={items.id} style={{flex: 1}}>
                 {<Image source={{uri: items.uri}} style={styles.image}></Image>}
@@ -106,7 +120,7 @@ class ScreenSwiper2 extends Component {
           color="black"
           onPress={() => this.setState({autoplay: !this.state.autoplay})}
         />
- */}
+      */}
       </SafeAreaView>
     );
   }

@@ -60,7 +60,8 @@ export default class AddAffirmationScreen extends Component {
               onChangeText={this.onTextChange.bind(this)}
               autoFocus
               padding={10}
-              color="white"></TextInput>
+              //color="white"
+            ></TextInput>
             <BackgroundColor
               selectedColor={this.props.screenProps.colorArray[0]}
               onPressColor={this.onPressColor}
@@ -82,30 +83,36 @@ const styles = StyleSheet.create({
   textInputStyle: {
     fontSize: 35,
     textAlign: 'center',
+    color: 'white',
   },
   safeAreaView: {
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'space-between',
     padding: 20,
+    color: 'white',
   },
   container1: {
     flex: 1,
     justifyContent: 'space-between',
+    color: 'white',
   },
   container2: {
     flex: 2,
     justifyContent: 'space-between',
+    color: 'white',
   },
   addButton: {
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     padding: 20,
+    color: 'white',
   },
   AffDetails: {
     flex: 2,
     justifyContent: 'space-between',
     alignItems: 'center',
+    color: 'white',
     //    flexWrap: 'wrap',
   },
 });

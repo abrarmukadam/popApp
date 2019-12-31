@@ -132,7 +132,7 @@ export default class AffirmationEditScreen extends Component {
         <View style={styles.container2}>
           <View style={styles.AffDetails}>
             <TextInput
-              style={{fontSize: 35, textAlign: 'center'}}
+              style={{fontSize: 35, textAlign: 'center', color: 'white'}}
               placeholder={'Type Here...'}
               value={this.state.text}
               multiline
@@ -140,7 +140,8 @@ export default class AffirmationEditScreen extends Component {
               onChangeText={text => this.onTextChange(text)}
               autoFocus
               padding={10}
-              color="white"></TextInput>
+              //color={'white'}
+            ></TextInput>
             <BackgroundColor
               onPressColor={color => this.onPressColor(color)}
               colorArray={this.props.screenProps.colorArray}

@@ -24,15 +24,17 @@ export default class SearchAffirmation extends Component {
 
 const styles = StyleSheet.create({
   SearchBoxStyle: {
+    height: 32,
     borderWidth: 0.2,
     borderRadius: 20,
     margin: 6,
     padding: 6,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
   },
   TextStyle: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: 'bold',
     margin: 2,
+    paddingStart: 8,
   },
 });

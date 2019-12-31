@@ -40,10 +40,26 @@ class VisionFullScreen extends Component {
     let newIndex = filteredVisionList.length - index - 1;
     let newItem = newIndex ? filteredVisionList[index] : filteredVisionList[0];
     // let newItem = filteredVisionList[index]; // : filteredVisionList[0];
-    this.props.navigation.navigate('VisionBoardSubScreen');
-    this.props.navigation.navigate('VisionFullScreen', {
-      visionItem: newItem,
-    });
+    //    this.props.navigation.navigate('VisionBoardSubScreen');
+    //console.log(filteredVisionList);
+
+    //if not the last item in the list then delete and navigate to next
+    if (filteredVisionList.length > 1) {
+      this.props.navigation.navigate('VisionFullScreen', {
+        visionItem: newItem,
+      });
+    }
+    //if last item in the list then delete the Vision Board as well
+    else {
+      let filteredVisionBoardArray = this.props.screenProps.visionBoardArray.filter(
+        List => {
+          return List.visionBoard != visionItem.visionBoard;
+        },
+      );
+      this.props.screenProps.updateVisionBoardArray(filteredVisionBoardArray);
+
+      this.props.navigation.navigate('VisionBoardHome');
+    }
   };
 
   handleOnClickBack = () => {
