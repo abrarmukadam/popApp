@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   AffirmationListScreen,
+  //  AffirmationFullScreen,
   AffirmationEditScreen,
   AddAffirmationScreen,
 } from './../components/index';
@@ -20,42 +21,23 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const MainStack = createStackNavigator(
-  {
-    Home: AffirmationListScreen,
-    Details: AffirmationEditScreen,
-  },
-  {
-    initialRouteName: 'Home',
-  },
-);
-
-MainStack.navigationOptions = ({navigation}) => {
-  let tabBarVisible = true;
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-  }
-
-  return {
-    tabBarVisible,
-  };
-};
-
 const RootStack = createStackNavigator(
   {
-    Main: {
-      screen: MainStack,
+    Home: {screen: AffirmationListScreen},
+    //    FullScreen: {screen: AffirmationFullScreen},
+    Details: {
+      screen: AffirmationEditScreen,
     },
     Add: {
       screen: AddAffirmationScreen,
     },
   },
   {
+    initialRouteName: 'Home',
     mode: 'modal',
     headerMode: 'none',
   },
 );
-
 RootStack.navigationOptions = ({navigation}) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
@@ -71,9 +53,6 @@ const VisionBoardStack = createStackNavigator(
   {
     VisionBoardHome: {
       screen: VisionBoardHomeScreen,
-      navigationOptions: {
-        tabBarVisible: false,
-      },
     },
 
     VisionBoardSubScreen: {

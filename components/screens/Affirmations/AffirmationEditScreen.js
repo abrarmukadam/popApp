@@ -8,6 +8,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import {BackgroundColor} from './../../index';
@@ -104,13 +105,19 @@ export default class AffirmationEditScreen extends Component {
     return (
       <SafeAreaView
         style={[styles.safeAreaView, {backgroundColor: this.state.backColor}]}>
-        <View style={styles.container1}>
+        <KeyboardAvoidingView
+          style={styles.container1}
+          behavior="height"
+          enabled>
           <View
             style={
               (styles.addButton,
               {
                 alignItems: 'flex-start',
-                padding: 25,
+                paddingLeft: 25,
+                paddingRight: 25,
+                paddingTop: 25,
+
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               })
@@ -128,8 +135,6 @@ export default class AffirmationEditScreen extends Component {
               color="white"
               onPress={() => this.onPressBinWarning()}></Icon>
           </View>
-        </View>
-        <View style={styles.container2}>
           <View style={styles.AffDetails}>
             <TextInput
               style={{fontSize: 35, textAlign: 'center', color: 'white'}}
@@ -142,6 +147,8 @@ export default class AffirmationEditScreen extends Component {
               padding={10}
               //color={'white'}
             ></TextInput>
+          </View>
+          <View style={styles.addButton}>
             <BackgroundColor
               onPressColor={color => this.onPressColor(color)}
               colorArray={this.props.screenProps.colorArray}
@@ -152,13 +159,16 @@ export default class AffirmationEditScreen extends Component {
                 //              ].backColor
               }
             />
-          </View>
-          <View style={styles.addButton}>
-            <TouchableOpacity onPress={this.onPressSave}>
+            <TouchableOpacity
+              style={{
+                marginBottom: 6,
+                paddingRight: 20,
+              }}
+              onPress={this.onPressSave}>
               <Icon name="md-send" size={40} color="white"></Icon>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
@@ -170,15 +180,15 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     alignContent: 'center',
     justifyContent: 'space-between',
-    padding: 10,
+    //    padding: 10,
 
-    marginBottom: 10,
+    //marginBottom: 10,
   },
   buttonStyle: {
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    padding: 10,
+    //    padding: 10,
   },
   container1: {
     flex: 1,
@@ -191,11 +201,13 @@ const styles = StyleSheet.create({
   addButton: {
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    padding: 20,
+    paddingBottom: 20,
+    padding: 2,
+    color: 'white',
   },
   AffDetails: {
     flex: 2,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
   },
 });

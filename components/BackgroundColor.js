@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 let tempIcon = 'circle'; //'bullseye'
 let icon1 = 'dot-circle-o';
 let icon2 = 'circle';
+let iconSize = 35;
 
 export default class BackgroundColor extends Component {
   state = {
@@ -26,7 +27,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[0] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[0] ? 'lightgrey' : colorArray[0]
             }
@@ -39,7 +40,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[1] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[1] ? 'lightgrey' : colorArray[1]
             }
@@ -52,7 +53,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[2] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[2] ? 'lightgrey' : colorArray[2]
             }
@@ -65,7 +66,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[3] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[3] ? 'lightgrey' : colorArray[3]
             }
@@ -78,7 +79,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[4] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[4] ? 'lightgrey' : colorArray[4]
             }
@@ -91,7 +92,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[5] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[5] ? 'lightgrey' : colorArray[5]
             }
@@ -104,7 +105,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[6] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[6] ? 'lightgrey' : colorArray[6]
             }
@@ -117,7 +118,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[7] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[7] ? 'lightgrey' : colorArray[7]
             }
@@ -130,7 +131,7 @@ export default class BackgroundColor extends Component {
         <View style={styles.ButtonPadding}>
           <Icon
             name={this.state.color == colorArray[8] ? icon1 : icon2}
-            size={40}
+            size={iconSize}
             color={
               this.state.color == colorArray[8] ? 'lightgrey' : colorArray[8]
             }
@@ -215,9 +216,11 @@ export default class BackgroundColor extends Component {
 const styles = StyleSheet.create({
   ButtonContainer: {
     flexDirection: 'row',
-    margin: 3,
+    //  margin: ,
   },
   ButtonPadding: {
-    padding: 2,
+    //    padding: '0.5%',
+    flex: 9,
+    //    width: '11%',
   },
 });
