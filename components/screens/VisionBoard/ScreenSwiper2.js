@@ -1,16 +1,50 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, SafeAreaView, Image, Alert} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {BackgroundImage} from './../../index';
 
 class ScreenSwiper2 extends Component {
-  state = {index: this.props.itemIndex};
+  state = {index: this.props.itemIndex, buttonPlay: 'true'};
+  constructor(props) {
+    super(props);
+    this.viewPager = React.createRef();
+  }
+
+  onPressPlay = currentPage => {
+    let length = this.props.list.length;
+    this.setState({buttonPlay: !this.state.buttonPlay});
+
+    this.setState({page: currentPage});
+    if (this.state.buttonPlay) {
+      let intervalId = setInterval(() => {
+        console.log(this.state.buttonPlay);
+        if (this.state.page < length) this.go(this.state.page);
+        this.setState({page: this.state.page + 1});
+        if (this.state.page >= length) this.setState({page: 0});
+      }, 2000);
+      this.setState({intervalId: intervalId});
+    } else clearInterval(this.state.intervalId);
+  };
+
+  go = page => {
+    this.viewPager.current.setPage(page);
+  };
 
   onPressDeleteWarning = vision => {
     const deletHeader = 'Delete Dream?';
     const deletMessage = 'Do you wish to Delete the selected Dream?';
+    clearInterval(this.state.intervalId);
+
     Alert.alert(
       deletHeader,
       deletMessage,
@@ -39,6 +73,7 @@ class ScreenSwiper2 extends Component {
     //    this.setState({index: tempIndex});
   };
   onPressBack = () => {
+    clearInterval(this.state.intervalId);
     this.props.onClickBack();
   };
 
@@ -72,7 +107,16 @@ class ScreenSwiper2 extends Component {
           <View style={{alignItems: 'center', flex: 4}}>
             <Text style={styles.Heading}>{this.props.header}</Text>
           </View>
-          <View style={{marginRight: 5}}>
+          <View style={{marginRight: 5, flexDirection: 'row'}}>
+            <TouchableOpacity
+              style={styles.buttonStyle}
+              onPress={() => this.onPressPlay(this.state.index)}>
+              <Icon
+                name={this.state.buttonPlay ? 'play' : 'stop'}
+                size={40}
+                color="white"></Icon>
+            </TouchableOpacity>
+
             <Icon
               name="delete"
               size={40}
@@ -81,25 +125,27 @@ class ScreenSwiper2 extends Component {
           </View>
         </View>
         <ViewPager
-          ref={viewPager => {
-            this.viewPager = viewPager;
-          }}
+          ref={this.viewPager}
           style={styles.viewPager}
           initialPage={this.state.index}
           transitionStyle="scroll"
           onPageSelected={e => {
             tempIndex = e.nativeEvent.position;
-            if (tempIndex == this.props.list.length + 1) {
-              this.setState({index: 0});
-              console.log('TRU TUR TUURR');
-              this.viewPager.setPage(1);
-            }
-            if (tempIndex == 0) {
-              this.setState({index: 0});
-              console.log('TRU TUR TUURR');
-              this.viewPager.setPage(this.props.list.length);
-            }
-            console.log(tempIndex);
+            this.setState({
+              index: tempIndex,
+            });
+
+            // if (tempIndex == this.props.list.length + 1) {
+            //   this.setState({index: 0});
+            //   console.log('TRU TUR TUURR');
+            //   this.viewPager.setPage(1);
+            // }
+            // if (tempIndex == 0) {
+            //   this.setState({index: 0});
+            //   console.log('TRU TUR TUURR');
+            //   this.viewPager.setPage(this.props.list.length);
+            // }
+            // console.log(tempIndex);
             //            this.setState({index});
           }}>
           {toBeDisplayedList.map(items => {

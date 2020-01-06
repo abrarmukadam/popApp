@@ -115,7 +115,7 @@ export default class App extends Component {
     }
   };
 
-  componentDidMount() {
+  componentWillMount() {
     //    console.log('COMPONEND DID MOUNT CALLED ');
     /*
     AsyncStorage.multiRemove(

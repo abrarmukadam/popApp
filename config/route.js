@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
   AffirmationListScreen,
-  //  AffirmationFullScreen,
+  AffirmationFullScreen,
   AffirmationEditScreen,
   AddAffirmationScreen,
 } from './../components/index';
@@ -24,8 +24,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const RootStack = createStackNavigator(
   {
     Home: {screen: AffirmationListScreen},
-    //    FullScreen: {screen: AffirmationFullScreen},
-    Details: {
+    Details: {screen: AffirmationFullScreen},
+    Edit: {
       screen: AffirmationEditScreen,
     },
     Add: {

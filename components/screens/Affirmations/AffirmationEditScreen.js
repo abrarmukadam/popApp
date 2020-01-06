@@ -53,7 +53,7 @@ export default class AffirmationEditScreen extends Component {
   onPressColor = color => {
     this.setState({backColor: color});
 
-    this.props.navigation.navigate('Details', {
+    this.props.navigation.navigate('Edit', {
       popMessage: this.props.screenProps.popArray[
         this.props.navigation.getParam('id') - 1
       ].backColor,

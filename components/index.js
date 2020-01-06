@@ -1,4 +1,5 @@
 import AffirmationListScreen from './screens/Affirmations/AffirmationListScreen';
+import AffirmationFullScreen from './screens/Affirmations/AffirmationFullScreen';
 import AffirmationEditScreen from './screens/Affirmations/AffirmationEditScreen';
 import AddAffirmationScreen from './screens/Affirmations/AddAffirmationScreen';
 
@@ -24,6 +25,7 @@ import FullScreenComponent from './FullScreenComponent';
 
 export {
   AffirmationListScreen,
+  AffirmationFullScreen,
   AffirmationEditScreen,
   AddAffirmationScreen,
   AddAffirmation,
