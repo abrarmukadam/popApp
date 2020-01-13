@@ -14,7 +14,11 @@ import {
   VisionFullScreen,
 } from './../components/index';
 
-import {LoginScreen} from './../components/index';
+import {
+  LoginScreen,
+  ForgotPasswordScreen,
+  RegisterScreen,
+} from './../components/index';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -78,6 +82,25 @@ VisionBoardStack.navigationOptions = ({navigation}) => {
   };
 };
 
+const LoginStack = createStackNavigator(
+  {
+    Login: {
+      screen: LoginScreen,
+    },
+
+    Register: {
+      screen: RegisterScreen,
+    },
+    ForgotPassword: {
+      screen: ForgotPasswordScreen,
+    },
+  },
+  {
+    initialRouteName: 'Login',
+    headerMode: 'none',
+  },
+);
+
 const TabNavigator = createBottomTabNavigator(
   {
     Affirmations: {
@@ -86,7 +109,7 @@ const TabNavigator = createBottomTabNavigator(
         //      tabBarLabel: 'Home Page',
         tabBarIcon: ({focused, tintColor}) => (
           <Icon
-            name={focused ? 'home' : 'home-outline'}
+            name={focused ? 'file-document-edit' : 'file-document-edit-outline'}
             size={focused ? 40 : 40}
             color="white"
           />
@@ -100,15 +123,15 @@ const TabNavigator = createBottomTabNavigator(
         color: 'white',
         tabBarIcon: ({focused, tintColor}) => (
           <Icon
-            name={focused ? 'card-bulleted' : 'card-bulleted-outline'}
+            name={focused ? 'cards' : 'cards-outline'}
             size={focused ? 40 : 40}
             color="white"
           />
         ),
       },
     },
-    LoginScreen: {
-      screen: LoginScreen,
+    Login: {
+      screen: LoginStack,
       navigationOptions: {
         tabBarLabel: 'Account',
         color: 'white',

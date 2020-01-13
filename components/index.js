@@ -19,6 +19,9 @@ import VisionDisplay from './VisionBoard/VisionDisplay';
 import VisionBoardDisplay from './VisionBoard/VisionBoardDisplay';
 
 import LoginScreen from './screens/Authentication/LoginScreen';
+import RegisterScreen from './screens/Authentication/RegisterScreen';
+import ForgotPasswordScreen from './screens/Authentication/ForgotPasswordScreen';
+
 import FullScreenSwiper from './FullScreenSwiper';
 import ScreenSwiper2 from './screens/VisionBoard/ScreenSwiper2';
 import FullScreenComponent from './FullScreenComponent';
@@ -40,6 +43,8 @@ export {
   VisionDisplay,
   VisionBoardDisplay,
   LoginScreen,
+  RegisterScreen,
+  ForgotPasswordScreen,
   FullScreenSwiper,
   ScreenSwiper2,
   FullScreenComponent,

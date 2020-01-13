@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   Dimensions,
+  SafeAreaView,
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -23,6 +24,12 @@ class LoginScreen extends Component {
     return (
       <View style={styles.safeAreaView}>
         <BackgroundImage />
+        <Icon
+          style={styles.backStyle}
+          name="keyboard-backspace"
+          size={40}
+          color="white"
+          onPress={() => this.props.navigation.navigate('Login')}></Icon>
         <View style={styles.logo}>
           <Image source={logo}></Image>
         </View>
@@ -51,29 +58,21 @@ class LoginScreen extends Component {
             secureTextEntry={this.state.passwordVisible}
             placeholderTextColor="rgba(255,255,255,0.7)"
             underlineColorAndroid="transparent"></TextInput>
-          <TouchableOpacity style={styles.eyeButton}>
-            <Icon
-              onPress={() => {
-                if (this.state.eyeButton == 'true') {
-                  this.setState({eyeButton: 'false', passwordVisible: false});
-                } else
-                  this.setState({eyeButton: 'true', passwordVisible: true});
-              }}
-              name={this.state.passwordVisible == true ? 'eye' : 'eye-off'}
-              size={28}
-              color="rgba(255,255,255,0.7)"></Icon>
-          </TouchableOpacity>
+        </View>
+        <View style={styles.inputContainer}>
+          <Icon
+            name="lock"
+            size={28}
+            color="rgba(255,255,255,0.7)"
+            style={styles.inputIcon}></Icon>
+          <TextInput
+            style={styles.input}
+            placeholder="Re-Enter Password"
+            secureTextEntry={this.state.passwordVisible}
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            underlineColorAndroid="transparent"></TextInput>
         </View>
         <TouchableOpacity style={styles.loginButton}>
-          <Text style={styles.loginButtonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('ForgotPassword')}>
-          <Text style={styles.textStyle}>Forgot password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => this.props.navigation.navigate('Register')}>
           <Text style={styles.loginButtonText}>Register</Text>
         </TouchableOpacity>
       </View>
@@ -81,9 +80,11 @@ class LoginScreen extends Component {
   }
 }
 const styles = StyleSheet.create({
-  textStyle: {
-    fontSize: 15,
-    color: 'blue',
+  backStyle: {
+    marginLeft: 18,
+    position: 'absolute',
+    top: 37,
+    left: 8,
   },
   inputContainer: {
     marginBottom: 20,

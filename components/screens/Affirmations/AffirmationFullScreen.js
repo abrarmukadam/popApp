@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ViewPager from '@react-native-community/viewpager';
-import {BackgroundImage} from './../../index';
 
 class AffirmationFullScreen extends Component {
   state = {
@@ -48,11 +47,11 @@ class AffirmationFullScreen extends Component {
     this.setState({page: currentPage});
     if (this.state.buttonPlay) {
       let intervalId = setInterval(() => {
-        console.log(this.state.buttonPlay);
+        if (this.state.page >= length - 1) this.setState({page: 0});
+        else this.setState({page: this.state.page + 1});
+
         if (this.state.page < length) this.go(this.state.page);
-        this.setState({page: this.state.page + 1});
-        if (this.state.page >= length) this.setState({page: 0});
-      }, 2000);
+      }, 2500);
       this.setState({intervalId: intervalId});
     } else clearInterval(this.state.intervalId);
     // if (!this.state.buttonPlay) {
