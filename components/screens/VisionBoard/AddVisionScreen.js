@@ -11,6 +11,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import ActionButton from 'react-native-action-button';
 
 export default class AddVisionScreen extends Component {
   state = {
@@ -48,7 +49,7 @@ export default class AddVisionScreen extends Component {
       uri: this.state.photo.uri,
     };
     newVisionBoardArray = [...newVisionBoardArray, newVisionBoard];
-
+    console.log('vision board createdadd');
     //    this.props.screenProps.updateData(newVisionBoard);
 
     this.props.screenProps.updateVisionBoardArray(newVisionBoardArray),
@@ -63,23 +64,31 @@ export default class AddVisionScreen extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <BackgroundImage />
-        <View style={{alignContent: 'center'}}>
-          {!photo && (
-            <Text style={styles.text}>Give your Dreams a beautiful name</Text>
-          )}
-          <TextInput
-            style={styles.textInputStyle}
-            placeholder={'Type the Name Here...'}
-            value={this.state.text}
-            onChangeText={this.onTextChange.bind(this)}
-            autoFocus
-            textAlign="center"
-            padding={10}></TextInput>
-          {!photo && (
-            <TouchableOpacity style={styles.button} onPress={this.onPressAdd}>
-              <Text style={styles.buttonText}>Add Photo</Text>
-            </TouchableOpacity>
-          )}
+        <View style={styles.container2}>
+          <View style={{flex: 1}}>
+            {!photo && (
+              <Text style={styles.text}>Give your Dreams a beautiful name</Text>
+            )}
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder={'Type the Name Here...'}
+              value={this.state.text}
+              onChangeText={this.onTextChange.bind(this)}
+              autoFocus
+              textAlign="center"
+              padding={10}></TextInput>
+          </View>
+          <View
+            style={{
+              flex: 1,
+            }}>
+            {!photo && (
+              <ActionButton buttonColor="#222222" onPress={this.onPressAdd} />
+              // <TouchableOpacity style={styles.button} onPress={this.onPressAdd}>
+              //   <Text style={styles.buttonText}>Add Photo</Text>
+              // </TouchableOpacity>
+            )}
+          </View>
         </View>
         {photo && (
           <View style={styles.Container2}>
@@ -135,6 +144,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
   },
+
+  container2: {
+    flex: 1,
+    alignContent: 'center',
+    justifyContent: 'flex-start',
+    position: 'absolute',
+    height: '80%',
+    top: '20%',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -150,8 +168,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   button: {
-    justifyContent: 'flex-end',
-    alignContent: 'flex-end',
+    //    justifyContent: 'flex-end',
+    //   alignContent: 'flex-end',
     alignItems: 'center',
     marginTop: 10,
     padding: 10,

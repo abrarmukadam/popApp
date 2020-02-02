@@ -16,7 +16,7 @@ export default class VisionDisplay extends Component {
         style={[
           styles.Layout,
           {
-            backgroundColor: 'darkcyan',
+            backgroundColor: 'grey',
             height: 240,
             width: widthArray[this.props.visionWidthCounter],
           },
@@ -35,18 +35,42 @@ export default class VisionDisplay extends Component {
             }}
             style={{
               width: '100%',
-              height: 193,
+              height: '100%',
               borderRadius: 5, //Then Make the Border Radius twice the size of width or Height
             }}
           />
         </View>
         <View
           style={{
+            width: '100%',
+            height: '12%',
+            justifyContent: 'center',
+            alignContent: 'center',
+            alignItems: 'flex-end',
+            flexWrap: 'wrap',
+            backgroundColor: 'black',
+            opacity: 0.7,
+            position: 'absolute',
+            bottom: 0,
+            borderBottomLeftRadius: 5, //Then Make the Border Radius twice the size of width or Height
+            borderBottomRightRadius: 5, //Then Make the Border Radius twice the size of width or Height
+          }}></View>
+
+        <View
+          style={{
+            width: '100%',
             flex: 1,
             justifyContent: 'center',
             alignContent: 'center',
             alignItems: 'flex-end',
             flexWrap: 'wrap',
+            backgroundColor: 'transparent',
+            color: 'white',
+            //            opacity: 0.8,
+            position: 'absolute',
+            bottom: 0,
+            borderBottomLeftRadius: 5, //Then Make the Border Radius twice the size of width or Height
+            borderBottomRightRadius: 5, //Then Make the Border Radius twice the size of width or Height
           }}>
           <Text style={styles.VisionText}>
             {this.props.visionItem.visionMessage}

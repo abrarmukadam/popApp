@@ -49,8 +49,6 @@ class VisionBoardSubScreen extends Component {
       visionMessage: this.state.text,
       uri: this.state.photo.uri,
     };
-    //    this.props.screenProps.updateData(newVision);
-
     this.props.screenProps.updateVisionArray([
       ...this.props.screenProps.visionArray,
       newVision,
@@ -116,8 +114,6 @@ class VisionBoardSubScreen extends Component {
       temp.id = index;
       index++;
     });
-    //console.log('filteredVisionBoardArray', filteredVisionBoardArray);
-    //console.log('filteredVisionArray', filteredVisionArray);
     this.props.screenProps.updateVisionBoardArray(filteredVisionBoardArray);
     this.props.screenProps.updateVisionArray(filteredVisionArray);
 
@@ -126,76 +122,79 @@ class VisionBoardSubScreen extends Component {
 
   render() {
     let visionWidthCounter = 0;
-
+    let filteredVisionArray = [];
     const photo = this.state.photo;
 
     const visionBoard = this.props.navigation.getParam('vision');
-    let filteredVisionArray = this.props.screenProps.visionArray.filter(
-      List => {
+
+    if (this.props.screenProps.visionArray)
+      filteredVisionArray = this.props.screenProps.visionArray.filter(List => {
         return List.visionBoard == visionBoard.visionBoard;
-      },
-    );
+      });
 
     if (filteredVisionArray.length > 0 && this.state.addNew == 0)
       return (
-        <SafeAreaView style={styles.safeAreaView}>
+        <View style={{flex: 1}}>
           <BackgroundImage></BackgroundImage>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignSelf: 'flex-start',
-              borderColor: 'white',
-              borderBottomWidth: 1,
-              paddingLeft: 5,
-              marginBottom: 2,
-            }}>
-            <View style={{flex: 1, alignItems: 'flex-start', marginLeft: 5}}>
-              <Icon
-                name="keyboard-backspace"
-                size={40}
-                color="white"
-                onPress={() =>
-                  this.props.navigation.navigate('VisionBoardHome')
-                }></Icon>
+
+          <SafeAreaView style={styles.safeAreaView}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignSelf: 'flex-start',
+                borderColor: 'white',
+                borderBottomWidth: 1,
+                paddingLeft: 5,
+                marginBottom: 2,
+              }}>
+              <View style={{flex: 1, alignItems: 'flex-start', marginLeft: 5}}>
+                <Icon
+                  name="keyboard-backspace"
+                  size={40}
+                  color="white"
+                  onPress={() =>
+                    this.props.navigation.navigate('VisionBoardHome')
+                  }></Icon>
+              </View>
+
+              <View style={{flex: 5, alignItems: 'center'}}>
+                <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
+              </View>
+
+              <View style={{marginRight: 5}}>
+                <Icon
+                  name="delete"
+                  size={40}
+                  color="white"
+                  onPress={() => this.onPressDeleteWarning(visionBoard)}></Icon>
+              </View>
             </View>
 
-            <View style={{flex: 5, alignItems: 'center'}}>
-              <Text style={styles.Heading}>{visionBoard.visionBoard}</Text>
-            </View>
+            <ScrollView>
+              <View style={styles.VisionList}>
+                {filteredVisionArray.map(vision => {
+                  if (visionWidthCounter % 4 == 0) visionWidthCounter = 0;
+                  visionWidthCounter++;
 
-            <View style={{marginRight: 5}}>
-              <Icon
-                name="delete"
-                size={40}
-                color="white"
-                onPress={() => this.onPressDeleteWarning(visionBoard)}></Icon>
-            </View>
-          </View>
+                  return (
+                    <VisionDisplay
+                      visionWidthCounter={visionWidthCounter}
+                      //                    width={width}
+                      key={vision.id}
+                      visionItem={vision}
+                      onVisionClicked={visionItem =>
+                        this.handleVisionClicked(visionItem)
+                      }></VisionDisplay>
+                  );
+                })}
+              </View>
+            </ScrollView>
 
-          <ScrollView>
-            <View style={styles.VisionList}>
-              {filteredVisionArray.map(vision => {
-                if (visionWidthCounter % 4 == 0) visionWidthCounter = 0;
-                visionWidthCounter++;
-
-                return (
-                  <VisionDisplay
-                    visionWidthCounter={visionWidthCounter}
-                    //                    width={width}
-                    key={vision.id}
-                    visionItem={vision}
-                    onVisionClicked={visionItem =>
-                      this.handleVisionClicked(visionItem)
-                    }></VisionDisplay>
-                );
-              })}
-            </View>
-          </ScrollView>
-
-          <ActionButton
-            buttonColor="blue"
-            onPress={this.onPressAddNew}></ActionButton>
-        </SafeAreaView>
+            <ActionButton
+              buttonColor="#222222"
+              onPress={this.onPressAddNew}></ActionButton>
+          </SafeAreaView>
+        </View>
       );
     return (
       //to add New Image
@@ -234,6 +233,7 @@ class VisionBoardSubScreen extends Component {
                 <TextInput
                   style={styles.textInputStyle}
                   placeholder={'Type the Caption Here...'}
+                  //    placeholderTextColor="slategray"
                   value={this.state.text}
                   autoFocus
                   onChangeText={this.onTextChange.bind(this)}
@@ -245,7 +245,7 @@ class VisionBoardSubScreen extends Component {
               <TouchableOpacity
                 style={styles.sendButtonStyle}
                 onPress={this.onPressAddToDreamBoard}>
-                <Icon name="content-save" size={40} color="white"></Icon>
+                <Icon name="checkbox-marked" size={40} color="white"></Icon>
               </TouchableOpacity>
             </View>
           </View>
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
   safeAreaView: {
     borderColor: 'white',
     borderBottomWidth: 0.5,
-
+    justifyContent: 'center',
     flex: 1,
     //    justifyContent: 'flex-start',
   },
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     borderColor: 'white',
     flexDirection: 'row',
-    borderBottomWidth: 0.5,
+    //    borderBottomWidth: 0.5,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -295,14 +295,16 @@ const styles = StyleSheet.create({
   sendButtonStyle: {justifyContent: 'flex-end', paddingRight: 5},
   buttonContainer: {
     //    flex: 1,
-    borderWidth: 2,
+    //    borderWidth: 2,
     paddingBottom: 4,
     justifyContent: 'flex-end',
     flexDirection: 'row',
-    borderColor: 'white',
-    borderBottomWidth: 0.5,
+    //  borderColor: 'white',
+    //   borderBottomWidth: 0.5,
     backgroundColor: 'transparent',
-    borderRadius: 20,
+    opacity: 0.8,
+
+    // borderRadius: 20,
   },
 
   button: {
@@ -336,10 +338,11 @@ const styles = StyleSheet.create({
   textInputStyle: {
     fontSize: 20,
     backgroundColor: 'grey',
-    color: 'white',
+    color: '#fffafa',
     fontWeight: 'bold',
     fontStyle: 'italic',
-    borderRadius: 20,
+    borderRadius: 10,
+    marginRight: 2,
   },
   image: {
     flex: 1,

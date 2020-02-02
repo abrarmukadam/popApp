@@ -60,27 +60,30 @@ export default class AffirmationListScreen extends Component {
     });
 
     return (
-      <SafeAreaView style={styles.safeAreaView}>
+      <View style={{flex: 1}}>
         <BackgroundImage />
-        <SearchAffirmation
-          OnSearchChange={this.OnSearchChange}></SearchAffirmation>
-        <ScrollView>
-          <View style={styles.AffList}>
-            {filteredList.map(item => {
-              return (
-                <AffirmationDisplay
-                  key={item.id}
-                  popItem={item}
-                  onItemClicked={this.navigateToDetails}
-                />
-              );
-            })}
-          </View>
-        </ScrollView>
-        <ActionButton
-          buttonColor="blue"
-          onPress={this.onPressAdd}></ActionButton>
-      </SafeAreaView>
+
+        <SafeAreaView style={styles.safeAreaView}>
+          <SearchAffirmation
+            OnSearchChange={this.OnSearchChange}></SearchAffirmation>
+          <ScrollView>
+            <View style={styles.AffList}>
+              {filteredList.map(item => {
+                return (
+                  <AffirmationDisplay
+                    key={item.id}
+                    popItem={item}
+                    onItemClicked={this.navigateToDetails}
+                  />
+                );
+              })}
+            </View>
+          </ScrollView>
+          <ActionButton
+            buttonColor="#222222"
+            onPress={this.onPressAdd}></ActionButton>
+        </SafeAreaView>
+      </View>
     );
   }
 }
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-    backgroundColor: 'lightyellow',
+
     //  margin: 10,
     //  marginTop: 10,
     //    marginBottom: 20,

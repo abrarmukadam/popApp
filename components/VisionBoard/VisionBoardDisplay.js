@@ -35,14 +35,31 @@ export default class VisionBoardDisplay extends Component {
               borderRadius: 10, //Then Make the Border Radius twice the size of width or Height
             }}
           />
-
           <View
             style={{
               //              flex: 1,
               width: '100%',
               justifyContent: 'flex-end',
               backgroundColor: 'black',
-              opacity: 0.5,
+              opacity: 0.7,
+              position: 'absolute',
+              bottom: 0,
+              borderBottomRightRadius: 10, //Then Make the Border Radius twice the size of width or Height
+              borderBottomLeftRadius: 10, //Then Make the Border Radius twice the size of width or Height
+              //              flexWrap: 'wrap',
+            }}>
+            <Text style={[styles.VisionText, {color: 'transparent'}]}>
+              {this.props.visionItem.visionBoard}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              //              flex: 1,
+              width: '100%',
+              justifyContent: 'flex-end',
+              backgroundColor: 'transparent',
+              opacity: 1,
 
               borderBottomRightRadius: 10, //Then Make the Border Radius twice the size of width or Height
               borderBottomLeftRadius: 10, //Then Make the Border Radius twice the size of width or Height

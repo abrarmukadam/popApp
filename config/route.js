@@ -16,6 +16,7 @@ import {
 
 import {
   LoginScreen,
+  LoggedInScreen,
   ForgotPasswordScreen,
   RegisterScreen,
 } from './../components/index';
@@ -25,7 +26,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const RootStack = createStackNavigator(
+const IconHeight = 30;
+const AffirmationStack = createStackNavigator(
   {
     Home: {screen: AffirmationListScreen},
     Details: {screen: AffirmationFullScreen},
@@ -42,7 +44,7 @@ const RootStack = createStackNavigator(
     headerMode: 'none',
   },
 );
-RootStack.navigationOptions = ({navigation}) => {
+AffirmationStack.navigationOptions = ({navigation}) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
@@ -76,7 +78,6 @@ VisionBoardStack.navigationOptions = ({navigation}) => {
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-
   return {
     tabBarVisible,
   };
@@ -87,6 +88,9 @@ const LoginStack = createStackNavigator(
     Login: {
       screen: LoginScreen,
     },
+    LoggedIn: {
+      screen: LoggedInScreen,
+    },
 
     Register: {
       screen: RegisterScreen,
@@ -96,21 +100,37 @@ const LoginStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Login',
     headerMode: 'none',
   },
 );
 
+LoginStack.navigationOptions = ({navigation}) => {
+  let tabBarVisible = true;
+  let routes = navigation.state.routes;
+
+  if (
+    routes[routes.length - 1].routeName == 'Login' ||
+    routes[routes.length - 1].routeName == 'Register' ||
+    routes[routes.length - 1].routeName == 'ForgotPassword'
+  ) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
 const TabNavigator = createBottomTabNavigator(
   {
     Affirmations: {
-      screen: RootStack,
+      screen: AffirmationStack,
       navigationOptions: {
         //      tabBarLabel: 'Home Page',
         tabBarIcon: ({focused, tintColor}) => (
           <Icon
             name={focused ? 'file-document-edit' : 'file-document-edit-outline'}
-            size={focused ? 40 : 40}
+            size={focused ? IconHeight : IconHeight}
             color="white"
           />
         ),
@@ -124,7 +144,7 @@ const TabNavigator = createBottomTabNavigator(
         tabBarIcon: ({focused, tintColor}) => (
           <Icon
             name={focused ? 'cards' : 'cards-outline'}
-            size={focused ? 40 : 40}
+            size={focused ? IconHeight : IconHeight}
             color="white"
           />
         ),
@@ -138,24 +158,29 @@ const TabNavigator = createBottomTabNavigator(
         tabBarIcon: ({focused, tintColor}) => (
           <Icon
             name={focused ? 'account' : 'account-outline'}
-            size={focused ? 40 : 40}
-            color="white"
+            size={focused ? IconHeight : IconHeight}
+            color={focused ? 'white' : 'white'}
           />
         ),
       },
     },
   },
   {
+    initialRouteName: 'Login',
     tabBarOptions: {
       showLabel: true,
-      activeTintColor: 'blue',
-      inactiveTintColor: 'white',
+      activeTintColor: 'white',
+
+      inactiveTintColor: 'grey',
       labelStyle: {
-        fontSize: 14,
+        fontSize: 11,
       },
       style: {
         borderTopWidth: 0,
-        backgroundColor: 'darkcyan',
+        //        marginVertical: 10,
+        //        paddingTop: 10,
+        opacity: 0.9,
+        backgroundColor: '#121212',
         //        paddingTop: 1,
       },
     },

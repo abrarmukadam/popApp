@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler';
+
 import AffirmationListScreen from './screens/Affirmations/AffirmationListScreen';
 import AffirmationFullScreen from './screens/Affirmations/AffirmationFullScreen';
 import AffirmationEditScreen from './screens/Affirmations/AffirmationEditScreen';
@@ -19,6 +21,7 @@ import VisionDisplay from './VisionBoard/VisionDisplay';
 import VisionBoardDisplay from './VisionBoard/VisionBoardDisplay';
 
 import LoginScreen from './screens/Authentication/LoginScreen';
+import LoggedInScreen from './screens/Authentication/LoggedInScreen';
 import RegisterScreen from './screens/Authentication/RegisterScreen';
 import ForgotPasswordScreen from './screens/Authentication/ForgotPasswordScreen';
 
@@ -43,6 +46,7 @@ export {
   VisionDisplay,
   VisionBoardDisplay,
   LoginScreen,
+  LoggedInScreen,
   RegisterScreen,
   ForgotPasswordScreen,
   FullScreenSwiper,

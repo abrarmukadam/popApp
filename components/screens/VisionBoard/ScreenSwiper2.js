@@ -88,78 +88,86 @@ class ScreenSwiper2 extends Component {
 
     console.log(toBeDisplayedList);
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: 'darkcyan'}}>
+      <View style={{flex: 1}}>
         <BackgroundImage></BackgroundImage>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            borderBottomWidth: 0.5,
-            borderBottomColor: 'white',
-          }}>
-          <View style={{marginLeft: 5}}>
-            <Icon
-              name="keyboard-backspace"
-              size={40}
-              color="white"
-              onPress={() => this.onPressBack()}></Icon>
-          </View>
-          <View style={{alignItems: 'center', flex: 4}}>
-            <Text style={styles.Heading}>{this.props.header}</Text>
-          </View>
-          <View style={{marginRight: 5, flexDirection: 'row'}}>
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() => this.onPressPlay(this.state.index)}>
+        <SafeAreaView style={{flex: 1}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              borderBottomWidth: 0.5,
+              borderBottomColor: 'white',
+            }}>
+            <View style={{marginLeft: 5}}>
               <Icon
-                name={this.state.buttonPlay ? 'play' : 'stop'}
+                name="keyboard-backspace"
                 size={40}
-                color="white"></Icon>
-            </TouchableOpacity>
+                color="white"
+                onPress={() => this.onPressBack()}></Icon>
+            </View>
+            <View style={{alignItems: 'center', flex: 4}}>
+              <Text style={styles.Heading}>{this.props.header}</Text>
+            </View>
+            <View style={{marginRight: 5, flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => this.onPressPlay(this.state.index)}>
+                <Icon
+                  name={this.state.buttonPlay ? 'play' : 'stop'}
+                  size={40}
+                  color="white"></Icon>
+              </TouchableOpacity>
 
-            <Icon
-              name="delete"
-              size={40}
-              color="white"
-              onPress={() => this.onPressDeleteWarning(tempIndex)}></Icon>
+              <Icon
+                name="delete"
+                size={40}
+                color="white"
+                onPress={() => this.onPressDeleteWarning(tempIndex)}></Icon>
+            </View>
           </View>
-        </View>
-        <ViewPager
-          ref={this.viewPager}
-          style={styles.viewPager}
-          initialPage={this.state.index}
-          transitionStyle="scroll"
-          onPageSelected={e => {
-            tempIndex = e.nativeEvent.position;
-            this.setState({
-              index: tempIndex,
-            });
+          <ViewPager
+            ref={this.viewPager}
+            style={styles.viewPager}
+            initialPage={this.state.index}
+            transitionStyle="scroll"
+            onPageSelected={e => {
+              tempIndex = e.nativeEvent.position;
+              this.setState({
+                index: tempIndex,
+              });
 
-            // if (tempIndex == this.props.list.length + 1) {
-            //   this.setState({index: 0});
-            //   console.log('TRU TUR TUURR');
-            //   this.viewPager.setPage(1);
-            // }
-            // if (tempIndex == 0) {
-            //   this.setState({index: 0});
-            //   console.log('TRU TUR TUURR');
-            //   this.viewPager.setPage(this.props.list.length);
-            // }
-            // console.log(tempIndex);
-            //            this.setState({index});
-          }}>
-          {toBeDisplayedList.map(items => {
-            return (
-              <View key={items.id} style={{flex: 1}}>
-                {<Image source={{uri: items.uri}} style={styles.image}></Image>}
-                <View style={styles.textViewStyle}>
-                  <Text style={styles.textStyle}>{items.visionMessage}</Text>
+              // if (tempIndex == this.props.list.length + 1) {
+              //   this.setState({index: 0});
+              //   console.log('TRU TUR TUURR');
+              //   this.viewPager.setPage(1);
+              // }
+              // if (tempIndex == 0) {
+              //   this.setState({index: 0});
+              //   console.log('TRU TUR TUURR');
+              //   this.viewPager.setPage(this.props.list.length);
+              // }
+              // console.log(tempIndex);
+              //            this.setState({index});
+            }}>
+            {toBeDisplayedList.map(items => {
+              return (
+                <View
+                  key={items.id}
+                  style={{flex: 1, justifyContent: 'center'}}>
+                  {
+                    <Image
+                      source={{uri: items.uri}}
+                      style={styles.image}></Image>
+                  }
+                  <View style={styles.textViewStyle}>
+                    <View style={styles.textViewStyle1}></View>
+                    <Text style={styles.textStyle}>{items.visionMessage}</Text>
+                  </View>
                 </View>
-              </View>
-            );
-          })}
-        </ViewPager>
-        {/*
+              );
+            })}
+          </ViewPager>
+          {/*
         <Icon
           name="play-box-outline"
           size={40}
@@ -167,7 +175,8 @@ class ScreenSwiper2 extends Component {
           onPress={() => this.setState({autoplay: !this.state.autoplay})}
         />
       */}
-      </SafeAreaView>
+        </SafeAreaView>
+      </View>
     );
   }
 }
@@ -178,23 +187,42 @@ const styles = StyleSheet.create({
   viewPager: {
     flex: 1,
   },
+
   image: {
     flex: 1,
     resizeMode: 'cover',
-    // position: 'absolute',
+    position: 'absolute',
     width: '100%',
     height: '100%',
     flexDirection: 'column',
   },
-  textViewStyle: {
-    padding: 5,
-    borderColor: 'white',
-    borderWidth: 0.5,
-    borderTopEndRadius: 20,
-    borderTopStartRadius: 20,
-    backgroundColor: 'darkcyan',
+  textViewStyle1: {
+    //    padding: 5,
+    justifyContent: 'center',
     alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    //    height: '100%',
+    height: '140%',
+    //    paddingVertical: 5,
+
+    width: '100%',
+    justifyContent: 'center',
+    backgroundColor: 'black',
+    opacity: 0.7,
   },
+  textViewStyle: {
+    justifyContent: 'center',
+    paddingVertical: 8,
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+
   textStyle: {
     textAlign: 'center',
     fontSize: 25,
@@ -203,6 +231,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
     borderRadius: 20,
+    backgroundColor: 'transparent',
   },
   Heading: {
     fontSize: 25,

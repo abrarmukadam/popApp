@@ -13,13 +13,109 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import logo from './../../../logo3.png';
 import {BackgroundImage} from './../../index';
 
+const heroku_url = 'https://pop-mongo.herokuapp.com';
+
 const {width: WIDTH} = Dimensions.get('window');
 
 class LoginScreen extends Component {
   state = {
     passwordVisible: true,
     eyeButton: 'true',
+    enteredEmail: '',
+    enteredPassword: '',
+    enteredRePassword: '',
+    userArray: '',
+    sameUser: '',
   };
+
+  receiveUserDetailsFromServer = async () => {
+    // await fetch('http://localhost:3000/users')
+    await fetch(heroku_url + '/users')
+      .then(response => response.json())
+      .then(responseJson => {
+        //          this._storeData(responseJson.data.userArray),
+        this.setState({
+          userArray: responseJson.users.userArray,
+        }),
+          function() {};
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  sendReisterDetailsToServer = userDetails => {
+    const body = JSON.stringify(userDetails);
+    //    const results = fetch('http://localhost:3000/users', {
+    //    const results = fetch('https://pop-server-123.herokuapp.com/users', {
+    const results = fetch(heroku_url + '/users/add', {
+      method: 'POST',
+      mode: 'CORS',
+      body: JSON.stringify(userDetails),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    })
+      .then(res => {
+        return res;
+      })
+      .catch(err => err);
+  };
+
+  onPressRegister2 = () => {
+    let userDetails = {
+      //userDetails to be saved
+      username: this.state.enteredEmail,
+      password: this.state.enteredPassword,
+    };
+
+    if (this.state.enteredPassword != this.state.enteredRePassword)
+      //compared both the entered passwords and check if same
+      this.setState({sameUser: 'Passwords do not match, Re-enter !'});
+    else {
+      this.sendReisterDetailsToServer(userDetails);
+      this.props.navigation.navigate('Login');
+      this.setState({sameUser: ''});
+    }
+  };
+
+  onPressRegister = () => {
+    let userDetails = {
+      //userDetails to be saved
+      username: this.state.enteredEmail,
+      password: this.state.enteredPassword,
+    };
+    if (this.state.enteredPassword != this.state.enteredRePassword)
+      //compared both the entered passwords and check if same
+      this.setState({sameUser: 'Passwords do not match, Re-enter !'});
+    else {
+      let result = this.receiveUserDetailsFromServer();
+      result.then(() => {
+        let filtered = this.state.userArray.find(List => {
+          if (List.username.toLowerCase() == userDetails.username.toLowerCase())
+            return 'false';
+        });
+        if (!filtered) {
+          this.sendReisterDetailsToServer(userDetails);
+          this.setState({sameUser: ''});
+          this.props.navigation.navigate('Login');
+        } else this.setState({sameUser: 'Username already exists !'});
+      });
+    }
+  };
+
+  OnEmailTextChange = text => {
+    this.setState({enteredEmail: text});
+  };
+
+  OnPasswordTextChange = text => {
+    this.setState({enteredPassword: text});
+  };
+
+  OnRePasswordTextChange = text => {
+    this.setState({enteredRePassword: text});
+  };
+
   render() {
     return (
       <View style={styles.safeAreaView}>
@@ -31,9 +127,9 @@ class LoginScreen extends Component {
           color="white"
           onPress={() => this.props.navigation.navigate('Login')}></Icon>
         <View style={styles.logo}>
-          <Image source={logo}></Image>
+          {/* <Image source={logo}></Image> */}
+          <Text style={styles.TextLogo}>Ziel</Text>
         </View>
-
         <View style={styles.inputContainer}>
           <Icon
             name="email"
@@ -41,6 +137,7 @@ class LoginScreen extends Component {
             color="rgba(255,255,255,0.7)"
             style={styles.inputIcon}></Icon>
           <TextInput
+            onChangeText={this.OnEmailTextChange.bind(this)}
             style={styles.input}
             placeholder="Email"
             placeholderTextColor="rgba(255,255,255,0.7)"
@@ -54,6 +151,7 @@ class LoginScreen extends Component {
             style={styles.inputIcon}></Icon>
           <TextInput
             style={styles.input}
+            onChangeText={this.OnPasswordTextChange.bind(this)}
             placeholder="Password"
             secureTextEntry={this.state.passwordVisible}
             placeholderTextColor="rgba(255,255,255,0.7)"
@@ -67,19 +165,37 @@ class LoginScreen extends Component {
             style={styles.inputIcon}></Icon>
           <TextInput
             style={styles.input}
+            onChangeText={this.OnRePasswordTextChange.bind(this)}
             placeholder="Re-Enter Password"
             secureTextEntry={this.state.passwordVisible}
             placeholderTextColor="rgba(255,255,255,0.7)"
             underlineColorAndroid="transparent"></TextInput>
         </View>
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={() => this.onPressRegister2()}>
           <Text style={styles.loginButtonText}>Register</Text>
         </TouchableOpacity>
+        <Text style={styles.usernameWarning}>{this.state.sameUser}</Text>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
+  TextLogo: {
+    borderColor: 'darkgrey',
+    color: 'white',
+    //    borderWidth: 0.8,
+    paddingRight: 20,
+    paddingLeft: 20,
+    //    margin: 20,
+    fontSize: 60,
+    fontWeight: 'bold',
+  },
+
+  usernameWarning: {
+    color: 'red',
+  },
   backStyle: {
     marginLeft: 18,
     position: 'absolute',
@@ -114,11 +230,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // width: 120,
     // height: 120,
-    opacity: 0.5,
+    opacity: 0.9,
   },
   loginButtonText: {
     fontSize: 25,
     color: 'rgba(255,255,255,0.7)',
+    color: 'white',
   },
   loginButton: {
     width: WIDTH - 55,
@@ -141,7 +258,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    //    marginBottom: 20,
   },
 });
 

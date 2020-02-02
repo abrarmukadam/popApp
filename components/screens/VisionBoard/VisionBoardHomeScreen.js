@@ -28,41 +28,42 @@ class VisionBoardHomeScreen extends Component {
 
   render() {
     let filteredList = [...this.props.screenProps.visionBoardArray];
-
-    if (filteredList[0])
+    //     if (filteredList[0])
+    if (this.props.screenProps.visionBoardArray[0])
       //IF VISION BOARD ALREADY EXISTS
       return (
-        <SafeAreaView style={styles.safeAreaView}>
+        <View style={{flex: 1}}>
           <BackgroundImage />
-          <View
-            style={{
-              borderColor: 'white',
-              borderBottomWidth: 0.5,
-              width: '100%',
-              alignItems: 'center',
-            }}>
-            <Text style={styles.Heading}>Dream Boards</Text>
-          </View>
-          <ScrollView>
-            <View style={styles.VisionList}>
-              {filteredList.map(vision => {
-                return (
-                  <VisionBoardDisplay
-                    key={vision.id}
-                    id={vision.id}
-                    itemId={vision.id}
-                    visionItem={vision}
-                    onVisionBoardClicked={this.navigateToVisionSubScreen}>
-                    >
-                  </VisionBoardDisplay>
-                );
-              })}
+          <SafeAreaView style={styles.safeAreaView}>
+            <View
+              style={{
+                borderColor: 'white',
+                borderBottomWidth: 0.5,
+                width: '100%',
+                alignItems: 'center',
+              }}>
+              <Text style={styles.Heading}>Dream Boards</Text>
             </View>
-          </ScrollView>
-          <ActionButton
-            buttonColor="blue"
-            onPress={this.onPressAdd}
-            /*            size={40}
+            <ScrollView>
+              <View style={styles.VisionList}>
+                {filteredList.map(vision => {
+                  return (
+                    <VisionBoardDisplay
+                      key={vision.id}
+                      id={vision.id}
+                      itemId={vision.id}
+                      visionItem={vision}
+                      onVisionBoardClicked={this.navigateToVisionSubScreen}>
+                      >
+                    </VisionBoardDisplay>
+                  );
+                })}
+              </View>
+            </ScrollView>
+            <ActionButton
+              buttonColor="#222222"
+              onPress={this.onPressAdd}
+              /*            size={40}
             icon={
               <Icon
                 name={'home'}
@@ -70,8 +71,9 @@ class VisionBoardHomeScreen extends Component {
                 color="green"
                 onPress={this.onPressAdd}></Icon>
             }*/
-          ></ActionButton>
-        </SafeAreaView>
+            ></ActionButton>
+          </SafeAreaView>
+        </View>
       );
     return (
       //IF NO VISION BOARD CREATED
@@ -118,8 +120,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightyellow',
-    marginBottom: 20,
+    backgroundColor: 'transparent',
+    //    marginBottom: 20,
   },
   Heading: {
     fontSize: 30,
