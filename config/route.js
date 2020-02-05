@@ -108,14 +108,20 @@ LoginStack.navigationOptions = ({navigation}) => {
   let tabBarVisible = true;
   let routes = navigation.state.routes;
 
+  let check = navigation.state.routes[0].params
+    ? navigation.state.routes[0].params.tabHide
+    : 'true';
+
   if (
     routes[routes.length - 1].routeName == 'Login' ||
     routes[routes.length - 1].routeName == 'Register' ||
     routes[routes.length - 1].routeName == 'ForgotPassword'
   ) {
     tabBarVisible = false;
+    if (check == 'false') tabBarVisible = true;
   }
 
+  //  if(navigation.state.routes[0].params)
   return {
     tabBarVisible,
   };
@@ -170,7 +176,7 @@ const TabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       showLabel: true,
       activeTintColor: 'white',
-
+      tabBarVisible: 'true',
       inactiveTintColor: 'grey',
       labelStyle: {
         fontSize: 11,

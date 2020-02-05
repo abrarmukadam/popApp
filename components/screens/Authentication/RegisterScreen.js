@@ -33,11 +33,8 @@ class LoginScreen extends Component {
     await fetch(heroku_url + '/users')
       .then(response => response.json())
       .then(responseJson => {
-        //          this._storeData(responseJson.data.userArray),
-        this.setState({
-          userArray: responseJson.users.userArray,
-        }),
-          function() {};
+        this.setState({userList: responseJson});
+        console.log('Response:', responseJson);
       })
       .catch(error => {
         console.error(error);
@@ -57,9 +54,16 @@ class LoginScreen extends Component {
       }),
     })
       .then(res => {
+        console.log('res', res);
         return res;
       })
-      .catch(err => err);
+      .catch(err => {
+        console.log('err', err);
+
+        this.setState({sameUser: 'Email already registered !'});
+
+        return err;
+      });
   };
 
   onPressRegister2 = () => {
@@ -73,9 +77,20 @@ class LoginScreen extends Component {
       //compared both the entered passwords and check if same
       this.setState({sameUser: 'Passwords do not match, Re-enter !'});
     else {
-      this.sendReisterDetailsToServer(userDetails);
-      this.props.navigation.navigate('Login');
-      this.setState({sameUser: ''});
+      let result = this.receiveUserDetailsFromServer();
+      result.then(() => {
+        console.log('user list received');
+
+        let filtered = this.state.userList.find(List => {
+          if (List.username.toLowerCase() == userDetails.username.toLowerCase())
+            return 'false';
+        });
+        if (!filtered) {
+          this.sendReisterDetailsToServer(userDetails);
+          this.setState({sameUser: ''});
+          this.props.navigation.navigate('Login');
+        } else this.setState({sameUser: 'Username already exists !'});
+      });
     }
   };
 

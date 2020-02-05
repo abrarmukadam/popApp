@@ -13,6 +13,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import logo from './../../../logo3.png';
 import {BackgroundImage} from './../../index';
 import axios from 'axios';
+import {NavigationActions} from 'react-navigation';
+
 const {width: WIDTH} = Dimensions.get('window');
 
 const heroku_url = 'https://pop-mongo.herokuapp.com';
@@ -28,7 +30,6 @@ class LoginScreen extends Component {
     passwordWrong: 'false',
     loggedInUserId: '',
     errorMessage: '',
-    mounted: 'false',
   };
 
   OnEmailTextChange = text => {
@@ -58,12 +59,13 @@ class LoginScreen extends Component {
 
         this.setState({passwordWrong: 'true'});
         this.setState({
-          errorMessage: 'No Network',
+          errorMessage: 'Email/Password did not match',
         });
 
         console.log('error 400:', error);
       });
   };
+
   onPressLogOut = () => {
     this.setState({
       loggedInUserId: '',
@@ -71,11 +73,13 @@ class LoginScreen extends Component {
       validate: 'false',
       errorMessage: '',
     });
-
     const loggedInDetails = ['', 'false', 'false'];
     this.props.screenProps.updateloggedInDetails(loggedInDetails);
 
     console.log('user logged Out');
+    this.props.navigation.navigate('Login', {
+      tabHide: 'true',
+    });
   };
 
   saveUserDetailsOnLogin = async data => {
@@ -97,6 +101,10 @@ class LoginScreen extends Component {
     this.props.screenProps.updateVisionBoardArray(data.visionBoardArray);
     this.props.screenProps.updateVisionArray(data.visionArray);
     this.setState({enteredEmail: '', enteredPassword: ''});
+
+    this.props.navigation.navigate('Login', {
+      tabHide: 'false',
+    });
     this.props.navigation.navigate('Home');
   };
 
@@ -113,105 +121,102 @@ class LoginScreen extends Component {
   componentDidMount() {
     console.log('component did mount in Login called');
     if (this.props.screenProps.loggedInDetails == null) {
-      const loggedInDetails = ['', 'false', 'false'];
+      const loggedInDetails = ['', 'false', 'false']; //id,loggedinStatus,validate
       this.props.screenProps.updateloggedInDetails(loggedInDetails);
+      this.props.navigation.setParams({tabHide: 'true'});
     }
     this.setState({
       loggedInUserId: this.props.screenProps.loggedInDetails[0],
       loggedInStatus: this.props.screenProps.loggedInDetails[1],
       validate: this.props.screenProps.loggedInDetails[2],
-      mounted: 'true',
     });
-
-    if (this.props.screenProps.loggedInDetails[1] == 'true')
-      return this.props.navigation.navigate('LoggedIn');
+    if (this.props.screenProps.loggedInDetails[1] == 'true') {
+      this.props.navigation.setParams({tabHide: 'false'});
+      this.props.navigation.navigate('Home');
+    }
   }
 
   render() {
     //    if (this.props.screenProps.loggedInDetails[1] == 'false')
     if (
-      this.state.mounted == 'true' &&
-      this.props.screenProps.loggedInDetails[1] == 'true'
+      this.state.loggedInStatus == 'false' &&
+      this.props.screenProps.loggedInDetails[1] == 'false'
     ) {
-      this.setState({mounted: 'false'});
+      return (
+        <View style={{flex: 1}}>
+          <BackgroundImage />
+          {/* Not logged in */}
 
-      return this.props.navigation.navigate('LoggedIn');
-    }
-    return (
-      <View style={{flex: 1}}>
-        <BackgroundImage />
-        {/* Not logged in */}
-
-        <SafeAreaView style={styles.safeAreaView}>
-          <View style={styles.logo}>
-            {/* <Image source={logo}></Image> */}
-            <Text style={styles.TextLogo}>Ziel</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <Icon
-              name="email"
-              size={28}
-              color="rgba(255,255,255,0.7)"
-              style={styles.inputIcon}></Icon>
-            <TextInput
-              style={styles.input}
-              value={this.state.enteredEmail}
-              onChangeText={this.OnEmailTextChange.bind(this)}
-              placeholder="Email"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              underlineColorAndroid="transparent"></TextInput>
-          </View>
-          <View style={styles.inputContainer}>
-            <Icon
-              name="lock"
-              size={28}
-              color="rgba(255,255,255,0.7)"
-              style={styles.inputIcon}></Icon>
-            <TextInput
-              value={this.state.enteredPassword}
-              style={styles.input}
-              onChangeText={this.OnPasswordTextChange.bind(this)}
-              placeholder="Password"
-              secureTextEntry={this.state.passwordVisible}
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              underlineColorAndroid="transparent"></TextInput>
-            <TouchableOpacity style={styles.eyeButton}>
+          <SafeAreaView style={styles.safeAreaView}>
+            <View style={styles.logo}>
+              {/* <Image source={logo}></Image> */}
+              <Text style={styles.TextLogo}>Ziel</Text>
+            </View>
+            <View style={styles.inputContainer}>
               <Icon
-                onPress={() => {
-                  if (this.state.eyeButton == 'true') {
-                    this.setState({
-                      eyeButton: 'false',
-                      passwordVisible: false,
-                    });
-                  } else
-                    this.setState({
-                      eyeButton: 'true',
-                      passwordVisible: true,
-                    });
-                }}
-                name={this.state.passwordVisible == true ? 'eye' : 'eye-off'}
+                name="email"
                 size={28}
-                color="rgba(255,255,255,0.7)"></Icon>
+                color="rgba(255,255,255,0.7)"
+                style={styles.inputIcon}></Icon>
+              <TextInput
+                style={styles.input}
+                value={this.state.enteredEmail}
+                onChangeText={this.OnEmailTextChange.bind(this)}
+                placeholder="Email"
+                placeholderTextColor="rgba(255,255,255,0.7)"
+                underlineColorAndroid="transparent"></TextInput>
+            </View>
+            <View style={styles.inputContainer}>
+              <Icon
+                name="lock"
+                size={28}
+                color="rgba(255,255,255,0.7)"
+                style={styles.inputIcon}></Icon>
+              <TextInput
+                value={this.state.enteredPassword}
+                style={styles.input}
+                onChangeText={this.OnPasswordTextChange.bind(this)}
+                placeholder="Password"
+                secureTextEntry={this.state.passwordVisible}
+                placeholderTextColor="rgba(255,255,255,0.7)"
+                underlineColorAndroid="transparent"></TextInput>
+              <TouchableOpacity style={styles.eyeButton}>
+                <Icon
+                  onPress={() => {
+                    if (this.state.eyeButton == 'true') {
+                      this.setState({
+                        eyeButton: 'false',
+                        passwordVisible: false,
+                      });
+                    } else
+                      this.setState({
+                        eyeButton: 'true',
+                        passwordVisible: true,
+                      });
+                  }}
+                  name={this.state.passwordVisible == true ? 'eye' : 'eye-off'}
+                  size={28}
+                  color="rgba(255,255,255,0.7)"></Icon>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => this.onPressLogin()}>
+              <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            style={styles.loginButton}
-            onPress={() => this.onPressLogin()}>
-            <Text style={styles.loginButtonText}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('ForgotPassword')}>
-            <Text style={styles.textStyle}>Forgot password?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.loginButton}
-            onPress={() => this.props.navigation.navigate('Register')}>
-            <Text style={styles.loginButtonText}>Register</Text>
-          </TouchableOpacity>
-          <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
-        </SafeAreaView>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('ForgotPassword')}>
+              <Text style={styles.textStyle}>Forgot password?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => this.props.navigation.navigate('Register')}>
+              <Text style={styles.loginButtonText}>Register</Text>
+            </TouchableOpacity>
+            <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
+          </SafeAreaView>
 
-        {/* {this.state.loggedInStatus == 'true' && (
+          {/* {this.state.loggedInStatus == 'true' && (
           <SafeAreaView>
             <View style={styles.logo}>
               <Image source={logo}></Image>
@@ -224,12 +229,39 @@ class LoginScreen extends Component {
             </TouchableOpacity>
           </SafeAreaView>
         )} */}
-      </View>
-    );
-    ///    else return this.props.navigation.navigate('LoggedIn');
+        </View>
+      );
+      ///    else return this.props.navigation.navigate('LoggedIn');
+    } else {
+      return (
+        <View style={styles.container}>
+          <BackgroundImage />
+          <SafeAreaView>
+            {
+              <View style={styles.logo}>
+                {/* <Image source={logo}></Image> */}
+                <Text style={styles.TextLogo}>Ziel</Text>
+              </View>
+            }
+
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={() => this.onPressLogOut()}>
+              <Text style={styles.loginButtonText}>LOG OUT</Text>
+            </TouchableOpacity>
+          </SafeAreaView>
+        </View>
+      );
+    }
   }
 }
 const styles = StyleSheet.create({
+  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  loginButtonText: {
+    fontSize: 25,
+    color: 'rgba(255,255,255,0.7)',
+    color: 'white',
+  },
   TextLogo: {
     borderColor: 'darkgrey',
     color: 'white',
