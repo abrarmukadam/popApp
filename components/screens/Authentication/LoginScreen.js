@@ -265,11 +265,12 @@ const styles = StyleSheet.create({
   TextLogo: {
     borderColor: 'darkgrey',
     color: 'white',
-    borderWidth: 0.8,
-    paddingRight: 20,
-    paddingLeft: 20,
+    //    borderWidth: 0.8,
+    paddingRight: 40,
+    paddingLeft: 30,
     //    margin: 20,
-    fontSize: 60,
+    fontSize: 50,
+    fontFamily: 'Zapfino',
     fontWeight: 'bold',
   },
   errorMessage: {

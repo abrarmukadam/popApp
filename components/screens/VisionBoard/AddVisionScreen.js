@@ -55,6 +55,7 @@ export default class AddVisionScreen extends Component {
     this.props.screenProps.updateVisionBoardArray(newVisionBoardArray),
       this.props.navigation.navigate('VisionBoardSubScreen', {
         vision: newVisionBoard,
+        photo: this.state.photo,
       });
   };
 
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   sendButtonStyle: {justifyContent: 'flex-end', paddingRight: 5},
   createButtonView: {
     //flex: 1,
-    borderWidth: 2,
+    //    borderWidth: 2,
     paddingBottom: 4,
     alignItems: 'center',
     justifyContent: 'flex-end',

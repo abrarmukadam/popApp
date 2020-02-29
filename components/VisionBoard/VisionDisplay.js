@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 
+const heroku_image_link = 'https://pop-mongo.herokuapp.com/image2/';
+
 export default class VisionDisplay extends Component {
   onPressVision() {
     this.props.onVisionClicked(this.props.visionItem);
@@ -11,6 +13,8 @@ export default class VisionDisplay extends Component {
 
   render() {
     const widthArray = ['0', '55%', '42%', '42%', '55%'];
+    //    var link = heroku_image_link + this.props.visionItem.fileName;
+    //  'https://pop-mongo.herokuapp.com/image2/3ac49b78-5f8c-4d11-93d0-8bbe4f9a368e.png';
     return (
       <TouchableOpacity
         style={[
@@ -31,8 +35,18 @@ export default class VisionDisplay extends Component {
           }}>
           <Image
             source={{
+              //uri: heroku_image_link + this.props.visionItem.fileName,
               uri: this.props.visionItem.uri,
+              // 'https://pop-mongo.herokuapp.com/image2/' +
+              // '3ac49b78-5f8c-4d11-93d0-8bbe4f9a368e.png',
             }}
+            onError={e => {
+              this.props.source = {
+                uri: link,
+              };
+            }} // source={{
+            //   uri: this.props.visionItem.uri,
+            // }}
             style={{
               width: '100%',
               height: '100%',

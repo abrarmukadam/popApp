@@ -7,6 +7,7 @@ import {YellowBox} from 'react-native';
 import 'react-native-gesture-handler';
 
 import axios from 'axios';
+const temp_url = 'http://localhost:5000';
 const heroku_url = 'https://pop-mongo.herokuapp.com';
 
 YellowBox.ignoreWarnings([
@@ -35,7 +36,44 @@ export default class App extends Component {
     loggedInDetails: '',
   };
 
-  updateMongoDB = async id => {
+  sendImageToServer = async img => {
+    const createFormData = (photo, body) => {
+      const data = new FormData();
+
+      data.append('photo', {
+        name: img.fileName,
+        type: img.type,
+        uri:
+          Platform.OS === 'android' ? img.uri : img.uri.replace('file://', ''),
+      });
+
+      Object.keys(body).forEach(key => {
+        data.append(key, body[key]);
+      });
+      return data;
+    };
+
+    //    fetch('http://localhost:5000/image/upload', {
+    await fetch(heroku_url + '/image/upload', {
+      method: 'POST',
+      body: createFormData(img, {userId: '123'}),
+    })
+      .then(response => response.json())
+      .then(response => {
+        console.log('upload succes', response);
+
+        //        alert('Upload success!');
+        //        this.setState({photo: null});
+        console.log('response:', response);
+        this.setState({sendImageResponse: response});
+      })
+      .catch(error => {
+        console.log('upload error', error);
+        alert('Check Network!');
+      });
+  };
+
+  updateMongoDB = async (id, data) => {
     // console.log(
     //   'update DB',
     //   id,
@@ -43,16 +81,17 @@ export default class App extends Component {
     //   this.state.visionBoardArray,
     //   this.state.visionArray,
     // );
-    const data = {
-      popArray: this.state.popArray,
-      visionBoardArray: this.state.visionBoardArray,
-      visionArray: this.state.visionArray,
-    };
-
+    // var data = {
+    //   popArray: this.state.popArray,
+    //   visionBoardArray: this.state.visionBoardArray,
+    //   visionArray: this.state.visionArray,
+    // };
+    console.log('updateMongoDB Run', data);
     await axios
       .post(heroku_url + '/users/update/' + id, data)
       .then(res => {
-        //        console.log(res.data[0]);
+        //        console.log('updateMongoDB Run', res.data[0]);
+        //        console.log('dadadadada', res.data[0]);
       })
       .catch(error => {
         console.log('Database Store Failed');
@@ -61,28 +100,46 @@ export default class App extends Component {
   };
 
   updateDataServer = updateArray => {
-    this.updateMongoDB(this.state.loggedInDetails[0]);
+    console.log('udateDataServer Run', this.state.loggedInDetails[0]);
+    this.updateMongoDB(this.state.loggedInDetails[0], updateArray);
   };
 
   updatePopArray = popArray => {
     // method to update App's state, passed to children
+    var data = {
+      popArray: popArray,
+      visionBoardArray: this.state.visionBoardArray,
+      visionArray: this.state.visionArray,
+    };
     this.setState({popArray: popArray});
-    this.updateDataServer(popArray);
     this._storeItem('popArray', popArray);
+    this.updateDataServer(data);
   };
 
   updateVisionArray = visionArray => {
     // method to update App's state, passed to children
-    this.updateDataServer(visionArray);
+    var data = {
+      popArray: this.state.popArray,
+      visionBoardArray: this.state.visionBoardArray,
+      visionArray: visionArray,
+    };
+
     this.setState({visionArray: visionArray});
     this._storeItem('visionArray', visionArray);
+    this.updateDataServer(data);
   };
 
   updateVisionBoardArray = visionBoardArray => {
     // method to update App's state, passed to children
-    this.updateDataServer(visionBoardArray);
+    var data = {
+      popArray: this.state.popArray,
+      visionBoardArray: visionBoardArray,
+      visionArray: this.state.visionArray,
+    };
+
     this.setState({visionBoardArray: visionBoardArray});
     this._storeItem('visionBoardArray', visionBoardArray);
+    this.updateDataServer(data);
   };
 
   updateloggedInDetails = loggedInDetails => {
@@ -236,6 +293,7 @@ export default class App extends Component {
           updateVisionBoardArray: this.updateVisionBoardArray,
           updateDataServer: this.updateDataServer,
           updateMongoDB: this.updateMongoDB,
+          sendImageToServer: this.sendImageToServer,
         }}
       />
     );

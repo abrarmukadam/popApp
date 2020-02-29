@@ -7,7 +7,13 @@ class BackgroundImage extends Component {
     return (
       //<View style={styles.view}></View>
       <Image
+        //        uri="http://localhost:5000/image/download/914eca79-85c4-450b-bb7b-75fcb023e469.png"
         source={require('./../background1.jpg')}
+        // source={{
+        //   uri:
+        //     'http://localhost:5000/image2/914eca79-85c4-450b-bb7b-75fcb023e469.png',
+        // }}
+        //        source={require('./../background1.jpg')}
         style={styles.image}></Image>
     );
   }

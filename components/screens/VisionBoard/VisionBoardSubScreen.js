@@ -16,7 +16,7 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class VisionBoardSubScreen extends Component {
-  state = {photo: null, text: '', addNew: 0};
+  state = {photo: this.props.navigation.getParam('photo'), text: '', addNew: 0};
 
   onPressAddNew = () => {
     this.handleChoosePhoto();
@@ -34,6 +34,7 @@ class VisionBoardSubScreen extends Component {
       if (response.uri) {
         this.setState({photo: response});
         this.setState({addNew: 1});
+        console.log('response', response);
       }
     });
   };
@@ -48,14 +49,34 @@ class VisionBoardSubScreen extends Component {
       visionBoard: this.props.navigation.getParam('vision').visionBoard,
       visionMessage: this.state.text,
       uri: this.state.photo.uri,
+      fileName: '',
     };
+    // let temp = this.props.screenProps
+    //   .sendImageToServer(this.state.photo)
+    //   .then((res, err) => {
+    //     console.log('res', res);
+    //     // console.log(
+    //     //   'filename:',
+    //     //   this.props.screenProps.sendImageResponse.files.filename,
+    //     // );
+    //     newVision.fileName = this.props.screenProps.sendImageResponse.files.filename;
+    //     let newVisionArray = [...this.props.screenProps.visionArray];
+    //     newVisionArray[
+    //       len + 1
+    //     ].fileName = this.props.screenProps.sendImageResponse.files.filename;
+    //     console.log('newVisionArray', newVisionArray);
+    //     this.props.screenProps.updateVisionArray([newVisionArray]);
+    //   })
+    //   .catch(() => {
+    //     console.log('error uploading image');
+    //   });
+    // console.log('pehle ye chala');
     this.props.screenProps.updateVisionArray([
       ...this.props.screenProps.visionArray,
       newVision,
     ]);
-    {
-      this.setState({addNew: 0, text: ''});
-    }
+
+    this.setState({addNew: 0, text: ''});
   };
 
   handleVisionClicked = visionItem => {
