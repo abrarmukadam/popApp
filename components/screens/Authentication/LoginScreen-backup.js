@@ -11,13 +11,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import logo from './../../../logo3.png';
-import {BackgroundImage} from './../../index';
+import {BackgroundImage} from '../../../index';
 import axios from 'axios';
 import {NavigationActions} from 'react-navigation';
 
 const {width: WIDTH} = Dimensions.get('window');
 
 const heroku_url = 'https://pop-mongo.herokuapp.com';
+//const heroku_url = 'https://pop-mongo.herokuapp.com';
 
 class LoginScreen extends Component {
   state = {
@@ -41,12 +42,17 @@ class LoginScreen extends Component {
   };
 
   onPressLogin = async () => {
+    const username = this.state.enteredEmail;
+    const password = this.state.enteredPassword;
+
+    this.props.fetchData(username, password);
     await axios
       .post(heroku_url + '/login/', {username: this.state.enteredEmail})
       .then(res => {
         console.log(res.data[0]);
         this.userValidate(res.data[0].password);
         if (this.state.validate == 'true') {
+          //          this.props.notifyLoginSuccess();
           this.saveUserDetailsOnLogin(res.data[0]);
         } else {
           this.setState({passwordWrong: 'true'});
@@ -67,48 +73,63 @@ class LoginScreen extends Component {
   };
 
   onPressLogOut = () => {
+    console.log('Logout Pressed');
+    this.props.userLogOut();
+
+    //------NOT REQUIRED----->
     this.setState({
       loggedInUserId: '',
       loggedInStatus: 'false',
       validate: 'false',
       errorMessage: '',
     });
+
     const loggedInDetails = ['', 'false', 'false'];
     this.props.screenProps.updateloggedInDetails(loggedInDetails);
+    //<------NOT REQUIRED------
 
     console.log('user logged Out');
+
     this.props.navigation.navigate('Login', {
       tabHide: 'true',
-    });
+    }); //to Hide Tab bar in Login Page
   };
 
   saveUserDetailsOnLogin = async data => {
+    //------NOT REQUIRED----->
+
     //load data from server
     console.log('saveUserDetailsOnLogin:', data);
-    this.setState({loggedInStatus: 'true', loggedInUserId: data._id});
+    this.setState({
+      loggedInStatus: 'true',
+      loggedInUserId: data._id,
+    });
     const loggedInDetails = [
       this.state.loggedInUserId,
       this.state.loggedInStatus,
       this.state.validate,
     ];
     this.props.screenProps.updateloggedInDetails(loggedInDetails);
-    console.log('loading data from server & saving to local storage');
-    console.log('pop', data.popArray);
-    console.log('v array', data.visionArray);
-    console.log('v board', data.visionBoardArray);
 
     this.props.screenProps.updatePopArray(data.popArray);
     this.props.screenProps.updateVisionBoardArray(data.visionBoardArray);
     this.props.screenProps.updateVisionArray(data.visionArray);
-    this.setState({enteredEmail: '', enteredPassword: ''});
+    this.setState({
+      enteredEmail: '',
+      enteredPassword: '',
+    });
 
     this.props.navigation.navigate('Login', {
       tabHide: 'false',
     });
+    //<------NOT REQUIRED------
+
     this.props.navigation.navigate('Home');
   };
 
   userValidate = password => {
+    //------NOT REQUIRED------>
+
     if (password == this.state.enteredPassword) {
       console.log('User Authenticated');
       this.setState({validate: 'true'});
@@ -117,30 +138,38 @@ class LoginScreen extends Component {
       this.setState({validate: 'false'});
     }
   };
+  //<------NOT REQUIRED------ //being done at server now
 
   componentDidMount() {
     console.log('component did mount in Login called');
+    //------MODIFICATION REQUIRED------>
+
     if (this.props.screenProps.loggedInDetails == null) {
       const loggedInDetails = ['', 'false', 'false']; //id,loggedinStatus,validate
       this.props.screenProps.updateloggedInDetails(loggedInDetails);
       this.props.navigation.setParams({tabHide: 'true'});
     }
     this.setState({
-      loggedInUserId: this.props.screenProps.loggedInDetails[0],
-      loggedInStatus: this.props.screenProps.loggedInDetails[1],
-      validate: this.props.screenProps.loggedInDetails[2],
+      loggedInUserId: this.props.screenProps.loggedInDetails[0], //id
+      loggedInStatus: this.props.screenProps.loggedInDetails[1], //loggedinStatus
+      validate: this.props.screenProps.loggedInDetails[2], //validate
     });
     if (this.props.screenProps.loggedInDetails[1] == 'true') {
-      this.props.navigation.setParams({tabHide: 'false'});
+      this.props.navigation.setParams({
+        tabHide: 'false',
+      });
+
       this.props.navigation.navigate('Home');
+      //<------MODIFICATION REQUIRED------
     }
   }
 
   render() {
     //    if (this.props.screenProps.loggedInDetails[1] == 'false')
+
     if (
-      this.state.loggedInStatus == 'false' &&
-      this.props.screenProps.loggedInDetails[1] == 'false'
+      this.props.loggedInStatus != true &&
+      this.props.screenProps.loggedInDetails[1] != 'true'
     ) {
       return (
         <View style={{flex: 1}}>
@@ -215,23 +244,9 @@ class LoginScreen extends Component {
             </TouchableOpacity>
             <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
           </SafeAreaView>
-
-          {/* {this.state.loggedInStatus == 'true' && (
-          <SafeAreaView>
-            <View style={styles.logo}>
-              <Image source={logo}></Image>
-            </View>
-
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={() => this.onPressLogOut()}>
-              <Text style={styles.loginButtonText}>LOG OUT</Text>
-            </TouchableOpacity>
-          </SafeAreaView>
-        )} */}
         </View>
       );
-      ///    else return this.props.navigation.navigate('LoggedIn');
+      //    else return this.props.navigation.navigate('LoggedIn');
     } else {
       return (
         <View style={styles.container}>
@@ -240,10 +255,10 @@ class LoginScreen extends Component {
             {
               <View style={styles.logo}>
                 {/* <Image source={logo}></Image> */}
+
                 <Text style={styles.TextLogo}>Ziel</Text>
               </View>
             }
-
             <TouchableOpacity
               style={styles.loginButton}
               onPress={() => this.onPressLogOut()}>

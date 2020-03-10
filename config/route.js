@@ -15,11 +15,14 @@ import {
 } from './../components/index';
 
 import {
-  LoginScreen,
   LoggedInScreen,
   ForgotPasswordScreen,
   RegisterScreen,
 } from './../components/index';
+
+import {default as LoginScreen} from './../components/SubComponents/LoginControl/login-control.container';
+
+import PalleteScreen from './../components/screens/Pallete/pallete.presentation';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -170,9 +173,23 @@ const TabNavigator = createBottomTabNavigator(
         ),
       },
     },
+    Pallete: {
+      screen: PalleteScreen,
+      navigationOptions: {
+        tabBarLabel: 'Account',
+        color: 'white',
+        tabBarIcon: ({focused, tintColor}) => (
+          <Icon
+            name={focused ? 'account' : 'account-outline'}
+            size={focused ? IconHeight : IconHeight}
+            color={focused ? 'white' : 'white'}
+          />
+        ),
+      },
+    },
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Pallete',
     tabBarOptions: {
       showLabel: true,
       activeTintColor: 'white',

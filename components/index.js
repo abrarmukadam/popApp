@@ -20,9 +20,9 @@ import VisionFullScreen from './screens/VisionBoard/VisionFullScreen';
 import VisionDisplay from './VisionBoard/VisionDisplay';
 import VisionBoardDisplay from './VisionBoard/VisionBoardDisplay';
 
-import LoginScreen from './screens/Authentication/LoginScreen';
+import LoginScreen from './screens/Authentication/LoginScreen/LoginScreen';
 import LoggedInScreen from './screens/Authentication/LoggedInScreen';
-import RegisterScreen from './screens/Authentication/RegisterScreen';
+import RegisterScreen from './screens/Authentication/RegisterScreen/RegisterScreen';
 import ForgotPasswordScreen from './screens/Authentication/ForgotPasswordScreen';
 
 import FullScreenSwiper from './FullScreenSwiper';

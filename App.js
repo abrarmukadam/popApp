@@ -16,6 +16,11 @@ YellowBox.ignoreWarnings([
   '`-[RCTRootView cancelTouches]`',
 ]);
 
+import configureStore from './config/redux-store';
+import {Provider} from 'react-redux';
+
+let store = configureStore();
+
 export default class App extends Component {
   state = {
     dataSource: '',
@@ -284,18 +289,20 @@ export default class App extends Component {
       // <View>
       //   <Text>Testing</Text>
       // </View>
-      <TabNavigator
-        screenProps={{
-          ...this.state,
-          updateloggedInDetails: this.updateloggedInDetails,
-          updatePopArray: this.updatePopArray,
-          updateVisionArray: this.updateVisionArray,
-          updateVisionBoardArray: this.updateVisionBoardArray,
-          updateDataServer: this.updateDataServer,
-          updateMongoDB: this.updateMongoDB,
-          sendImageToServer: this.sendImageToServer,
-        }}
-      />
+      <Provider store={store}>
+        <TabNavigator
+          screenProps={{
+            ...this.state,
+            updateloggedInDetails: this.updateloggedInDetails,
+            updatePopArray: this.updatePopArray,
+            updateVisionArray: this.updateVisionArray,
+            updateVisionBoardArray: this.updateVisionBoardArray,
+            updateDataServer: this.updateDataServer,
+            updateMongoDB: this.updateMongoDB,
+            sendImageToServer: this.sendImageToServer,
+          }}
+        />
+      </Provider>
     );
   }
 }
