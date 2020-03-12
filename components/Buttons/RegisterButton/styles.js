@@ -16,7 +16,6 @@ export default StyleSheet.create({
     marginBottom: 8,
     alignItems: 'center',
     backgroundColor: '#432577',
-    borderWidth: 0.2,
     margin: 8,
   },
 });

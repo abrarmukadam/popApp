@@ -1,3 +1,3 @@
-import AffirmationCard from './affirmation-display.container';
+import AffirmationCardDisplay from './affirmation-card-display.container';
 
-export {AffirmationCard};
+export {AffirmationCardDisplay};

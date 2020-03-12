@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import AffirmationDisplay from './affirmation-display.presentation';
+import AffirmationCardDisplay from './affirmation-card-display.presentation';
 
 const mapStateToProps = state => {
   return {
@@ -11,4 +11,7 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AffirmationDisplay);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AffirmationCardDisplay);

@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {BackgroundColor} from './../../index';
+import {BackgroundColor} from '../../index';
 
 export default class AddAffirmationScreen extends Component {
   state = {text: '', backColor: this.props.screenProps.colorArray[0]};

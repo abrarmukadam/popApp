@@ -16,8 +16,8 @@ export default class SearchAffirmation extends Component {
         behavior="height"
         enabled>
         <TextInput
-          placeholder=" Search here..."
-          onChangeText={this.OnSearchTextChange.bind(this)}
+          placeholder="Search here..."
+          onChangeText={text => this.OnSearchTextChange(text)}
           //         clearButtonMode="always"
           style={styles.TextStyle}></TextInput>
       </KeyboardAvoidingView>

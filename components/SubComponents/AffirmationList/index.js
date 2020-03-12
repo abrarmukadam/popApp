@@ -1,3 +1,3 @@
-import AffirmationList from './affirmation-list.container';
+import {default as AffirmationList} from './affirmation-list.container';
 
-export {AffirmationList};
+export default AffirmationList;

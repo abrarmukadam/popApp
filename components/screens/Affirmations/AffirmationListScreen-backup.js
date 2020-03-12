@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {SafeAreaView, StyleSheet, View, ScrollView, Image} from 'react-native';
 import ActionButton from 'react-native-action-button';
 
-import {SearchAffirmation, BackgroundImage} from './../../index';
+import {SearchAffirmation, BackgroundImage} from '../../index';
 
 import {AffirmationCard} from '../../SubComponents/AffirmationCard/index';
 import {AffirmationList} from '../../SubComponents/AffirmationList/index';

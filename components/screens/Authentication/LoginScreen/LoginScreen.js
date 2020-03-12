@@ -4,7 +4,7 @@ import styles from './styles.js';
 import BackgroundImage from './../../../BackgroundImage';
 /* Import the component we are drafting here */
 import LoginForm from './../../../SubComponents/LoginForm/index.js';
-import RegisterButton from './../../../SubComponents/RegisterButton/RegisterButton.js';
+import RegisterButton from '../../../Buttons/RegisterButton/RegisterButton.js';
 import Logo from './../../../SubComponents/Logo/logo';
 
 class LoginScreen extends Component {
@@ -18,7 +18,9 @@ class LoginScreen extends Component {
         />
         {!this.props.loggedInStatus && (
           <RegisterButton
-            onPressRegister={() => this.props.navigation.navigate('Register')}
+            onPressRegister={() => {
+              this.props.navigation.navigate('Register');
+            }}
           />
         )}
       </View>

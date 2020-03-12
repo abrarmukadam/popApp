@@ -14,11 +14,6 @@ const mapPropsToState = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onRegister: (username, password) => {
-      console.log(
-        'dipsatch Register with username & password',
-        username,
-        password,
-      );
       return dispatch(Actions.RegisterActions.RegisterUser(username, password));
     },
   };

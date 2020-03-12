@@ -1,10 +1,9 @@
 import React from 'react';
 
 import {
-  AffirmationListScreen,
-  AffirmationFullScreen,
-  AffirmationEditScreen,
   AddAffirmationScreen,
+  AffirmationFullScreen,
+  //  EditAffirmationScreen,
 } from './../components/index';
 
 import {
@@ -21,6 +20,8 @@ import {
 } from './../components/index';
 
 import {default as LoginScreen} from './../components/SubComponents/LoginControl/login-control.container';
+import {default as AffirmationListScreen} from './../components/SubComponents/AffirmationControl/affirmation-control.container';
+import {default as EditAffirmationScreen} from './../components/screens/Affirmations/EditAffirmationScreen/EditAffirmationScreen.container';
 
 import PalleteScreen from './../components/screens/Pallete/pallete.presentation';
 
@@ -33,11 +34,8 @@ const IconHeight = 30;
 const AffirmationStack = createStackNavigator(
   {
     Home: {screen: AffirmationListScreen},
-    Details: {screen: AffirmationFullScreen},
-    Edit: {
-      screen: AffirmationEditScreen,
-    },
-    Add: {
+    EditAffirmationScreen: {screen: EditAffirmationScreen},
+    AddAffirmationScreen: {
       screen: AddAffirmationScreen,
     },
   },
@@ -190,6 +188,7 @@ const TabNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: 'Pallete',
+    //initialRouteName: 'Login',
     tabBarOptions: {
       showLabel: true,
       activeTintColor: 'white',

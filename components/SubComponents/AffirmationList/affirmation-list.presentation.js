@@ -1,41 +1,51 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import ActionButton from 'react-native-action-button';
+import {
+  View,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 
-import {SearchAffirmation, BackgroundImage} from './../../index';
-
-import {AffirmationCard} from '../../SubComponents/AffirmationCard/index';
 import styles from './styles';
+import {AffirmationCardDisplay} from './../AffirmationCard/index';
 
 export default class AffirmationList extends Component {
   constructor(props) {
     super(props);
   }
+  navigateToDetails = selectedCard => {
+    this.props.editAffirmation(selectedCard);
 
-  componentDidMount() {
-    console.log('AffirmationList Component Mounted');
-    //If this.props.affirmations is empty, fetch it
-    //  if (this.props.affirmationList.length == 0) {
-    this.props.fetchAffirmations();
-    //  }
-  }
+    console.log('Navigate to Details for :', selectedCard);
+  };
+  // componentDidMount() {
+  //   this.props.fetchAffirmations(this.props.affirmationList);
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.affirmationList != this.props.affirmationList)
+  //     this.props.fetchAffirmations(this.props.affirmationList);
+  // }
 
   render() {
     return (
-      <TouchableOpacity onPress={() => this.props.addAffirmation()}>
-        {this.props.affirmationList.map(item => {
-          return (
-            <View>
-              <AffirmationCard
-                key={item.id}
-                popItem={item}
-                //                onItemClicked={this.navigateToDetails}
-              />
-            </View>
-          );
-        })}
-        <Text>AFFIRMATION LIST</Text>
-      </TouchableOpacity>
+      <SafeAreaView>
+        <ScrollView>
+          <View style={styles.AffList}>
+            {this.props.filteredAffirmationList.map(item => {
+              return (
+                <AffirmationCardDisplay
+                  key={item.id}
+                  popItem={item}
+                  onItemClicked={selectedCard =>
+                    this.navigateToDetails(selectedCard)
+                  }
+                />
+              );
+            })}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }

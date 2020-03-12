@@ -68,6 +68,11 @@ export default function loginReducer(state = defaultState, action) {
     case LOG_OUT: {
       return {
         ...state,
+        affirmationList: [],
+        visionBoardList: [],
+        visionList: [],
+        username: '',
+        password: '',
         loginSuccess: false, //validate
         loggedInUserId: '', //logged in user ID
         loggedInStatus: false, //currently logged In?

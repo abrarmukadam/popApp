@@ -1,12 +1,14 @@
 import 'react-native-gesture-handler';
 
-import AffirmationListScreen from './screens/Affirmations/AffirmationListScreen';
+import AffirmationListScreen from './screens/Affirmations/AffirmationListScreen/AffirmationListScreen';
 import AffirmationFullScreen from './screens/Affirmations/AffirmationFullScreen';
 import AffirmationEditScreen from './screens/Affirmations/AffirmationEditScreen';
-import AddAffirmationScreen from './screens/Affirmations/AddAffirmationScreen';
+import EditAffirmationScreen from './screens/Affirmations/EditAffirmationScreen/EditAffirmationScreen';
+
+import AddAffirmationScreen from './screens/Affirmations/AddAffirmationScreen/AddAffirmationScreen';
 
 import AffirmationDisplay from './Affirmations/AffirmationDisplay';
-import AddAffirmation from './Affirmations/AddAffirmation';
+//import AddAffirmation from './Affirmations/AddAffirmation/Add';
 import SearchAffirmation from './SearchAffirmation';
 
 import BackgroundColor from './BackgroundColor';
@@ -34,8 +36,9 @@ export {
   AffirmationFullScreen,
   AffirmationEditScreen,
   AddAffirmationScreen,
-  AddAffirmation,
+  //  AddAffirmation,
   AffirmationDisplay,
+  EditAffirmationScreen,
   SearchAffirmation,
   BackgroundColor,
   BackgroundImage,

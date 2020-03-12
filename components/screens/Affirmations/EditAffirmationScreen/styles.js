@@ -7,15 +7,18 @@ export default StyleSheet.create({
     backgroundColor: 'grey',
     justifyContent: 'center',
   },
-  safeAreaView: {
-    flex: 1,
-    //  margin: 10,
-    //  marginTop: 10,
-    //    marginBottom: 20,
-  },
   backButtonStyle: {
     position: 'absolute',
     top: 50,
     left: 30,
+  },
+  trashButtonStyle: {
+    position: 'absolute',
+    top: 50,
+    right: 30,
+  },
+  sendButtonStyle: {
+    alignSelf: 'flex-end',
+    paddingRight: 10,
   },
 });
