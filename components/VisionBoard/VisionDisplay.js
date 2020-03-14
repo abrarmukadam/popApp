@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 
 const heroku_image_link = 'https://pop-mongo.herokuapp.com/image2/';
+const defaultLink = require('./../GeneralComponents/images/noImage2.png');
+//const defaultLink = require('file:///Users/abrar/Library/Developer/CoreSimulator/Devices/FFE7CE3C-CFF4-4D28-9472-7D9226E82FAD/data/Containers/Data/Application/8BF2C9F8-40E2-4569-B177-03199386DA3E/tmp/3A11CA18-55C2-468F-A3F3-13CA27A0B3D4.jpg');
+const link1 =
+  'file:///Users/abrar/Library/Devel1oper/CoreSimulator/Devices/FFE7CE3C-CFF4-4D28-9472-7D9226E82FAD/data/Containers/Data/Application/8BF2C9F8-40E2-4569-B177-03199386DA3E/tmp/7556599B-90BD-4A48-8218-649244D4B34B.jpg';
+const link2 =
+  'assets-library://asset/asset.HEIC?id=CC95F08C-88C3-4012-9D6D-64A413D254B3&ext=HEIC';
 
 export default class VisionDisplay extends Component {
   onPressVision() {
@@ -9,6 +15,10 @@ export default class VisionDisplay extends Component {
     //    this.props.navigation.navigate('VisionFullScreen');
 
     //    alert(this.props.popItem.popMessage);
+  }
+
+  componentDidMount() {
+    console.log('visionDisplay mounted');
   }
 
   render() {
@@ -34,15 +44,20 @@ export default class VisionDisplay extends Component {
             alignItems: 'center',
           }}>
           <Image
-            source={{
+            source={
               //uri: heroku_image_link + this.props.visionItem.fileName,
-              uri: this.props.visionItem.uri,
+              ({uri: defaultLink}, {uri: link1})
+              //     {uri: this.props.visionItem.uri}
+
               // 'https://pop-mongo.herokuapp.com/image2/' +
               // '3ac49b78-5f8c-4d11-93d0-8bbe4f9a368e.png',
-            }}
+            }
+            defaultSource={defaultLink}
             onError={e => {
+              console.log('ERROR BEING RUN');
               this.props.source = {
-                uri: link,
+                uri:
+                  'https://www.sunrgy.com/wp-content/uploads/woocommerce-placeholder-1200x1200.png',
               };
             }} // source={{
             //   uri: this.props.visionItem.uri,

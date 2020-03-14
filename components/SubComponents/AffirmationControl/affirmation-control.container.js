@@ -5,16 +5,17 @@ import {Actions} from '../../../Actions/index';
 
 const mapStateToProps = state => {
   return {
-    store: state,
+    //    store: state,
 
     loggedInAffirmationList: state.loginReducer.affirmationList || [],
     affirmationList: state.affirmationReducer.affirmationList || [],
+
+    loggedInVisionBoardList: state.loginReducer.visionBoardList || [],
+    visionBoardList: state.visionBoardReducer.visionBoardList || [],
+
+    loggedInVisionArrayList: state.loginReducer.visionList || [],
+    visionArrayList: state.visionBoardReducer.visionArrayList || [],
     // store: state,
-    // loginSuccess: state.loginReducer.loginSuccess || false,
-    // loggedInUserId: state.loginReducer.loggedInUserId || '', //logged in user ID
-    // loggedInStatus: state.loginReducer.loggedInStatus || false, //currently logged In?
-    // wrongPassword: state.loginReducer.wrongPassword || false,
-    // LoginFailedError: state.loginReducer.LoginFailedError || '',
   };
 };
 
@@ -23,6 +24,14 @@ const mapDispatchToProps = dispatch => {
     fetchAffirmations: affirmationList => {
       return dispatch(
         Actions.AffirmationActions.fetchAffirmations(affirmationList),
+      );
+    },
+    fetchVisionBoards: (visionBoardList, visionArrayList) => {
+      return dispatch(
+        Actions.VisionBoardActions.fetchVisionBoard(
+          visionBoardList,
+          visionArrayList,
+        ),
       );
     },
     // addAffirmation: newAffirmation =>

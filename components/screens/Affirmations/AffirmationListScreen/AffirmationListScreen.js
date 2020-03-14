@@ -74,6 +74,10 @@ class AffirmationListScreen extends Component {
   componentDidMount() {
     console.log('FETCH AFFIRMATIONS CALLED WHEN LOGGED IN');
     this.props.fetchAffirmations(this.props.loggedInAffirmationList);
+    this.props.fetchVisionBoards(
+      this.props.loggedInVisionBoardList,
+      this.props.loggedInVisionArrayList,
+    );
     this.setState({
       filteredList: this.props.loggedInAffirmationList,
     });
@@ -99,6 +103,11 @@ class AffirmationListScreen extends Component {
     ) {
       console.log('FETCH UPDATED AFFIRMATION ON NEW LOGIN');
       this.props.fetchAffirmations(this.props.loggedInAffirmationList);
+      this.props.fetchVisionBoards(
+        this.props.loggedInVisionBoardList,
+        this.props.loggedInVisionArrayList,
+      );
+
       this.setState({
         filteredList: this.props.loggedInAffirmationList,
       });

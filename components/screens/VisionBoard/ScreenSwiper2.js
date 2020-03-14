@@ -68,9 +68,7 @@ class ScreenSwiper2 extends Component {
   };
 
   onPressDelete = vision => {
-    //    this.setState({temp: 1});
     this.props.onClickDelete(vision);
-    //    this.setState({index: tempIndex});
   };
   onPressBack = () => {
     clearInterval(this.state.intervalId);
@@ -80,11 +78,7 @@ class ScreenSwiper2 extends Component {
   render() {
     let tempIndex = this.props.itemIndex;
 
-    let toBeDisplayedList = [
-      //      this.props.list[this.props.list.length - 1],
-      ...this.props.list,
-      //     this.props.list[0],
-    ];
+    let toBeDisplayedList = [...this.props.list];
 
     console.log(toBeDisplayedList);
     return (
@@ -135,19 +129,6 @@ class ScreenSwiper2 extends Component {
               this.setState({
                 index: tempIndex,
               });
-
-              // if (tempIndex == this.props.list.length + 1) {
-              //   this.setState({index: 0});
-              //   console.log('TRU TUR TUURR');
-              //   this.viewPager.setPage(1);
-              // }
-              // if (tempIndex == 0) {
-              //   this.setState({index: 0});
-              //   console.log('TRU TUR TUURR');
-              //   this.viewPager.setPage(this.props.list.length);
-              // }
-              // console.log(tempIndex);
-              //            this.setState({index});
             }}>
             {toBeDisplayedList.map(items => {
               return (
@@ -167,14 +148,6 @@ class ScreenSwiper2 extends Component {
               );
             })}
           </ViewPager>
-          {/*
-        <Icon
-          name="play-box-outline"
-          size={40}
-          color="black"
-          onPress={() => this.setState({autoplay: !this.state.autoplay})}
-        />
-      */}
         </SafeAreaView>
       </View>
     );

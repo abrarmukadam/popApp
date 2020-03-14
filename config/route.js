@@ -1,14 +1,10 @@
 import React from 'react';
 
-import {
-  AddAffirmationScreen,
-  AffirmationFullScreen,
-  //  EditAffirmationScreen,
-} from './../components/index';
+import {AddAffirmationScreen} from './../components/index';
 
 import {
   VisionBoardHomeScreen,
-  VisionBoardSubScreen,
+  //  VisionBoardSubScreen,
   AddVisionScreen,
   VisionFullScreen,
 } from './../components/index';
@@ -22,6 +18,9 @@ import {
 import {default as LoginScreen} from './../components/SubComponents/LoginControl/login-control.container';
 import {default as AffirmationListScreen} from './../components/SubComponents/AffirmationControl/affirmation-control.container';
 import {default as EditAffirmationScreen} from './../components/screens/Affirmations/EditAffirmationScreen/EditAffirmationScreen.container';
+import {default as VisionBoardListScreen} from './../components/screens/VisionBoard/VisionBoardListScreen/VisionBoardListScreen-container';
+import {default as AddVisionBoardScreen} from './../components/screens/VisionBoard/AddVisionBoardScreen/AddVisionBoardScreen.container';
+import {default as VisionBoardSubScreen} from './../components/screens/VisionBoard/VisionBoardSubScreen/VisionBoardSubScreen.container';
 
 import PalleteScreen from './../components/screens/Pallete/pallete.presentation';
 
@@ -59,13 +58,13 @@ AffirmationStack.navigationOptions = ({navigation}) => {
 const VisionBoardStack = createStackNavigator(
   {
     VisionBoardHome: {
-      screen: VisionBoardHomeScreen,
+      screen: VisionBoardListScreen,
     },
 
     VisionBoardSubScreen: {
       screen: VisionBoardSubScreen,
     },
-    AddVisionBoardScreen: AddVisionScreen,
+    AddVisionBoardScreen: AddVisionBoardScreen,
     VisionFullScreen: VisionFullScreen,
   },
   {

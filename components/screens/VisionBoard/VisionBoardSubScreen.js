@@ -205,7 +205,8 @@ class VisionBoardSubScreen extends Component {
                       visionItem={vision}
                       onVisionClicked={visionItem =>
                         this.handleVisionClicked(visionItem)
-                      }></VisionDisplay>
+                      }
+                    />
                   );
                 })}
               </View>

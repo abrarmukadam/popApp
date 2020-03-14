@@ -1,4 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+
+const {width: WIDTH} = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -7,36 +9,12 @@ export default StyleSheet.create({
     backgroundColor: 'grey',
     justifyContent: 'center',
   },
-  textContainer: {
-    width: '85%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-  },
-  button: {
-    alignItems: 'flex-end',
-    marginTop: 60,
-    padding: 10,
-    //    borderWidth: 1,
-
-    backgroundColor: 'dodgerblue',
-    //backgroundColor: '#432577',
-    borderRadius: 10,
-  },
-  text: {
-    margin: 10,
-    fontSize: 22,
-    color: 'cornsilk',
-    fontStyle: 'italic',
-  },
   safeAreaView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
+    width: WIDTH,
     //    marginBottom: 20,
   },
   Heading: {
@@ -44,7 +22,6 @@ export default StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontStyle: 'italic',
-    paddingBottom: 40,
   },
   VisionList: {
     margin: 1,

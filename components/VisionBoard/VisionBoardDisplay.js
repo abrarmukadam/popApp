@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-
+//const default_uri = require('./../GeneralComponents/images/noImage.png');
+const defaultLink = require('./../GeneralComponents/images/noImage2.png');
 export default class VisionBoardDisplay extends Component {
-  onPressVisionBoard(visionItem) {
-    this.props.onVisionBoardClicked(this.props.visionItem);
-  }
   render() {
     return (
       <TouchableOpacity
         style={[styles.Layout, {backgroundColor: 'lightgrey'}]}
-        onPress={this.onPressVisionBoard.bind(this)}>
+        onPress={() => this.props.onVisionBoardClicked(this.props.visionItem)}>
         <View
           style={{
             flex: 4,
@@ -20,13 +18,28 @@ export default class VisionBoardDisplay extends Component {
             alignItems: 'center',
           }}>
           <View style={{flex: 4}}></View>
+
           <Image
-            source={{
-              uri: this.props.visionItem.uri,
+            // source={
+
+            //     //              require('./../GeneralComponents/images/noImage2.png')
+            //     //              require('./../GeneralComponents/images/noImage.png')
+            //     // {
+            //     //   //              uri: this.props.visionItem.uri,
+            //     //   uri: require('./../GeneralComponents/images/noImage.png'),
+            //     // })
+
+            // }
+            onError={e => {
+              this.props.source = {
+                uri:
+                  'https://www.sunrgy.com/wp-content/uploads/woocommerce-placeholder-1200x1200.png',
+              };
             }}
+            defaultSource={defaultLink}
             style={{
               flex: 1,
-              width: 320,
+              width: 310,
               height: '100%',
               //              height: 160,
               //             resizeMode: 'cover',

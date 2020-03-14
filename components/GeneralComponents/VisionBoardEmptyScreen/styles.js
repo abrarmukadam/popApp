@@ -12,20 +12,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-  },
-  button: {
-    alignItems: 'flex-end',
-    marginTop: 60,
-    padding: 10,
-    //    borderWidth: 1,
-
-    backgroundColor: 'dodgerblue',
-    //backgroundColor: '#432577',
-    borderRadius: 10,
-  },
   text: {
     margin: 10,
     fontSize: 22,

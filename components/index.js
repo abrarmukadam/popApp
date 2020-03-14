@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 
 import AffirmationListScreen from './screens/Affirmations/AffirmationListScreen/AffirmationListScreen';
-import AffirmationFullScreen from './screens/Affirmations/AffirmationFullScreen';
-import AffirmationEditScreen from './screens/Affirmations/AffirmationEditScreen';
+import AffirmationFullScreen from './screens/Affirmations/AffirmationFullScreen-backup';
+import AffirmationEditScreen from './screens/Affirmations/AffirmationEditScreen-backup';
 import EditAffirmationScreen from './screens/Affirmations/EditAffirmationScreen/EditAffirmationScreen';
 
 import AddAffirmationScreen from './screens/Affirmations/AddAffirmationScreen/AddAffirmationScreen';
@@ -14,8 +14,12 @@ import SearchAffirmation from './SearchAffirmation';
 import BackgroundColor from './BackgroundColor';
 import BackgroundImage from './BackgroundImage';
 
+import VisionBoardListScreen from './screens/VisionBoard/VisionBoardListScreen/VisionBoardListScreen';
+import AddVisionBoardScreen from './screens/VisionBoard/AddVisionBoardScreen/AddVisionBoardScreen';
+import VisionBoardSubScreen from './screens/VisionBoard/VisionBoardSubScreen/VisionBoardSubScreen';
+
 import VisionBoardHomeScreen from './screens/VisionBoard/VisionBoardHomeScreen';
-import VisionBoardSubScreen from './screens/VisionBoard/VisionBoardSubScreen';
+//import VisionBoardSubScreen from './screens/VisionBoard/VisionBoardSubScreen';
 import AddVisionScreen from './screens/VisionBoard/AddVisionScreen';
 import VisionFullScreen from './screens/VisionBoard/VisionFullScreen';
 
@@ -55,4 +59,6 @@ export {
   FullScreenSwiper,
   ScreenSwiper2,
   FullScreenComponent,
+  VisionBoardListScreen,
+  AddVisionBoardScreen,
 };
