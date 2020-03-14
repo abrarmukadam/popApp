@@ -13,15 +13,11 @@ const TestVisionBoardList = [
     id: 1,
     visionBoard: 'Deam',
     height: 40,
-    uri:
-      'file://Users/abrar/Library/Developer/CoreSimulator/Devices/FFE7CE3C-CFF4-4D28-9472-7D9226E82FAD/data/Containers/Data/Application/0F61BE60-D776-40A5-BD4D-875FB158C355/tmp/FDF4E03A-2B20-461B-8710-840013149BC8.jpg',
   },
   {
     id: 2,
     visionBoard: 'New',
     height: 40,
-    uri:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJ1BzEaBaH--xssLNjYJX_0tHKqbC5C22tqTy13-otaXcY5o2a',
   },
 ];
 
@@ -64,6 +60,7 @@ class VisionBoardListScreen extends Component {
         {!this.props.visionBoardList[0] && <VisionBoardEmptyScreen />}
         {this.props.visionBoardList[0] && (
           <VisionBoardList
+            visionArrayList={this.props.visionArrayList}
             visionBoardList={this.props.visionBoardList}
             navigateToVisionSubScreen={this.navigateToVisionSubScreen}
           />

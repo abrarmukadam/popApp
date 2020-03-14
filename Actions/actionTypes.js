@@ -10,6 +10,10 @@ export const ADD_VISION_BOARD = 'ADD_VISION_BOARD';
 export const DELETE_VISION_BOARD = 'DELETE_VISION_BOARD';
 export const EDIT_VISION_BOARD = 'EDIT_VISION_BOARD';
 
+export const ADD_VISION = 'ADD_VISION';
+export const DELETE_VISION = 'DELETE_VISION';
+export const EDIT_VISION = 'EDIT_VISION';
+
 export const FETCH_DATA = 'FETCH_DATA';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

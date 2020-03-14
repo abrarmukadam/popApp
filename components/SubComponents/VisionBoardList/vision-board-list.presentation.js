@@ -24,6 +24,7 @@ class VisionBoardList extends Component {
               return (
                 //                <Text>{vision.visionBoard}</Text>
                 <VisionBoardDisplay
+                  visionArrayList={this.props.visionArrayList}
                   key={vision.id}
                   id={vision.id}
                   itemId={vision.id}

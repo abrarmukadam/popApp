@@ -7,6 +7,13 @@ import {
   BackgroundColor,
   VisionDisplay,
 } from './../../index';
+
+//const link = require('./../../GeneralComponents/images/noImage2.png');
+const defaultLink = require('./../../GeneralComponents/images/noImage2.png');
+
+const remote_link =
+  'https://www.sunrgy.com/wp-content/uploads/woocommerce-placeholder-1200x1200.png';
+
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImagePicker from 'react-native-image-picker';
@@ -46,9 +53,8 @@ class Pallete extends Component {
           onPress={() => {
             this.handleChoosePhoto();
           }}>
-          <Text> IMAGE </Text>
+          <Text> SHIMAGE </Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={() => {
             console.log('button pressed', this.state.test);

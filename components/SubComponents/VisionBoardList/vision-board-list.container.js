@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import VisionBoardList from './vision-board-list.presentation';
 const mapPropsToState = state => {
   return {
-    affirmationList: state.affirmationReducer.affirmationList,
+    //    visionArrayList: state.visionBoardReducer.visionArrayList,
   };
 };
 
