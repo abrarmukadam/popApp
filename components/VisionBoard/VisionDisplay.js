@@ -52,10 +52,10 @@ export default class VisionDisplay extends Component {
             }}
           />
         </View>
+
         <View
           style={{
             width: '100%',
-            height: '12%',
             justifyContent: 'center',
             alignContent: 'center',
             alignItems: 'flex-end',
@@ -66,7 +66,11 @@ export default class VisionDisplay extends Component {
             bottom: 0,
             borderBottomLeftRadius: 5, //Then Make the Border Radius twice the size of width or Height
             borderBottomRightRadius: 5, //Then Make the Border Radius twice the size of width or Height
-          }}></View>
+          }}>
+          <Text style={styles.VisionText}>
+            {this.props.visionItem.visionMessage}
+          </Text>
+        </View>
 
         <View
           style={{

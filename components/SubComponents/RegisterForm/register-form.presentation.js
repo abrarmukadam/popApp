@@ -134,7 +134,7 @@ class RegisterForm extends Component {
           disabled={this.props.registerStatus.status.isLoading ? true : false}
           onPress={() => this.onPressRegister()}>
           {this.props.registerStatus.status.isLoading && (
-            <Text style={styles.ButtonText}>Loading</Text>
+            <Text style={styles.ButtonText}>Loading...</Text>
           )}
           {!this.props.registerStatus.status.isLoading && (
             <Text style={styles.ButtonText}>Register</Text>

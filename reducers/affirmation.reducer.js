@@ -6,10 +6,17 @@ import {
   ADD_AFFIRMATION,
   DELETE_AFFIRMATION,
   EDIT_AFFIRMATION,
+  USER_ID,
 } from '../Actions/actionTypes';
 
 export default function affirmationReducer(state = defaultState, action) {
   switch (action.type) {
+    case USER_ID: {
+      return {
+        ...state,
+        userLoggedIn: action.payload.loggedInUserId,
+      };
+    }
     case UPDATE_FETCHED_AFFIRMATIONS: {
       return {
         ...state,

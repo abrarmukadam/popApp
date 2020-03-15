@@ -16,10 +16,10 @@ YellowBox.ignoreWarnings([
   '`-[RCTRootView cancelTouches]`',
 ]);
 
-import configureStore from './config/redux-store';
-import {Provider} from 'react-redux';
+import {store, persistor} from './config/redux-store';
 
-let store = configureStore();
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
 export default class App extends Component {
   state = {
@@ -106,7 +106,7 @@ export default class App extends Component {
 
   updateDataServer = updateArray => {
     console.log('udateDataServer Run', this.state.loggedInDetails[0]);
-    this.updateMongoDB(this.state.loggedInDetails[0], updateArray);
+    //  this.updateMongoDB(this.state.loggedInDetails[0], updateArray);
   };
 
   updatePopArray = popArray => {
@@ -290,18 +290,20 @@ export default class App extends Component {
       //   <Text>Testing</Text>
       // </View>
       <Provider store={store}>
-        <TabNavigator
-          screenProps={{
-            ...this.state,
-            updateloggedInDetails: this.updateloggedInDetails,
-            updatePopArray: this.updatePopArray,
-            updateVisionArray: this.updateVisionArray,
-            updateVisionBoardArray: this.updateVisionBoardArray,
-            updateDataServer: this.updateDataServer,
-            updateMongoDB: this.updateMongoDB,
-            sendImageToServer: this.sendImageToServer,
-          }}
-        />
+        <PersistGate loading={null} persistor={persistor}>
+          <TabNavigator
+            screenProps={{
+              ...this.state,
+              updateloggedInDetails: this.updateloggedInDetails,
+              updatePopArray: this.updatePopArray,
+              updateVisionArray: this.updateVisionArray,
+              updateVisionBoardArray: this.updateVisionBoardArray,
+              updateDataServer: this.updateDataServer,
+              updateMongoDB: this.updateMongoDB,
+              sendImageToServer: this.sendImageToServer,
+            }}
+          />
+        </PersistGate>
       </Provider>
     );
   }

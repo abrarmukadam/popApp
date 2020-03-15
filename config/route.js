@@ -170,24 +170,24 @@ const TabNavigator = createBottomTabNavigator(
         ),
       },
     },
-    Pallete: {
-      screen: PalleteScreen,
-      navigationOptions: {
-        tabBarLabel: 'Account',
-        color: 'white',
-        tabBarIcon: ({focused, tintColor}) => (
-          <Icon
-            name={focused ? 'account' : 'account-outline'}
-            size={focused ? IconHeight : IconHeight}
-            color={focused ? 'white' : 'white'}
-          />
-        ),
-      },
-    },
+    // Pallete: {
+    //   screen: PalleteScreen,
+    //   navigationOptions: {
+    //     tabBarLabel: 'Account',
+    //     color: 'white',
+    //     tabBarIcon: ({focused, tintColor}) => (
+    //       <Icon
+    //         name={focused ? 'account' : 'account-outline'}
+    //         size={focused ? IconHeight : IconHeight}
+    //         color={focused ? 'white' : 'white'}
+    //       />
+    //     ),
+    //   },
+    // },
   },
   {
-    initialRouteName: 'Pallete',
-    //initialRouteName: 'Login',
+    // initialRouteName: 'Pallete',
+    initialRouteName: 'Login',
     tabBarOptions: {
       showLabel: true,
       activeTintColor: 'white',

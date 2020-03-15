@@ -23,6 +23,7 @@ class AddAffirmationCard extends Component {
     };
     //    this.props.handleAddAffirmation(newAffirmation)
     this.props.addAffirmation(newAffirmation);
+
     this.props.returnToHome();
   };
 

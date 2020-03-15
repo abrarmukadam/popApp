@@ -1,5 +1,12 @@
 import axios from 'axios';
-import {FETCH_DATA, LOGIN_FAILED, LOG_OUT, LOGIN_SUCCESS} from './actionTypes';
+import {
+  FETCH_DATA,
+  LOGIN_FAILED,
+  USER_ID,
+  LOG_OUT,
+  LOGIN_SUCCESS,
+  SEND_DATA,
+} from './actionTypes';
 import heroku_url from './heroku_url';
 //const heroku_url = 'http://localhost:5000';
 
@@ -35,6 +42,10 @@ export function fetchData(username, password) {
             id: res.data[0]._id,
           },
         });
+        dispatch({
+          type: USER_ID,
+          payload: {loggedInUserId: res.data[0]._id},
+        });
       })
       .catch(error => {
         console.log('error 404:', error);
@@ -54,6 +65,46 @@ export function userLogOut() {
     console.log('dispatch in action called');
     dispatch({
       type: LOG_OUT,
+    });
+    dispatch({
+      type: USER_ID,
+      payload: {loggedInUserId: ''},
+    });
+  };
+}
+
+export function dataToServer(
+  userLoggedIn,
+  affirmationList,
+  visionBoardArray,
+  visionArray,
+) {
+  console.log('send data to server function called');
+  console.log('ID:', userLoggedIn);
+
+  const outgoing_data = {
+    popArray: affirmationList,
+    visionBoardArray: visionBoardArray,
+    visionArray: visionArray,
+  };
+  console.log('OUTGOING DATA:', outgoing_data);
+  //this.updateMongoDB(userLoggedIn, outgoing_data);
+  if (userLoggedIn) {
+    axios
+      .post(heroku_url + '/users/update/' + userLoggedIn, outgoing_data)
+      .then(res => {
+        //        console.log('updateMongoDB Run', res.data[0]);
+        //        console.log('dadadadada', res.data[0]);
+      })
+      .catch(error => {
+        console.log('Database Store Failed');
+        console.log('error 400:', error);
+      });
+  }
+  return dispatch => {
+    dispatch({
+      type: SEND_DATA,
+      payload: {data: outgoing_data},
     });
   };
 }

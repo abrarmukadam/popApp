@@ -6,7 +6,7 @@ import {Actions} from '../../../Actions/index';
 const mapStateToProps = state => {
   return {
     //    store: state,
-
+    loggedInStatus: state.loginReducer.loggedInStatus || false,
     loggedInAffirmationList: state.loginReducer.affirmationList || [],
     affirmationList: state.affirmationReducer.affirmationList || [],
 
@@ -15,6 +15,9 @@ const mapStateToProps = state => {
 
     loggedInVisionArrayList: state.loginReducer.visionList || [],
     visionArrayList: state.visionBoardReducer.visionArrayList || [],
+
+    userLoggedIn: state.affirmationReducer.userLoggedIn || '',
+
     // store: state,
   };
 };
@@ -34,6 +37,23 @@ const mapDispatchToProps = dispatch => {
         ),
       );
     },
+    dataToServer: (
+      userLoggedIn,
+      affirmationList,
+      visionBoardList,
+      visionArrayList,
+    ) => {
+      console.log('dispatching data to server');
+      return dispatch(
+        Actions.LoginActions.dataToServer(
+          userLoggedIn,
+          affirmationList,
+          visionBoardList,
+          visionArrayList,
+        ),
+      );
+    },
+
     // addAffirmation: newAffirmation =>
     //   dispatch(Actions.AddAffirmationActions.addAffirmation(newAffirmation)),
   };

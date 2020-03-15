@@ -59,8 +59,8 @@ export default function visionBoardReducer(state = defaultState, action) {
       return {
         ...state,
         visionBoardList: action.payload.visionBoardList,
-        //        visionArrayList: action.payload.visionArrayList,
-        visionArrayList: tempVisionArrayList,
+        visionArrayList: action.payload.visionArrayList,
+        //   visionArrayList: tempVisionArrayList,
       };
     }
     case ADD_VISION_BOARD: {

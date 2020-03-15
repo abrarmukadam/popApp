@@ -4,12 +4,18 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 const defaultLink = require('./../GeneralComponents/images/noImage2.png');
 export default class VisionBoardDisplay extends Component {
   render() {
+    let vision_uri = defaultLink;
     console.log(
       'visionArrayList',
       this.props.visionArrayList,
       this.props.visionItem.id,
-      this.props.visionArrayList[this.props.visionItem.id],
+      this.props.visionArrayList[this.props.visionItem.id - 1],
     );
+    if (this.props.visionArrayList[this.props.visionItem.id - 1])
+      vision_uri = {
+        uri: this.props.visionArrayList[this.props.visionItem.id - 1][0].uri,
+      };
+    else vision_uri = defaultLink;
     return (
       <TouchableOpacity
         style={[styles.Layout, {backgroundColor: 'lightgrey'}]}
@@ -26,10 +32,7 @@ export default class VisionBoardDisplay extends Component {
           <View style={{flex: 4}}></View>
 
           <Image
-            source={{
-              uri: this.props.visionArrayList[this.props.visionItem.id - 1][0]
-                .uri,
-            }}
+            source={vision_uri}
             onError={e => {
               this.props.source = {
                 uri:
@@ -39,7 +42,7 @@ export default class VisionBoardDisplay extends Component {
             defaultSource={defaultLink}
             style={{
               flex: 1,
-              width: 310,
+              width: '100%',
               height: '100%',
               //              height: 160,
               //             resizeMode: 'cover',

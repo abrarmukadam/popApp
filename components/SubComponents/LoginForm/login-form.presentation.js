@@ -39,7 +39,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    if (!this.props.loggedInStatus)
+    if (!this.props.userLoggedIn)
       return (
         <View style={styles.container}>
           <View style={styles.inputContainer}>
@@ -103,7 +103,7 @@ class LoginForm extends Component {
               )
             }>
             {this.props.fetchLogin.status.isLoading && (
-              <Text style={styles.loginButtonText}>Loading</Text>
+              <Text style={styles.loginButtonText}>Loading...</Text>
             )}
             {!this.props.fetchLogin.status.isLoading && (
               <Text style={styles.loginButtonText}>Login</Text>
@@ -120,6 +120,7 @@ class LoginForm extends Component {
               console.log('Logout Button Pressed');
               this.props.onLogout();
               this.setState({enteredPassword: '', enteredEmail: ''});
+              this.props.onLogOutSuccess();
             }}>
             <Text style={styles.loginButtonText}>Logout</Text>
           </TouchableOpacity>

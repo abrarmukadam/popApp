@@ -18,6 +18,7 @@ import {
   LOGIN_FAILED,
   LOGIN_SUCCESS,
   LOG_OUT,
+  SEND_DATA,
 } from '../Actions/actionTypes';
 
 export default function loginReducer(state = defaultState, action) {
@@ -78,6 +79,12 @@ export default function loginReducer(state = defaultState, action) {
         loggedInStatus: false, //currently logged In?
       };
     }
+    case SEND_DATA: {
+      return {
+        ...state,
+      };
+    }
+
     default: {
       return state;
     }

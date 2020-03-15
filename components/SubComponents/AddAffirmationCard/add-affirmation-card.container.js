@@ -11,7 +11,7 @@ const mapPropsToState = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addAffirmation: newAffirmation => {
-      console.log('dipsatch newAffirmatoin');
+      console.log('dispatch newAffirmatoin');
       return dispatch(
         Actions.AffirmationActions.addAffirmation(newAffirmation),
       );

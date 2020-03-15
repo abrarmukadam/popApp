@@ -14,7 +14,9 @@ class AddAffirmationScreen extends Component {
     return (
       <View style={styles.container}>
         <AddAffirmationCard
-          returnToHome={() => this.props.navigation.navigate('Home')}
+          returnToHome={() => {
+            this.props.navigation.navigate('Home');
+          }}
         />
         <View style={styles.backButtonStyle}>
           <Icon

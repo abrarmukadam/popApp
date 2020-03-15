@@ -8,6 +8,7 @@ const mapPropsToState = state => {
     loginSuccess: state.loginReducer.loginSuccess || false,
     loggedInUserId: state.loginReducer.loggedInUserId || '', //logged in user ID
     loggedInStatus: state.loginReducer.loggedInStatus || false, //currently logged In?
+    userLoggedIn: state.affirmationReducer.userLoggedIn || '',
   };
 };
 

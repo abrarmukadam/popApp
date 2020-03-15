@@ -40,6 +40,16 @@ class VisionBoardListScreen extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log('VISION BOARD LIST DID UPDATE CALLED');
+    // if (
+    //   prevProps.affirmationList != this.props.affirmationList &&
+    //   prevProps.userLoggedIn == this.props.userLoggedIn
+    // ) {
+    //   this.props.dataToServer(
+    //     this.props.affirmationList,
+    //     this.props.visionBoardList,
+    //     this.props.visionArrayList,
+    //   );
+    // }
 
     // if (
     //   prevProps.loggedInVisionBoardList != this.props.loggedInVisionBoardList

@@ -1,22 +1,27 @@
-import {createStore, applyMiddleware} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import {reducers} from '../reducers/index';
 import logger from 'redux-logger';
 
 import thunkMiddleware from 'redux-thunk';
 
-export default function configureStore() {
-  let middleware = [thunkMiddleware, logger];
+import {persistStore, persistReducer} from 'redux-persist';
+//import storage from 'redux-persist/lib/storage';
 
-  let store = createStore(reducers, applyMiddleware(...middleware));
+import {AsyncStorage} from 'react-native';
+import loginReducer from '../reducers/login.reducer';
 
-  // Whenever a action is called, this functions are called.
-  store.subscribe(() => {
-    console.log('updated store');
-    console.log(store.getState());
-  });
+//export default function configureStore() {
+let middleware = [thunkMiddleware, logger];
 
-  // dispatched, or shoots out an action
-  //store.dispatch()
+const persistConfig = {
+  key: 'root1',
+  storage: AsyncStorage,
+  whitelist: ['affirmationReducer', 'visionBoardReducer'], // which reducer want to store
+  //blacklist: ['loginReducer.status'],
+};
 
-  return store;
-}
+const pReducer = persistReducer(persistConfig, reducers);
+
+export const store = createStore(pReducer, applyMiddleware(...middleware));
+
+export const persistor = persistStore(store);

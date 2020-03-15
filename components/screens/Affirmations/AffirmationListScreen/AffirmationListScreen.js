@@ -72,18 +72,33 @@ class AffirmationListScreen extends Component {
     });
   };
   componentDidMount() {
-    console.log('FETCH AFFIRMATIONS CALLED WHEN LOGGED IN');
-    this.props.fetchAffirmations(this.props.loggedInAffirmationList);
-    this.props.fetchVisionBoards(
-      this.props.loggedInVisionBoardList,
-      this.props.loggedInVisionArrayList,
-    );
-    this.setState({
-      filteredList: this.props.loggedInAffirmationList,
-    });
+    if (this.props.loggedInStatus) {
+      console.log('FETCH AFFIRMATIONS CALLED WHEN LOGGED IN');
+      this.props.fetchAffirmations(this.props.loggedInAffirmationList);
+      this.props.fetchVisionBoards(
+        this.props.loggedInVisionBoardList,
+        this.props.loggedInVisionArrayList,
+      );
+      this.setState({
+        filteredList: this.props.loggedInAffirmationList,
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (
+      (prevProps.affirmationList != this.props.affirmationList ||
+        prevProps.visionBoardList != this.props.visionBoardList ||
+        prevProps.visionArrayList != this.props.visionArrayList) &&
+      prevProps.userLoggedIn == this.props.userLoggedIn
+    ) {
+      this.props.dataToServer(
+        this.props.userLoggedIn,
+        this.props.affirmationList,
+        this.props.visionBoardList,
+        this.props.visionArrayList,
+      );
+    }
     console.log(this.props.affirmationList);
     let filteredList = [];
     if (prevState.searchFilter != this.state.searchFilter) {
@@ -98,9 +113,7 @@ class AffirmationListScreen extends Component {
         filteredList: filteredList,
       });
     }
-    if (
-      prevProps.loggedInAffirmationList != this.props.loggedInAffirmationList
-    ) {
+    if (prevProps.userLoggedIn != this.props.userLoggedIn) {
       console.log('FETCH UPDATED AFFIRMATION ON NEW LOGIN');
       this.props.fetchAffirmations(this.props.loggedInAffirmationList);
       this.props.fetchVisionBoards(
