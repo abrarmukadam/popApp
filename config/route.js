@@ -1,25 +1,29 @@
 import React from 'react';
 
-import {
-  AffirmationListScreen,
-  AffirmationFullScreen,
-  AffirmationEditScreen,
-  AddAffirmationScreen,
-} from './../components/index';
+import {AddAffirmationScreen} from './../components/index';
 
 import {
   VisionBoardHomeScreen,
-  VisionBoardSubScreen,
+  //  VisionBoardSubScreen,
   AddVisionScreen,
   VisionFullScreen,
 } from './../components/index';
 
 import {
-  LoginScreen,
   LoggedInScreen,
   ForgotPasswordScreen,
   RegisterScreen,
 } from './../components/index';
+
+import {default as LoginScreen} from './../components/SubComponents/LoginControl/login-control.container';
+import {default as AffirmationListScreen} from './../components/SubComponents/AffirmationControl/affirmation-control.container';
+import {default as EditAffirmationScreen} from './../components/screens/Affirmations/EditAffirmationScreen/EditAffirmationScreen.container';
+import {default as VisionBoardListScreen} from './../components/screens/VisionBoard/VisionBoardListScreen/VisionBoardListScreen-container';
+import {default as AddVisionBoardScreen} from './../components/screens/VisionBoard/AddVisionBoardScreen/AddVisionBoardScreen.container';
+import {default as VisionBoardSubScreen} from './../components/screens/VisionBoard/VisionBoardSubScreen/VisionBoardSubScreen.container';
+import {default as visionBoardFullScreen} from './../components/screens/VisionBoard/VisionBoardFullScreen/visionBoardFullScreen.container';
+
+import PalleteScreen from './../components/screens/Pallete/pallete.presentation';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -30,11 +34,8 @@ const IconHeight = 30;
 const AffirmationStack = createStackNavigator(
   {
     Home: {screen: AffirmationListScreen},
-    Details: {screen: AffirmationFullScreen},
-    Edit: {
-      screen: AffirmationEditScreen,
-    },
-    Add: {
+    EditAffirmationScreen: {screen: EditAffirmationScreen},
+    AddAffirmationScreen: {
       screen: AddAffirmationScreen,
     },
   },
@@ -58,14 +59,14 @@ AffirmationStack.navigationOptions = ({navigation}) => {
 const VisionBoardStack = createStackNavigator(
   {
     VisionBoardHome: {
-      screen: VisionBoardHomeScreen,
+      screen: VisionBoardListScreen,
     },
 
     VisionBoardSubScreen: {
       screen: VisionBoardSubScreen,
     },
-    AddVisionBoardScreen: AddVisionScreen,
-    VisionFullScreen: VisionFullScreen,
+    AddVisionBoardScreen: AddVisionBoardScreen,
+    VisionFullScreen: visionBoardFullScreen,
   },
   {
     initialRouteName: 'VisionBoardHome',
@@ -170,8 +171,23 @@ const TabNavigator = createBottomTabNavigator(
         ),
       },
     },
+    // Pallete: {
+    //   screen: PalleteScreen,
+    //   navigationOptions: {
+    //     tabBarLabel: 'Account',
+    //     color: 'white',
+    //     tabBarIcon: ({focused, tintColor}) => (
+    //       <Icon
+    //         name={focused ? 'account' : 'account-outline'}
+    //         size={focused ? IconHeight : IconHeight}
+    //         color={focused ? 'white' : 'white'}
+    //       />
+    //     ),
+    //   },
+    // },
   },
   {
+    // initialRouteName: 'Pallete',
     initialRouteName: 'Login',
     tabBarOptions: {
       showLabel: true,

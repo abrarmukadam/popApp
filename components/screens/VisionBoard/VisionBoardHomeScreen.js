@@ -53,9 +53,8 @@ class VisionBoardHomeScreen extends Component {
                       id={vision.id}
                       itemId={vision.id}
                       visionItem={vision}
-                      onVisionBoardClicked={this.navigateToVisionSubScreen}>
-                      >
-                    </VisionBoardDisplay>
+                      onVisionBoardClicked={this.navigateToVisionSubScreen}
+                    />
                   );
                 })}
               </View>
@@ -71,7 +70,7 @@ class VisionBoardHomeScreen extends Component {
                 color="green"
                 onPress={this.onPressAdd}></Icon>
             }*/
-            ></ActionButton>
+            />
           </SafeAreaView>
         </View>
       );

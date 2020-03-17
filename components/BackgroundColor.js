@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 let tempIcon = 'circle'; //'bullseye'
 let icon1 = 'dot-circle-o';
 let icon2 = 'circle';
-let iconSize = 35;
+let iconSize = 36;
 
 export default class BackgroundColor extends Component {
   state = {
@@ -215,12 +215,15 @@ export default class BackgroundColor extends Component {
 
 const styles = StyleSheet.create({
   ButtonContainer: {
+    paddingLeft: 6,
     flexDirection: 'row',
+    //borderWidth: 1,
     //  margin: ,
   },
   ButtonPadding: {
+    //    paddingLeft: 2,
     //    padding: '0.5%',
-    flex: 9,
+    flex: 10,
     //    width: '11%',
   },
 });

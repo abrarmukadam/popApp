@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import {SafeAreaView, StyleSheet, View, ScrollView, Image} from 'react-native';
 import ActionButton from 'react-native-action-button';
 
-import {
-  AffirmationDisplay,
-  SearchAffirmation,
-  BackgroundImage,
-} from './../../index';
+import {SearchAffirmation, BackgroundImage} from '../../index';
+
+import {AffirmationCard} from '../../SubComponents/AffirmationCard/index';
+import {AffirmationList} from '../../SubComponents/AffirmationList/index';
 
 export default class AffirmationListScreen extends Component {
   static navigationOptions = {
@@ -51,6 +50,7 @@ export default class AffirmationListScreen extends Component {
     this.props.navigation.navigate('Add');
   };
   render() {
+    console.log('AffirmationListScreen Rendered');
     let filteredList = this.props.screenProps.popArray.filter(List => {
       return (
         List.popMessage
@@ -70,7 +70,7 @@ export default class AffirmationListScreen extends Component {
             <View style={styles.AffList}>
               {filteredList.map(item => {
                 return (
-                  <AffirmationDisplay
+                  <AffirmationCard
                     key={item.id}
                     popItem={item}
                     onItemClicked={this.navigateToDetails}
@@ -78,7 +78,9 @@ export default class AffirmationListScreen extends Component {
                 );
               })}
             </View>
+            {/* <AffirmationList /> */}
           </ScrollView>
+
           <ActionButton
             buttonColor="#222222"
             onPress={this.onPressAdd}></ActionButton>
@@ -102,7 +104,6 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1,
-
     //  margin: 10,
     //  marginTop: 10,
     //    marginBottom: 20,

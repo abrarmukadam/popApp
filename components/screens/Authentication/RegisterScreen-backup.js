@@ -10,8 +10,7 @@ import {
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import logo from './../../../logo3.png';
-import {BackgroundImage} from './../../index';
+import {BackgroundImage} from '../../index';
 
 const heroku_url = 'https://pop-mongo.herokuapp.com';
 
@@ -94,30 +93,30 @@ class LoginScreen extends Component {
     }
   };
 
-  onPressRegister = () => {
-    let userDetails = {
-      //userDetails to be saved
-      username: this.state.enteredEmail,
-      password: this.state.enteredPassword,
-    };
-    if (this.state.enteredPassword != this.state.enteredRePassword)
-      //compared both the entered passwords and check if same
-      this.setState({sameUser: 'Passwords do not match, Re-enter !'});
-    else {
-      let result = this.receiveUserDetailsFromServer();
-      result.then(() => {
-        let filtered = this.state.userArray.find(List => {
-          if (List.username.toLowerCase() == userDetails.username.toLowerCase())
-            return 'false';
-        });
-        if (!filtered) {
-          this.sendReisterDetailsToServer(userDetails);
-          this.setState({sameUser: ''});
-          this.props.navigation.navigate('Login');
-        } else this.setState({sameUser: 'Username already exists !'});
-      });
-    }
-  };
+  // onPressRegister = () => {
+  //   let userDetails = {
+  //     //userDetails to be saved
+  //     username: this.state.enteredEmail,
+  //     password: this.state.enteredPassword,
+  //   };
+  //   if (this.state.enteredPassword != this.state.enteredRePassword)
+  //     //compared both the entered passwords and check if same
+  //     this.setState({sameUser: 'Passwords do not match, Re-enter !'});
+  //   else {
+  //     let result = this.receiveUserDetailsFromServer();
+  //     result.then(() => {
+  //       let filtered = this.state.userArray.find(List => {
+  //         if (List.username.toLowerCase() == userDetails.username.toLowerCase())
+  //           return 'false';
+  //       });
+  //       if (!filtered) {
+  //         this.sendReisterDetailsToServer(userDetails);
+  //         this.setState({sameUser: ''});
+  //         this.props.navigation.navigate('Login');
+  //       } else this.setState({sameUser: 'Username already exists !'});
+  //     });
+  //   }
+  // };
 
   OnEmailTextChange = text => {
     this.setState({enteredEmail: text});
