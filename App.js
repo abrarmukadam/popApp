@@ -9,6 +9,7 @@ YellowBox.ignoreWarnings([
   'Warning: AsyncStorage has been extracted from react-native core',
   'Warning: componentWillReceiveProps has been renamed, and is not recommended for use.',
   '`-[RCTRootView cancelTouches]`',
+  'Warning: Encountered two children with the same key,',
 ]);
 
 import {store, persistor} from './config/redux-store';

@@ -8,19 +8,28 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
+  Dimensions,
 } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+import ImageRotate from 'react-native-image-rotate';
+import CameraRoll from '@react-native-community/cameraroll';
+
+import ActionSheet from 'react-native-actionsheet';
 import ActionButton from 'react-native-action-button';
 //import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
 import {VisionDisplay, BackgroundImage} from './../../../index';
+const {width: WIDTH} = Dimensions.get('window');
+const {height: HEIGHT} = Dimensions.get('window');
 
 class VisionBoardSubScreen extends Component {
   state = {
     photo: null,
     text: '',
+    tempPhoto: null,
     newVisionBoardCreated: this.props.navigation.getParam(
       'newVisionBoardCreated',
     ),
@@ -28,7 +37,8 @@ class VisionBoardSubScreen extends Component {
 
   onPressAddNew = () => {
     console.log('Add Vision Pressed');
-    this.handleChoosePhoto();
+    this.ActionSheet.show();
+    // this.handleChoosePhoto();
   };
 
   handleVisionClicked = visionItem => {
@@ -43,16 +53,28 @@ class VisionBoardSubScreen extends Component {
       visionBoardIndex: visionIndex,
     });
   };
+  handleClickPhoto = () => {
+    let photo = {};
 
+    ImagePicker.openCamera({
+      enableRotationGesture: true,
+      // width: WIDTH,
+      // height: HEIGHT,
+      //      cropping: true,
+    }).then(image => {
+      image.uri = image.path;
+
+      this.setState({photo: image, tempPhoto: image});
+    });
+  };
   handleChoosePhoto = () => {
-    const options = {
-      noData: true,
-      customButtons: [],
-    };
-    ImagePicker.showImagePicker(options, response => {
-      if (response.uri) {
-        this.setState({photo: response});
-      }
+    ImagePicker.openPicker({
+      width: WIDTH,
+      height: HEIGHT,
+      cropping: true,
+    }).then(image => {
+      image.uri = image.path;
+      this.setState({photo: image, tempPhoto: image});
     });
   };
 
@@ -61,7 +83,6 @@ class VisionBoardSubScreen extends Component {
     const selectedVisionBoard = this.props.navigation.getParam(
       'selectedVisionBoard',
     );
-
     const newVision = {
       //       id: tempVisionArrayList[selectedVisionBoard.id - 1].length + 1,
       visionBoard: selectedVisionBoard.visionBoard,
@@ -78,7 +99,6 @@ class VisionBoardSubScreen extends Component {
       newVision.id = 1;
       tempVisionArrayList[selectedVisionBoard.id - 1] = [newVision];
     }
-    console.log('NEW LIST>', tempVisionArrayList);
     this.setState({photo: null});
     this.props.addVision(tempVisionArrayList);
     this.props.navigation.navigate('VisionBoardSubScreen');
@@ -122,12 +142,9 @@ class VisionBoardSubScreen extends Component {
       index++;
     });
 
-    console.log('filteredVisionBoardArray', filteredVisionBoardArray);
-
     let newVisionArrayList = [...this.props.visionArrayList];
     newVisionArrayList.splice(visionBoard.id - 1, 1);
 
-    console.log('newVisionArrayList', newVisionArrayList);
     this.props.deleteVisionBoard(filteredVisionBoardArray, newVisionArrayList);
 
     this.props.navigation.navigate('VisionBoardHome');
@@ -140,14 +157,13 @@ class VisionBoardSubScreen extends Component {
   render() {
     let visionWidthCounter = 0;
     let filteredVisionArray = [];
-
+    const DisplayedPhoto = {};
     const selectedVisionBoard = this.props.navigation.getParam(
       'selectedVisionBoard',
     );
     filteredVisionArray =
       this.props.visionArrayList[selectedVisionBoard.id - 1] || [];
     if (this.state.newVisionBoardCreated) {
-      console.log('if(newVisionBoardCreated) TRUE');
       this.onPressAddNew();
       this.setState({newVisionBoardCreated: false});
     }
@@ -197,6 +213,19 @@ class VisionBoardSubScreen extends Component {
                   );
                 })}
               </View>
+              <ActionSheet
+                ref={o => (this.ActionSheet = o)}
+                title={'Select a Photo'}
+                options={['Take Photo...', 'Choose from Library...', 'Cancel']}
+                cancelButtonIndex={2}
+                destructiveButtonIndex={2}
+                onPress={index => {
+                  if (index == 0) this.handleClickPhoto();
+                  else if (index == 1) this.handleChoosePhoto();
+                  // console.log(index, ' pressed');
+                  /* do something */
+                }}
+              />
             </ScrollView>
           </SafeAreaView>
 
@@ -206,13 +235,44 @@ class VisionBoardSubScreen extends Component {
           />
         </View>
       );
-    if (this.state.photo)
+    if (this.state.photo) {
+      if (this.state.tempPhoto.height < this.state.tempPhoto.width) {
+        ImageRotate.rotateImage(
+          this.state.tempPhoto.uri,
+          90,
+          uri => {
+            DisplayedPhoto.uri = uri;
+            DisplayedPhoto.height = this.state.tempPhoto.width;
+            DisplayedPhoto.width = this.state.tempPhoto.heightl;
+            this.setState({tempPhoto: DisplayedPhoto});
+          },
+          error => {
+            console.error(error);
+          },
+        );
+      }
+
+      // const DIRECTION =
+      //   this.state.photo.height > this.state.photo.width
+      //     ? [{rotate: '0deg'}]
+      //     : [{rotate: '90deg'}];
+
+      /* change the deg (degree of rotation) between 0deg, 360deg*/
+
       return (
         <View style={styles.container}>
           <BackgroundImage />
           <Image
-            source={{uri: this.state.photo.uri}}
-            style={styles.image}></Image>
+            source={{uri: this.state.tempPhoto.uri}}
+            style={[
+              {
+                // transform: DIRECTION,
+                // width: this.state.photo.height,
+                // height: this.state.photo.width,
+              },
+              styles.image,
+            ]}
+          />
 
           <View style={styles.safeAreaView}>
             <SafeAreaView style={styles.headerContainerStyle2}>
@@ -236,7 +296,7 @@ class VisionBoardSubScreen extends Component {
               <SafeAreaView style={styles.buttonContainer}>
                 <TouchableOpacity
                   style={styles.addButtonStyle}
-                  onPress={() => this.handleChoosePhoto()}>
+                  onPress={() => this.onPressAddNew()}>
                   <Icon name="md-images" size={40} color="white"></Icon>
                 </TouchableOpacity>
                 <View style={{flex: 1, justifyContent: 'flex-end'}}>
@@ -257,7 +317,21 @@ class VisionBoardSubScreen extends Component {
                 <TouchableOpacity
                   style={styles.sendButtonStyle}
                   //onPress={() => console.log(this.state.text)}
-                  onPress={() => this.onPressAddToDreamBoard()}>
+                  onPress={() => {
+                    if (this.state.photo.height < this.state.photo.width)
+                      CameraRoll.saveToCameraRoll(
+                        this.state.tempPhoto.uri,
+                      ).then(uri => {
+                        const photo = {
+                          uri: uri,
+                          height: this.state.photo.height,
+                          width: this.state.photo.width,
+                        };
+                        this.setState({photo: photo});
+                        this.onPressAddToDreamBoard();
+                      });
+                    else this.onPressAddToDreamBoard();
+                  }}>
                   <Icon name="md-send" size={40} color="white"></Icon>
                 </TouchableOpacity>
               </SafeAreaView>
@@ -265,8 +339,22 @@ class VisionBoardSubScreen extends Component {
 
             {/* /////////////////////// */}
           </View>
+          <ActionSheet
+            ref={o => (this.ActionSheet = o)}
+            title={'Select a Photo'}
+            options={['Take Photo...', 'Choose from Library...', 'Cancel']}
+            cancelButtonIndex={2}
+            destructiveButtonIndex={2}
+            onPress={index => {
+              if (index == 0) this.handleClickPhoto();
+              else if (index == 1) this.handleChoosePhoto();
+              // console.log(index, ' pressed');
+              /* do something */
+            }}
+          />
         </View>
       );
+    }
   }
 }
 

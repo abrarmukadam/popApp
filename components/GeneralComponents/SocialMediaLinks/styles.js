@@ -2,9 +2,11 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    flex: 0,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    // flex: 0,
+    //       position: 'relative',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    bottom: 10,
   },
   InstaLogo: {
     height: 30,

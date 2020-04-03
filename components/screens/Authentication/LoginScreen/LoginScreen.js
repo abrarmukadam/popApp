@@ -57,7 +57,7 @@ class LoginScreen extends Component {
             }}
           />
         )}
-        <SocialMediaLinks />
+        <SocialMediaLinks userLoggedIn={this.props.userLoggedIn} />
       </View>
     );
   }

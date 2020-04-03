@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/cameraroll": "^1.5.2",
     "@react-native-community/viewpager": "^2.0.2",
     "axios": "^0.19.2",
     "form-data": "^3.0.0",
@@ -18,9 +19,12 @@
     "react": "16.9.0",
     "react-native": "0.61.2",
     "react-native-action-button": "^2.8.5",
+    "react-native-actionsheet": "^2.4.2",
     "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.5.3",
+    "react-native-image-crop-picker": "^0.28.0",
     "react-native-image-picker": "^0.28.0",
+    "react-native-image-rotate": "^2.1.0",
     "react-native-masonry": "^0.5.0-alpha.5",
     "react-native-masonry-layout": "^1.0.6",
     "react-native-masonry-list": "^2.13.0",

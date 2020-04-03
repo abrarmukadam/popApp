@@ -15,7 +15,7 @@ import {BackgroundImage} from './../../index';
 import styles from './styles';
 
 class VisionFullScreenSwiper extends Component {
-  state = {index: this.props.itemIndex, buttonPlay: 'true'};
+  state = {index: this.props.itemIndex, buttonPlay: 'true', showIcons: true};
   constructor(props) {
     super(props);
     this.viewPager = React.createRef();
@@ -98,39 +98,54 @@ class VisionFullScreenSwiper extends Component {
           }}>
           {toBeDisplayedList.map(items => {
             return (
-              <View key={items.id} style={{flex: 1, justifyContent: 'center'}}>
-                {<Image source={{uri: items.uri}} style={styles.image}></Image>}
-                <View style={styles.textViewStyle}>
-                  <View style={styles.textViewStyle1}></View>
-                  <Text style={styles.textStyle}>{items.visionMessage}</Text>
-                </View>
-              </View>
+              <TouchableOpacity
+                key={items.id}
+                style={{flex: 1, justifyContent: 'center'}}
+                onPress={() =>
+                  this.setState({showIcons: !this.state.showIcons})
+                }
+                activeOpacity={1}>
+                {<Image source={{uri: items.uri}} style={styles.image} />}
+                {this.state.showIcons && (
+                  <View style={styles.textViewStyle}>
+                    <View style={styles.textViewStyle1}></View>
+                    <Text style={styles.textStyle}>{items.visionMessage}</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
             );
           })}
         </ViewPager>
-        <SafeAreaView style={styles.backButtonStyle}>
-          <Icon
-            name="md-arrow-back"
-            size={40}
-            color="white"
-            onPress={() => this.onPressBack()}></Icon>
-        </SafeAreaView>
-        <SafeAreaView style={styles.buttonStyle}>
-          <Icon
-            name={this.state.buttonPlay ? 'ios-play' : 'ios-square'}
-            size={40}
-            onPress={() => this.onPressPlay(this.state.index)}
-            color="white"></Icon>
-        </SafeAreaView>
-        <SafeAreaView style={styles.trashButtonStyle}>
-          <Icon
-            name="md-trash"
-            size={40}
-            color="white"
-            onPress={() => this.onPressDeleteWarning(this.state.index)}
-          />
-        </SafeAreaView>
-
+        {this.state.showIcons && (
+          <SafeAreaView style={styles.backButtonStyle}>
+            <Icon
+              name="md-arrow-back"
+              size={40}
+              color="white"
+              onPress={() => this.onPressBack()}
+            />
+          </SafeAreaView>
+        )}
+        {this.state.showIcons && (
+          <SafeAreaView style={styles.buttonStyle}>
+            <Icon
+              name={this.state.buttonPlay ? 'ios-play' : 'ios-square'}
+              size={40}
+              onPress={() => this.onPressPlay(this.state.index)}
+              color="white"
+            />
+          </SafeAreaView>
+        )}
+        {this.state.showIcons && (
+          <SafeAreaView style={styles.trashButtonStyle}>
+            <Icon
+              name="md-trash"
+              size={40}
+              color="white"
+              onPress={() => this.onPressDeleteWarning(this.state.index)}
+            />
+          </SafeAreaView>
+        )}
         {/* <View style={{marginLeft: 5}}>
           <Icon
             name="keyboard-backspace"

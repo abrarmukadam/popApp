@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
 import {Linking, View, Text, TouchableOpacity, Image} from 'react-native';
 import styles from './styles';
+const INSTA_LINK = 'https://www.instagram.com/ziel.lightupyourdreams/';
 
 class SocialMediaLinks extends Component {
   state = {};
   render() {
+    const pos = this.props.userLoggedIn ? 'absolute' : 'relative';
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {position: pos}]}>
         <View style={styles.ContactStyles}>
-          <Text style={styles.ContactTextStyle}>Connect with us:</Text>
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL('http://instagram.com/ziel.voiceofyoursoul/')
-            }>
-            {/* onPress={() => Linking.openURL('http://instagram.com')}> */}
+          {/* <Text style={styles.ContactTextStyle}>Connect with us:</Text> */}
+          <TouchableOpacity onPress={() => Linking.openURL(INSTA_LINK)}>
             <Image
               style={styles.InstaLogo}
               source={require('../images/instagram_image.png')}></Image>

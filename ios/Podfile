@@ -49,6 +49,8 @@ target 'PopApp' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNImageRotate', :path => '../node_modules/react-native-image-rotate'
+
   target 'PopAppTests' do
     inherit! :search_paths
     # Pods for testing

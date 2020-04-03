@@ -3,7 +3,9 @@ import {View, Image, Text, TextInput, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 import {BackgroundImage} from './../../../index';
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //----------------------------------------------------------
@@ -18,11 +20,23 @@ class AddVisionBoardScreen extends Component {
     const options = {
       noData: true,
     };
-    ImagePicker.showImagePicker(options, response => {
-      if (response.uri) {
-        this.setState({photo: response});
+
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      if (image.uri) {
+        this.setState({photo: image});
       }
+      console.log(image);
     });
+
+    // ImagePicker.showImagePicker(options, response => {
+    //   if (response.uri) {
+    //     this.setState({photo: response});
+    //   }
+    // });
   };
   render() {
     console.log('photo:', this.state.photo);
