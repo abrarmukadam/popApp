@@ -10,48 +10,6 @@ import {
   EDIT_VISION,
   DELETE_VISION,
 } from '../Actions/actionTypes';
-let tempVisionArrayList = [
-  [
-    {
-      id: 1,
-      visionBoard: 'Amazing',
-      visionMessage: 'abba',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 2,
-      visionBoard: 'Amazing',
-      visionMessage: 'dabba',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 3,
-      visionBoard: 'Amazing',
-      visionMessage: 'jabba',
-      uri: 'https://picsum.photos/500',
-    },
-  ],
-  [
-    {
-      id: 1,
-      visionBoard: 'Nameste london',
-      visionMessage: 'abba1',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 2,
-      visionBoard: 'Nameste london',
-      visionMessage: 'dabba2',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 3,
-      visionBoard: 'Nameste london',
-      visionMessage: 'jabba3',
-      uri: 'https://picsum.photos/500',
-    },
-  ],
-];
 
 export default function visionBoardReducer(state = defaultState, action) {
   switch (action.type) {

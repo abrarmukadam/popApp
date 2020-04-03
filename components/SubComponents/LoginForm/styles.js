@@ -50,6 +50,7 @@ export default StyleSheet.create({
     color: 'red',
   },
   LogoutScreenContainer: {
+    flex: 0,
     alignItems: 'center',
     justifyContent: 'center',
   },

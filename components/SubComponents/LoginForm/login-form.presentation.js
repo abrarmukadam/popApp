@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles.js';
-
+import {SocialMediaLinks} from '../../index';
 class LoginForm extends Component {
   constructor() {
     super();

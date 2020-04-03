@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import styles from './styles.js';
-import BackgroundImage from './../../../BackgroundImage';
+import {BackgroundImage, SocialMediaLinks} from '../../../index';
 /* Import the component we are drafting here */
 import LoginForm from './../../../SubComponents/LoginForm/index.js';
 import RegisterButton from '../../../Buttons/RegisterButton/RegisterButton.js';
@@ -57,6 +57,7 @@ class LoginScreen extends Component {
             }}
           />
         )}
+        <SocialMediaLinks />
       </View>
     );
   }

@@ -17,49 +17,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import {VisionDisplay, BackgroundImage} from './../../../index';
 
-let tempVisionArrayList = [
-  [
-    {
-      id: 1,
-      visionBoard: 'Amazing',
-      visionMessage: 'abba',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 2,
-      visionBoard: 'Amazing',
-      visionMessage: 'dabba',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 3,
-      visionBoard: 'Amazing',
-      visionMessage: 'jabba',
-      uri: 'https://picsum.photos/500',
-    },
-  ],
-  [
-    {
-      id: 1,
-      visionBoard: 'Nameste london',
-      visionMessage: 'abba1',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 2,
-      visionBoard: 'Nameste london',
-      visionMessage: 'dabba2',
-      uri: 'https://picsum.photos/500',
-    },
-    {
-      id: 3,
-      visionBoard: 'Nameste london',
-      visionMessage: 'jabba3',
-      uri: 'https://picsum.photos/500',
-    },
-  ],
-];
-
 class VisionBoardSubScreen extends Component {
   state = {
     photo: null,

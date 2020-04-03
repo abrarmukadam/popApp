@@ -9,11 +9,7 @@ import {
   VisionFullScreen,
 } from './../components/index';
 
-import {
-  LoggedInScreen,
-  ForgotPasswordScreen,
-  RegisterScreen,
-} from './../components/index';
+import {ForgotPasswordScreen, RegisterScreen} from './../components/index';
 
 import {default as LoginScreen} from './../components/SubComponents/LoginControl/login-control.container';
 import {default as AffirmationListScreen} from './../components/SubComponents/AffirmationControl/affirmation-control.container';
@@ -27,10 +23,13 @@ import PalleteScreen from './../components/screens/Pallete/pallete.presentation'
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-// import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const IconHeight = 30;
+
+//Affirmation Navigation stack
+
 const AffirmationStack = createStackNavigator(
   {
     Home: {screen: AffirmationListScreen},
@@ -56,6 +55,7 @@ AffirmationStack.navigationOptions = ({navigation}) => {
   };
 };
 
+//Vision Board Navigation stack
 const VisionBoardStack = createStackNavigator(
   {
     VisionBoardHome: {
@@ -89,10 +89,6 @@ const LoginStack = createStackNavigator(
     Login: {
       screen: LoginScreen,
     },
-    LoggedIn: {
-      screen: LoggedInScreen,
-    },
-
     Register: {
       screen: RegisterScreen,
     },
