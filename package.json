@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-native-community/cameraroll": "^1.5.2",
     "@react-native-community/viewpager": "^2.0.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "form-data": "^3.0.0",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
